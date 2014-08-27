@@ -1,0 +1,116 @@
+\section{Results}
+\label{sec:Results}
+\FloatBarrier
+\subsection{Straight Beam Results}
+The simplest test case for this model is a linear-elastic beam with a square profile.
+For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
+Even a coarse discretization successfully reproduces the elastically deformed beam shape in \cref{fig:elastic_g2000}.
+
+\begin{figure}[h]
+  \centering
+  \resizebox{0.5\linewidth}{!}{\input{\plotpath/elastic_h20_g2000.pgf}}
+  \caption{The uniform-load elastic beam is accurately modeled with few nodes}
+  \label{fig:elastic_g2000}
+\end{figure}
+
+As an elastic-perfectly-plastic beam exceeds the elastic limit of its material, plastic zones begin to grow on the top and bottom of the beam's cross section.
+This behavior is mimicked by the plasticity of the longest bond-pairs described in \cref{eq:epp_force}, producing the results shown in \cref{fig:eppu_h10_g2000}.
+To accurately capture this phenomenon and model beam plasticity, a finer discretization is required.
+\begin{figure}[h]
+  \centering
+  \resizebox{0.5\linewidth}{!}{\input{\plotpath/eppu_h10_g2000.pgf}}
+  \caption{The elastic perfectly-plastic beam requires finer discretization}
+  \label{fig:eppu_h10_g2000}
+\end{figure}
+
+A material that is plastically deformed does not return to its original state when unloaded.
+For a beam in bending, the residual deformations can be seen in a beam that has been loaded beyond the onset of plastic deformation and then unloaded.
+The Abaqus model retains slightly more than \sfrac{1}{10} of its loaded displacement after being completely unloaded.
+This result is observed in the bond-pair plasticity model, shown in \cref{fig:ResidualPlasticityN,fig:ResidualPlasticityH}. 
+Accurate residual deformation modeling requires both a relatively small horizon and a fairly large number of nodes.
+
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.5\linewidth}{!}{\input{\plotpath/unloaded2_h10_g2000_n.pgf}}
+  \caption{The need for fine discretization is even more apparent when representing residual plastic deformation}
+  \label{fig:ResidualPlasticityN}
+\end{figure}
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.5\linewidth}{!}{\input{\plotpath/unloaded2_n1000_g2000_h.pgf}}
+  \caption{Accurately modeling residual plastic deformation also requires a small horizon}
+  \label{fig:ResidualPlasticityH}
+\end{figure}
+
+It is more difficult to verify the brittle material model described by \cref{eq:brittle_force} because brittle failure is unstable.
+When a crack begins, moment is transferred to other bond pairs, and failure progresses until every pair of bonds surrounding a node are broken, creating a hinge at that node.
+This is borne out by the results in \cref{fig:brittleBeam}, in which ``Nodal Health'' represents the fraction of bond-pairs about each node that have never exceeded their critical angle and therefore have not failed.
+
+\begin{figure}[h]
+  \centering
+  \resizebox{0.5\linewidth}{!}{\input{\plotpath/brittle_h10_n200.pgf}}
+  \caption{A brittle beam with prescribed center displacement}
+  \label{fig:brittleBeam}
+\end{figure}
+
+Unlike a local model, partial failure is observed at nodes near the plastic hinge, as pairs of bonds that straddle the hinge are broken.
+
+\FloatBarrier
+\subsection{Flat Plate Results}
+
+The simplest test case for the 2D model is a linear-elastic square plate with Poisson's ratio \(\nu = \sfrac{1}{3}\) that is simply-supported on all 4 sides with a uniform transverse pressure load on the entire surface between the supports.  As expected from an energy-equivalent model, the slice along the plate's centerline shown in \cref{fig:plate_convergence_h} demonstrates good agreement between the static deflection predicted by the bond-pair model and that of classical linear elasticity as the horizon length shrinks.  This convergence only continues to a minimum horizon, below which the discretized equation of motion (\cref{eq:discretebeamEoM}) ceases to accurately approximate the continuous integral formulation (\cref{eq:PDstateEoM,eq:SillingForceNO}).  The minimum horizon size depends on the discretization; it appears that three times the node spacing is sufficient, but that a horizon that is only twice the node spacing is insufficient.  The difference is evident in \cref{fig:plate_minimum_h}, which also shows that results are insensitive to fineness of discretization once the minimum horizon criterion is met.
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_h.pgf}}
+  \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Smaller Horizons}
+  \label{fig:plate_convergence_h}
+\end{figure}
+%
+\begin{figure}[h]
+  \centering
+%  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_minimum_h.pgf}}
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_dx.pgf}}
+  \caption{Horizon Must Include Sufficient Nodes}
+  \label{fig:plate_minimum_h}
+\end{figure}
+%
+Accurate results require a denser discretization than is the case for the elastic beams from previous work.  \Cref{fig:plate_convergence_n} illustrates the model converging to the analytical solution as the discretization is made finer and the horizon shrinks.
+%
+\begin{figure}[tbp]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_n.pgf}}
+  \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Finer Discretization}
+  \label{fig:plate_convergence_n}
+\end{figure}
+
+The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.  An analytical solution for this combination of uniform transverse pressure and in-plane edge tension can be found in Timoshenko's book~\cite{timoshenko1959theory}.  As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.  Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.
+%
+\begin{figure}[tbp]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/plateStiffening.pgf}}
+  \caption{The Combined Model Accurately Captures the Influence of In-Plane Tension}
+  \label{fig:plateStiffening}
+\end{figure}
+%
+The bond-multiple plate model is motivated by the desire to extend the bending model to an arbitrary Poisson's ratio, so the obvious test for this model is the same as for the bond-pair model. When compared to analytical predictions, \cref{fig:plate_poisson} demonstrates the bond-multiple model's ability to simulate plates with Poisson's ratios that depart significantly from the bond-pair limitation of $\nu = \sfrac{1}{3}$.
+%
+\begin{figure}[tbp]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlatePoissonEffect.pgf}}
+  \caption{The Extended Model Matches for Arbitrary Poisson's Ratio}
+  \label{fig:plate_poisson}
+\end{figure}
+%
+
+Unlike the brittle beam, failure in a brittle plate need not progress unstably. To demonstrate the behavior of this model, a controlled-displacement double-torsion fracture test was simulated with the bond-pair model. A good review of the double-torsion test is available in \cite{shyam2006double}. The simple qualitative results are shown in \cref{fig:DTdamage}, colored by the fraction of failed bond pairs around each node. For each successive displacement load, the stable progression of the damaged region extends further into the plate. As with the brittle beam, the region within one horizon of the crack shows partial damage.
+
+%
+\begin{figure}[tbp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/DoubleTorsionDD.pgf}}
+  \caption{Crack Progression in Double Torsion Brittle Plate}
+  \label{fig:DTdamage}
+\end{figure}

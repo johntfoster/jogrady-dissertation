@@ -1,0 +1,140 @@
+\chapter{Conclusion}
+
+As far as we know, these are the first peridynamic state-based thin feature models.
+
+The models developed so far provide allow for peridynamic modeling of peridynamic beams and plates in elastic bending.
+The models are validated by comparing their strain energies to the strain energy of classical models for small, homogenous deformations.
+Code was written to evaluate both beam and plate bond-pair models for linear elastic, brittle, nonlinear elastic, and elastic perfectly plastic materials.
+Simulations run with the developed models provide results in agreement with conventional methods for simple cantilever beam tests.
+Plate simulation results are promising but not yet verified for either elastic or elastic perfectly plastic materials.
+The proposed damage model successfully reproduces the impact of nonlinear elasticity on deformation of a rectangular cantilever, and the framework is laid to allow application of the same model to plates and I-beams.
+Plastic deformation results for rectangular cantilevers are promising, but the residual deformation for a plastically deformed beam does not yet match expected results.
+
+There are still several several goals that will improve the reliability, applicability, and usability of these models.
+While a few cantilever beam cases have been validated, extended validation will consider fixed-displacement (pinned) boundary conditions and additional load cases.
+Correctly modeling each case will require a more careful consideration of the appropriate way to apply various loads and enforce various boundary conditions.
+Further testing will also include brittle failure and plasticity in I-beams and in plates.
+Specifically, the hysteresis associated with plastic deformation must be reconciled.
+
+To maximize computational efficiency, the presented results were obtained by fixing the in-plane coordinates of each node and allowing only the vertical component to vary.
+The presented cases are expected to exhibit almost no lateral displacements, but to generalize the model it will need to include all three degrees of freedom for each node.
+The code to accomplish this task was written and commented out to improve performance, so this should be a relatively easy change.
+The increased computational complexity may require implementation of a different solver method such the Nonlinear Conjugate Gradient Method.
+Neither the bond-pair nor the bond-multiple models resist bond extension, so full degree-of-freedom models must also incorporate an extension energy term to prevent infinite transverse displacements.
+
+A full degree-of-freedom model is necessary to extend the plate model for use with 3D thin shells.
+Shells are similar to plates but are not initially a flat plane.
+It is expected that shells can be successfully by starting with a plate and applying initial plastic deformations to all bond pairs that are not initially collinear.
+
+By incorporating extension energy into the model, we will also gain the ability to model buckling and tension-stiffening, both of which are important to thin feature failure.
+Beam, plate, and shell elements should all exhibit buckling and tension stiffening behavior as a natural result of combining models that resist bending with those that resist elongation.
+
+To make these models more useful for analysis of real parts, they should be extended to be usable with irregular discretization.
+For beams, this may be accomplished by using the bond-multiple model.
+For plates, irregular discretization might be possible using a modified bond-multiple method, or it may require the implementation of virtual points at the edges of regions with finer discretization.
+
+Finally, the fact that the bond-pair plate model describes a material with the same Poisson ratio as a bond-pair 2D peridynamic solid suggests a means of modeling plates with arbitrary Poisson ratios.
+Just as the state-based linear peridynamic solid divides the deformation state into dilatory and deviatoric deformation, it may be possible to divide the bending state of a plate into spherical and deviatoric bending.
+
+
+
+\appendix
+\chapter{Fr\'echet Derivative}
+\label{sec:frechet}
+\section{Definition}
+The derivative of a function of a state is defined by Silling in \cite{silling2007peridynamic} as follows:
+\begin{quote}
+Let $\Psi$ be a function of a state, $\Psi(\cdot):\mathcal{A}_m\rightarrow\mathcal{L}_n$. Suppose there exists a state-valued function denoted $\nabla\Psi\in\mathcal{A}_{m+n}$ such that for any $\vstate{A}{}{}\in\mathcal{A}_m$ and any $\Delta\vstate{A}{}{}\in\mathcal{A}_m$,
+\begin{equation}
+  \Psi(\vstate{A}{}{}+\Delta\vstate{A}{}{})=\Psi(\vstate{A}{}{})+\nabla\Psi(\vstate{A}{}{})\bullet\Delta\vstate{A}{}{}+o(||\Delta\vstate{A}{}{}||).
+\end{equation}
+Then $\Psi$ is said to be \textit{differentiable} and $\nabla\Psi$ is called the \textit{Frechet derivative} of $\Psi$.
+\end{quote}
+This is a fairly straightforward way of defining a derivative with respect to a state.
+Because the force vector-state and deformation vector-state are work conjugate, the force vector-state can be determined by taking the Fr\'echet derivative of energy with respect to the deformation vector-state.
+\section{Bond-Pair Force}
+For the bond-pair model, we derive the bond force function from the bond-pair energy function
+%
+\begin{align}
+%
+\tvstate{T}{}{\boldsymbol{\xi}} &= \nabla w\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}\right)\notag \\
+%
+w&=\omega\!\left(\boldsymbol{\xi}\right)\alpha\left[1+\cos\!\left(\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right)\right]\notag \\
+%
+w\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}+\Delta\tvstate{Y}{}{\boldsymbol{\xi}}\right) &=
+ \omega\!\left(\boldsymbol{\xi}\right)\alpha\left[1+\cos\!\left(\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}+\Delta\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right)\right]\notag
+\end{align}
+%
+\begin{multline}
+\nabla w\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}\right)\bullet\Delta\tvstate{Y}{}{\boldsymbol{\xi}}= 
+w\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}+\Delta\tvstate{Y}{}{\boldsymbol{\xi}}\right) -w\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}\right) \notag\\
+%
+=\omega\!\left(\boldsymbol{\xi}\right)\alpha\sin\!\left(\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right)\!\left[\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}+\Delta\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)-\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right]
+\end{multline}
+%
+\begin{equation}
+\left[\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}}+\Delta\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)-\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right] = 
+\frac{\Delta\tvstate{Y}{}{\boldsymbol{\xi}}}{|\tvstate{Y}{}{\boldsymbol{\xi}}|}\bullet \hat{\theta}\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\notag
+\end{equation}
+%
+To determine the $\hat{\theta}$ direction vector, we must construct a vector that is normal to $\tvstate{Y}{}{\boldsymbol{\xi}}$ and that is in the plane containing both $\vstate{Y}{}{\boldsymbol{\xi}}$ and $\vstate{Y}{}{\boldsymbol{-\xi}}$.
+The cross product of $\vstate{Y}{}{\boldsymbol{\xi}}$ and $\vstate{Y}{}{\boldsymbol{-\xi}}$ is a vector normal to that plane, so any vector normal to that cross product will be in the correct plane.
+Therefore, the vector $\vstate{Y}{}{\boldsymbol{\xi}}\times\left[\vstate{Y}{}{\boldsymbol{\xi}}\times\vstate{Y}{}{\boldsymbol{-\xi}}\right]$ is both normal to $\vstate{Y}{}{\boldsymbol{\xi}}$ and is in the plane containing both $\vstate{Y}{}{\boldsymbol{\xi}}$ and $\vstate{Y}{}{\boldsymbol{-\xi}}$.
+Normalizing gives us the $\hat{\theta}$ direction vector:
+%
+\begin{equation}
+\hat{\theta}\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)=
+\frac{\tvstate{Y}{}{\boldsymbol{\xi}}\times\left[\tvstate{Y}{}{\boldsymbol{\xi}}\times\tvstate{Y}{}{\boldsymbol{-\xi}}\right]}{|\tvstate{Y}{}{\boldsymbol{\xi}}||\tvstate{Y}{}{\boldsymbol{\xi}}||\tvstate{Y}{}{\boldsymbol{-\xi}}|\sin\!\left(\theta\!\left(\tvstate{Y}{}{\boldsymbol{\xi}},\tvstate{Y}{}{-\boldsymbol{\xi}}\right)\right)}\notag 
+\end{equation}
+%
+We combine all of these to get the expression for bond force found in \cref{eq:SillingForceNO}.
+\begin{align}
+%
+\tvstate{T}{}{\boldsymbol{\xi}} &=
+\omega\!\left(\boldsymbol{\xi}\right)\frac{-\alpha}{|\tvstate{Y}{}{\boldsymbol{\xi}}|} \frac{\tvstate{Y}{}{\boldsymbol{\xi}}}{|\tvstate{Y}{}{\boldsymbol{\xi}}|} \times 
+\left[\frac{\tvstate{Y}{}{\boldsymbol{\xi}}}{|\tvstate{Y}{}{\boldsymbol{\xi}}|} \times 
+\frac{\tvstate{Y}{}{-\boldsymbol{\xi}}}{|\tvstate{Y}{}{-\boldsymbol{\xi}}|}\right]\notag
+\end{align}
+%
+\section{Isotropic Bending Correction}
+To derive the bending ``pressure'' force, we start with the isotropic energy discrepancy
+%
+\begin{equation}
+    W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
+\end{equation}
+%
+with
+%
+\begin{align}
+    \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag
+\end{align}
+Because $\bar{\boldsymbol{\kappa}}$ is itself a vector-state, we will need to begin with the change in $\bar{\boldsymbol{\kappa}}$ with respect to $\vstate{Y}{}{}$ and carry the result through to find the change in $W'$.
+\begin{align}
+    \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &= \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag 
+\end{align}
+%
+%
+\begin{align}
+    W'\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\left[\bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right)\right]^2 \notag \\
+    &=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left\{ \vphantom{\int_0^\delta} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)\right. \notag \\
+    &\phantom{=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}} + \frac{4}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &\phantom{=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}}\left. + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi\right\} \notag \\
+    &=W'\left(\vstate{Y}{}{}\right)+ 2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \frac{4}{m} \frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \bullet \Delta\vstate{Y}{}{} + o\left(||\Delta\vstate{Y}{}{}||\right)\notag \\
+    \nabla W'\!\left(\vstate{Y}{}{}\right) &= \vstate{T}{}{\boldsymbol{\xi}} =  \frac{8 G}{m} \frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\notag
+\end{align}
+%
+This demonstrates the bond-length dependent ``pressure'' applied to each point in the neighborhood of a point with average curvature $\bar{\boldsymbol{\kappa}}$.
+
+
+
+
+\chapter{Notations }
+
+Here we show the use of multiple appendixes.
+
+
+\section{Math Notations}
+
+Each appendix can have sub-sections as a regular chapter.

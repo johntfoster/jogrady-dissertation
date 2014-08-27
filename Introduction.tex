@@ -1,0 +1,30 @@
+\chapter{Introduction}
+
+The final goal of many mechanical engineering analyses is the prediction and description of material failure.
+Even when some amount of material failure is acceptable, conservative engineering models can indicate safe conditions by which failure may be avoided.
+Within these operation envelopes, a wide variety of well-developed analysis techniques are available to predict material behavior.
+Outside the envelope, the onset of failure may be predicted and replacement/repair indicated, but the actual progression of material failure is unknown.
+Because these envelopes conservatively restrict operation, absolute avoidance of material failure may require tradeoffs such as: reduced operational life, expensive inspection and repair regimes, increased down-time, and reduced performance in other areas.
+Material models that accurately predict failure progression can extend the operational envelope without reducing reliability.
+Other problems, such as those related to impact, penetration, and blast resistance, necessarily involve material failure and cannot be accurately modeled without simulating failure progression.
+Without reliable means for modeling failure progression, these problems can be tackled only by means of extensive (and expensive) testing programs.
+While some extrapolation from test results is possible, many conditions of interest are difficult, expensive, and/or dangerous to create and to observe.
+For these reasons, accurate and reliable models for the progression of failure for various materials and conditions has long been and remains a major focus of engineering research.
+
+
+\section{Scope}
+
+This dissertation presents a peridynamic equivalent to an Euler-Bernoulli beam, along with a methodology for representing non-uniform cross-sections, plastic behavior, and failure.
+Unlike many continuum beam theories that derive new equations of motion (such as fourth order PDE's) from the 3D elastic constitutive model, the new model is not derived from prior ordinary peridynamic models based on bond extension, but is a material model that directly resists bending deformation while maintaining the same conservation of momentum equation as the 3D model.
+This beam model is demonstrated to be equivalent to Eringen's nonlocal elasticity for small peridynamic horizons.
+The 1D beam model is then extended to 2D to model the bending behavior of flat Kirchhoffoff-Love plates.
+The resulting 1-parameter model is constrained to a Poisson ratio \(\nu=\sfrac{1}{3}\).  
+By introducing an \emph{isotropic bending-state}, the model is extended to any valid Poisson ratio.  
+The model is combined with an extension-based model to capture the effect of in-plane forces on bending behavior, resulting in a flat shell model.
+Introducing the concept of virtual points results in a model that is more practically applicable and able to model non-uniform distributions of peridynamic points, as might result from a meshing software.
+Using virtual points also allows the simulation of curved shells, greatly expanding the class of problems that can be approached with this model.
+Because many analyses of interest are partly or wholly comprised of these types of features, their development is an important addition to the capabilities of peridynamic analysis.
+
+\section{Outline}
+
+The second section of this dissertation reviews the literature for material modeling, focussing on the most prominent PDE-based material failure modeling techniques, alternative nonlocal models, peridynamics, and thin feature modeling. Section 3 provides necessary background information on peridynamic models. Section 4 develops the new bond-pair and bond-multiple peridynamic bending models. Section 5 shows the results of those models for some simple comparison cases. Conclusions and avenues for future development are laid out in Section 6.

@@ -1,0 +1,256 @@
+\chapter{Literature Review}
+\section{PDE-Based Failure Modeling}
+Because material failure is an important part of many problems, there are several computational methods that attempt to simulate progressing material failure. 
+One of the most popular is the eXtended Finite Element Method (XFEM), an excellent overview of which can be found in~\cite{fries2010extended} by Fries and Belytschko.
+Traditional finite elements use polynomial basis functions to describe unknown fields over an element.
+As a result, fields such as displacement always vary continuously across an element; discontinuities within an element are poorly approximated even by high-order polynomials.
+Discontinuities can only arise between elements, and are therefore very mesh-dependent; worse, to model a moving or evolving discontinuity requires continual remeshing around the advancing crack tip.
+The finite elements in an XFEM model are ``extended'' or enriched by adding basis functions that reflect the expected field behavior. 
+In the case of crack growth, this extension comes in the form of discontinuous basis functions.
+In 1982, Arnold~\cite{arnold1982interior} developed a mathematical basis for using discontinuous finite elements and an interior penalty method.
+This method allows modeling problems with very high gradients (as at boundaries) and greatly reduces the importance of meshing and the need for remeshing.
+Instead of remeshing along an expected crack path, the predicted direction of crack growth is used to choose discontinuous basis functions consistent with a crack along that path.
+
+The use of discontinuous basis functions (such as \cref{fig:CrackEnrich}) to model crack progression through an element was first developed by Belytschko and Black in \cite{belytschko1999elastic} to model straight and gently curving cracks with less remeshing.
+Longer cracks would require remeshing, but at the root of the crack rather than the tip.
+\begin{figure}[h]
+  \centering
+  \scalebox{.55}{\input{\plotpath/CrackEnrichment.pgf}}
+  \caption{XFEM includes discontinuous enrichment basis functions}
+  \label{fig:CrackEnrich}
+\end{figure}
+The practice was then extended by Mo\"es et al. in~\cite{dolbow1999finite} to use different discontinuous basis functions for cracks and crack tips, allowing the modeling of cracks with greater length and curvature without remeshing.
+As with traditional finite element methods, XFEM is mesh-based and uses traditional finite element basis functions.
+The elements are enriched extrinsically by adding discontinuous basis functions to the existing basis functions using the Partition of Unity concept described by Melenk and Babuska in~\cite{melenk1996partition}.
+The enrichment functions can capture arbitrary discontinuities in both the parameter being modeled and in its gradient, but the location of the discontinuities must be predicted so that the appropriate enrichment functions can be used.
+Elements are enriched locally as illustrated in \cref{fig:XFEM} rather than globally, to capture local phenomena like crack growth.
+In some elements, every node is enriched, while in others, only some nodes are enriched.
+Some choices of enrichment functions cause difficulties in the partially enriched ``blending'' elements, a problem for which a variety of fixes are available depending on the situation.
+
+
+
+%
+\begin{figure}[h]
+  \centering
+\includegraphics{XFEMenrichments}
+\caption[XFEM models enrich nodes around a discontinuity]{XFEM models enrich nodes around a discontinuity\cite{fries2010extended}}
+\label{fig:XFEM}
+\end{figure}
+%
+
+More recently, Sauerland and Fries applied XFEM to two phase flow problems \cite{sauerland2013stable}, and Holl et al.~\cite{holl2013adaptive} used XFEM in the multi scale modeling of crack propagation.
+Mohammadnejad and Khoei~\cite{mohammadnejad2013hydro} and Hunsweck et al. \cite{hunsweck2013finite} modeled using XFEM the combination of fluid and fracture behavior found in hydraulic fracturing, a topic of considerable recent interest.
+
+A second common method of modeling material failure is the Reproducing Kernel Particle Method (RKPM), developed by Liu et al.~\cite{liu1995reproducing}.
+Mesh-based models track the connections between points in a deforming material, which can become problematic when large deformations deform the mesh and even cause it to intersect itself.
+RKPM is a ``mesh free'' method that tracks material properties by their values at selected points.
+Mesh-free methods are advantageous for modeling large deformation in fluids and solids because they do not track connections between points.
+Between material points, properties are interpolated from their values at nearby points by way of integration with a kernel function.
+The difference in domains between RKPM and XFEM can be seen in \cref{fig:FEMvsRKPM}.
+%
+\begin{figure}[h]
+  \centering
+\includegraphics{FEMvsRKPM}
+\caption[Comparison of domains of influence for FEM and RKPM]{Comparison of domains of influence for a)FEM and b)RKPM, by Guan et al. \cite{guan2011semi}}
+\label{fig:FEMvsRKPM}
+\end{figure}
+%
+The key to the RKPM lies in this kernel function; by using window functions from wavelet analysis, a ``reproducing'' kernel guarantees that  integrals of interpolated properties reproduce the integral of the continuous property field.
+The ``reproducing'' kernel makes the RKPM a Partition of Unity method like XFEM, and is a major advantage of RKPM relative to other particle methods.
+It is, however, computationally expensive.
+Recent applications of the RKPM include the work of Guan et al. on fragment-impact problems~\cite{guan2011semi} and analysis of non-linear wave equations by Cheng and Kim Meow~\cite{cheng2012analyzing}.
+The RKPM has also been used by Xie and Wang~\cite{xie2014stabilized} to analyze coupled hydro-mechanical behavior.
+Wu et al. have coupled RKPM and FEM in their recent work on fragmentation and debris evolution\cite{wu2014fragmentation}.
+
+Other methods of modeling failure include multiple finite element techniques and particle methods.
+Finite element methods incorporating ``element death'' remove from consideration elements that meet particular criteria and are perhaps the simplest way of modeling material failure.
+
+Cohesive zone elements, proposed by Ortiz et al.~\cite{ortiz1987finite}, use element level information to detect the onset of plasticity (material instability) and add suitable deformation modes to model shear banding.
+The additional deformation modes allow cohesive zone elements to capture the more complex displacements associated with plastic shear bands.
+Other cohesive zone elements developed by Needleman\cite{needleman1987continuum} model crack growth, but Foulk et al.\cite{foulk2000formulation} note that this requires very fine meshes or prior knowledge of the crack path.
+They are useful for cases such as composite delamination or debonding, where the crack follows a known surface.
+Fang et al. propose in \cite{fang2011augmented} a method of augmenting the cohesive zone model to work in concert with XFEM-type elements to model both arbitrary and known crack paths.
+More recently, McGarry et al. \cite{mcgarry2014potential} and M\'airt\'in et al. \cite{mairtin2014potential} developed a cohesive zone model to account for crack closure, including crack surface tractions.
+
+Particle methods of modeling failure include the Smooth Particle Hydrodynamic (SPH) method, reviewed by Monaghan in \cite{monaghan2005smoothed}, in which a kernel (commonly a cubic spline) is used to create a smooth interpolation of actual quantities.
+Developed for fluids, Springel notes in \cite{springel2010smoothed} that it is often used in astrophysics problems, where many fluid problems are encountered and even ``solid" bodies deform under their own gravity.
+It can also predict elastic behavior and has been extended with failure models by Benz and Asphaug in \cite{benz1995simulations} by adding an evolving damage parameter.
+Particle methods like SPH handle fragmentation very well, and are used in a variety of problems with material interfaces, high strains, and multiphase and multi-physics aspects.
+Because cubic spline kernels do not reproduce a Partition of Unity, property interpolation does not accurately reproduce the continuum field.
+Additionally, elastic SPH models do not conserve angular momentum, and in cases require artificial viscosities or artificial stresses to avoid numerical instability.
+
+The Material Point Method, developed by Sulsky and Schreyer in~\cite{sulsky1996axisymmetric}, tracks points in both Eulerian and Lagrangian meshes.
+The advantage of using both meshes is an ability to handle obstacles and boundary conditions without difficulty at large deformations.
+Wieckowski notes that the downside to using both meshes is continual remeshing and added computational expense \cite{wikeckowski2004material}.
+Despite this expense, the material point method was extended to model cracks by Nairn in \cite{nairn2003material}, then further enhanced by Sadeghirad et al. in \cite{sadeghirad2011convected} to improve stability when modeling massive deformations.
+The Lattice Discrete Particle Method was developed by Cusatis et al.\cite{cusatis2011lattice,cusatis2011blattice} to model concrete.
+It fills a volume with variously-sized particles generated from a probability density function based on aggregate size.
+The relationships between these particles form tetrahedrons (the lattice) that fill the volume and allow multi-particle interaction.
+Failure occurs at predefined surfaces between particles and can include various failure modes.
+The LDPM is capable of accurately modeling many failure conditions in concrete, including the impact of specimen size on effective material behavior.
+These are only a few of the myriad of models that attempt to model the progression of material failure.
+
+All of these methods are used to solve a partial differential equation for conservation of momentum in a continuum. 
+Because they are based on continuum PDEs, they do not naturally develop discontinuous displacements such as cracks. 
+The PDEs that govern these methods are ill-defined at the surface of a crack, so cracks must be inserted within or between elements after discretization. 
+This results in crack propagation that is discretization-dependent as well as computationally expensive and potentially unstable. 
+Although progress in addressing these issues continues, much of the difficulty is essentially tied to the undefined nature of derivative equations at discontinuous displacements.
+By abandoning the use of displacement derivatives, peridynamics offers an alternative way to address discontinuous displacements.
+%
+
+\section{Peridynamic Modeling}
+The term \textit{peridynamic} was coined by Silling in \cite{silling2000reformulation} to describe the new formulation of continuum mechanics he developed in \cite{silling2000reformulation}.
+From the Greek roots \textit{peri} and \textit{dyna} meaning \textit{near} and \textit{force} respectively, it alludes to the nonlocal force exerted by nearby points.
+In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen, the peridynamic model casts material behavior at a point as an \textit{integral} equation of the surrounding displacement rather than the classical \textit{differential} equation.
+Because peridynamic models do not include spatial displacement derivatives, discontinuous displacements can arise naturally and can be analyzed without special heuristics. 
+In classical continuum mechanics, linear momentum is conserved according to the local  \cref{eq:ClassicCoPV},
+%
+\begin{equation}
+\label{eq:ClassicCoPV}
+\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \nabla \cdot \mathbf{P}(\mathbf{x}) + \mathbf{b}(\mathbf{x})
+\end{equation}
+%
+in which $\rho$ is the density, $\ddot{\mathbf{u}}$ is the second time derivative of displacement , $\mathbf{P}$ is the transpose of the First Piola Kirchhoff stress tensor, and $\mathbf{b}$ is the body force density, all of which are functions of position $\mathbf{x}$ and of time. 
+Because \(P\) is defined in terms of the deformation gradient, it is clear that \cref{eq:ClassicCoPV} is undefined for discontinuous displacements. 
+Strongly nonlocal models (including peridynamics) replace the divergence-of-stress term with an integral functional.
+%
+\begin{equation}
+\label{eq:PDCoPV}
+\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbi{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b}(\mathbf{x})
+\end{equation}
+%
+so that, instead of the divergence of stress, we have the integral of a ``force" function $\mathbi{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$. 
+This force function may depend on \(\mathbf{x}\), \(\mathbf{q}\), their deformed positions, the original and deformed positions of other points in \(\Omega\), history, etc.
+It is common for \(\mathbi{f}\) to be defined as \(0\) for any pair of points initially further than \(\delta\) apart. 
+The points within \(\delta\) of a point \(\mathbf{x}\) are the \textit{neighborhood} of \(\mathbf{x}\) and are denoted in \cref{fig:PDbody} by \(\mathcal{H}\).
+%
+\begin{figure}[h]
+  \centering
+\subinputfrom{\diagrampath}{PDbody.eps_tex}
+\caption{A peridynamic body \protect\(\Omega\protect\)}
+\label{fig:PDbody}
+\end{figure}
+% 
+By including the behavior of nearby material, these models introduce an inherent length scale to the model. 
+This length scale may be determined by material properties or by computational demands.
+
+Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.
+While the simplest force functions recreate a one-parameter linear elastic solid material, other force functions can be used to model a wide variety of material behaviors, some of which will be outlined here.
+Most simulation of material behavior uses an equation of motion reformulated for a discretized model.
+When discretized, peridynamics is typically a mesh-free numerical method in which there are no geometrical connectivities between various nodes.
+
+A force function can be restricted to being pairwise (depending solely on the displacement of the two points \(\mathbf{x}\) and \(\mathbf{q}\)), and still model complex and varied behavior.
+By including a damage parameter that sets the force contribution of ``damaged'' bonds to \(0\), Silling and Askari\cite{silling2005meshfree} were able to model a brittle material with natural crack formation, propagation, and branching.
+Other examples of damage propagation include impacts against brittle structures as in \cref{fig:PDimpact} modeled by Demmie and Silling\cite{demmie2007approach} and fracturing of thermally-stressed glass modeled by Kilic and Madenci\cite{kilic2009prediction}. 
+%
+\begin{figure}[h]
+  \centering
+\includegraphics[width=0.8 \textwidth]{demmie07impact}
+\caption[Peridynamic model of an airplane impacting a concrete structure]{Peridynamic model of an airplane impacting a concrete structure \cite{demmie2007approach} }
+\label{fig:PDimpact}
+\end{figure}
+%
+Modeling progressive fracture, including crack branching, is a major advantage of peridynamic formulations.
+Using a piecewise force function, Dayal and Bhattacharya~\cite{dayal2006kinetics} were able to model phase transformation in 1D and 2D without an additional constitutive law; the transformations arose and propagated naturally as a dynamic instability, a result of the force function used.
+Peridynamic models have also been used to analyze composite laminates.
+In \cite{xu2008peridynamic}, Xu et al. designate peridynamic bonds as fiber or matrix bonds with different force functions to model damage in composite laminates. 
+Kilic et al. model fiber, matrix, and interfacial bonds in \cite{kilic2009peridynamic} to capture stacking order effects on damage propagation.
+Bobaru~\cite{bobaru2007influence} applied the peridynamic model to nano fiber networks, at a scale where long-range forces are very apparent.
+In the same paper he created a Representative Volume Element (RVE) for random networks of nano fibers, laying the ground work for peridynamic multi-scale modeling.
+Also related to multi-scale peridynamic modeling is work by Silling on model coarsening \cite{silling2011coarsening}, \cref{fig:PDmultiscale}.
+An example of a multi-scale peridynamic simulation can be found in \cite{askari2008peridynamics}, by Askari et al.
+%
+\begin{figure}[h]
+  \centering
+\includegraphics{PDmultiscale}
+\caption[Silling's illustration of course-graining in time]{Silling's illustration of course-graining in time from \cite{silling2011coarsening}.}
+\label{fig:PDmultiscale}
+\end{figure}
+%
+
+Concrete is a nearly standard example material in which nonlocal behavior is easily observed, and modeling the damage accumulation and proceeding discontinuity propagation has long been the goal of nonlocal models developed by Bazant and Pijaudier-Cabot~\cite{bazant1988nonlocal} among others, significantly predating peridynamics.
+In \cite{gerstle2007peridynamic}, Gerstle et al. use rotational degrees of freedom to create a concrete material model, capable of describing a linear elastic material with any Poisson ratio, that also handles material failure.
+Peridynamic models are not limited to force-displacement relationships; the theory has also been applied to diffusion processes and multiphysics problems.
+Peridynamic models can simulate heat transfer~\cite{bobaru2010peridynamic} and diffusion~\cite{burch2011classical}.
+
+Mathematical analyses of simplified cases have also been fruitful.
+Weckner~\cite{weckner2005effect} determined analytical solutions to the infinite bar problem. 
+Emmerlick and Zimmerman proved solution existence and uniqueness in the simplest case of the peridynamic bar~\cite{emmrich2007analysis}.
+Mikata found additional analytical solutions for the bar problem~\cite{mikata2012analytical}.
+In 3D, Weckner constructed Green's functions for an infinite peridynamic solid in \cite{weckner2009green}.
+All of this work was done with peridynamic models limited to pairwise force functions.
+
+Other than Gerstle's aforementioned micropolar peridynamic model, the pairwise force function limits 3D solid materials to a Poisson ratio of  \(\nu=\sfrac{1}{4}\). 
+To model additional material behavior, Silling et al. introduced state-based peridynamic models in \cite{silling2007peridynamic}.
+By freeing the force function from the pairwise restriction, state-based models allow the force relationship between two points to depend on the collective behavior of all nearby material.
+Using the concept of a deformation vector state allows for the construction of correspondence models that can recreate any classical constitutive model.
+These correspondence models use the deformation state to approximate the deformation gradient tensor, then use the deformation gradient tensor to calculate force contributions.
+State-based models were used by Foster et al. to simulate viscoplasticity and hardening in~\cite{foster2010viscoplasticity}, and rate dependent failure in~\cite{foster2011energy}, with others, via an energy criterion.
+Mitchell describes state-based models for plasticity in~\cite{mitchell2011nonlocal} and viscoelasticity in~\cite{mitchell2011non}.
+A non-ordinary state-based model was used by Warren et al. to simulate fracture in~\cite{warren2009non}.
+More recently, Tupek et al. have incorporated the idea of peridynamic damage into a Johnson-Cook based damage state that accumulates with plastic strain\cite{tupek2013approach}.
+%
+\section{Other Nonlocal Elasticity Models}
+\label{sec:NLbeams}
+%
+The peridynamic formulation of continuum mechanics is neither the only nor the first nonlocal model. Nonlocal elasticity generally allows for forces at a point that are dependent on the material configuration of an entire body, rather than the configuration at that point \cite{eringen1972nonlocal}.  While long-range forces are obvious at the molecular model, material at larger scales is conventionally modeled as though internal forces are local or contact forces \cite{kroner1967elasticity}.
+The result of such approximation is accurate for deformations that are homogeneous, but introduces some inaccuracy for inhomogeneous deformations like the propagation of waves with short wavelengths.
+One way to distinguish between homogeneous and inhomogeneous deformations is to incorporate higher-order gradients of deformation.
+While stress in classical elasticity is a function of the (first) gradient of deformation, Eringen's formulation of a nonlocal modulus in \cite{eringen1983differential} approximates a weighted sum of the first and second order gradients.
+This introduces a length scale to the model and has the effect of smearing out local deformation inhomogeneities over the surrounding material, while maintaining the conventional result for homogeneous deformations.
+
+Previous work in the nonlocal mechanics of beams is motivated by the observed stiffening of nanoscale cantilevers.
+Challamel and Wang demonstrate in \cite{Challamel2008small} that Eringen nonlocal elasticity cannot reproduce the scale stiffening, but that stiffening does result from other gradient-elastic models and models incorporating nonlocal curvature.
+Because all of these models incorporate higher-order gradients of deformation, they impose stronger continuity requirements than classical elasticity, and are unsuitable for discontinuous displacements.
+Because the gradients are evaluated locally, gradient models are called \textit{weakly nonlocal}.
+Recent work by Paolo et al. \cite{paola2013mechanically} develops a displacement-based beam in which relative axial displacement, shear displacement, and rotation of non-adjacent beam segments are resisted by three kinds of nonlocal spring, whose stiffnesses can be tuned to the expected material behavior.
+With the appropriate nonlocal stiffnesses, their model reproduces the nanoscale cantilever stiffening effect.
+
+Similarly, Duan and Wang \cite{duan2007exact} applied Eringen-type elasticity to the quasi-1D problem of axisymmetric bending in nanoscale plates.
+Pradhan and Murmu~\cite{pradhan2009small} extended the concept to buckling in single-layered graphed sheets, a fully 2D problem.
+Later, Ansari et al.~\cite{ansari2010nonlocal} modeled the vibration of single-layered graphed sheets using Eringen-type elasticity.
+
+Nonlocal effects have also been incorporated into many of the modeling techniques previously discussed.
+Bazant and Chang incorporated nonlocal strain-softening into a finite element model in \cite{bazant1987nonlocal}.
+Any interpolating particle method will exhibit some measure of nonlocality, but some explicitly model nonlocal phenomena.
+Vignjevic et al. used SPH to model nonlocal strain-softening in \cite{vignjevic2014sph}, and in \cite{burghardt2012nonlocal}, Burghardt et al. developed a material point method that incorporates nonlocal plasticity.
+
+\section{Thin Features}
+Many engineering analyses concern shapes that have one dimension much greater than another; numerical modeling the behavior of these shapes can be a considerable challenge for methods designed for 3D solids. 
+In finite element models, for example, calculations can become unstable or too stiff when individual elements become long and thin. 
+To avoid such elements while maintaining model fidelity requires a very large number of solid elements. 
+By making some assumptions about the behavior along the thin direction, many such shapes can be modeled as 1D beams or 2D plates or shells without great loss of accuracy.
+A comprehensive review of the classical continuum mechanics associated with thin features by Reddy \cite{reddy2007theory} also includes a section on the Finite Element analysis of plates and shells.
+Material failure in classical thin features is modeled using the same techniques as in solids.
+Dolbow et al. use XFEM in~\cite{dolbow2000modeling} to model fracture in plates.
+Li et al. use a variant of RKPM in~\cite{li2000numerical} to model plastic deformation in shells.
+More recently, Xu et al. have applied XFEM to plate plasticity problems\cite{xu2013xfem}, and Memar Ardestani et al. have used RKPM to model functionally graded plates\cite{memar2014analysis}.
+Other authors use cohesive zone elements\cite{li2002analysis} or SPH\cite{maurel2008sph} to study failure in thin features.
+%
+
+\subsection{Peridynamic Models}
+Reduced dimension thin features such as bars\cite{silling2003deformation,weckner2005effect,emmrich2007analysis,mikata2012analytical}, plates\cite{kilic2009prediction}, and membranes\cite{silling2005peridynamic} have been modeled using peridynamics, but these models are used for in-plane forces as in \cref{fig:PDmembrane}.
+%
+\begin{figure}[h]
+  \centering
+\includegraphics{PDmembrane}
+\caption[Tearing a peridynamic membrane]{Tearing a peridynamic membrane \cite{silling2005peridynamic}}
+\label{fig:PDmembrane}
+\end{figure}
+%
+Because traditional peridynamic models exert forces in the direction of the bonds between points, they are not well-suited for bending problems of thin shapes, in which force and displacement are both nearly perpendicular to bonds connecting material points.
+Just as with solid finite elements, most peridynamic models of thin features like the tubes in \cref{fig:LittlewoodCylinder} have included several nodes through the thickness of a thin part to capture bending behavior.
+A recent paper by Taylor and Steigmann~\cite{taylor2013two} applies asymptotic analysis to reduce a 3D solid bond-based peridynamic model to 2 dimensions while retaining resistance to bending.
+%
+\begin{figure}[h!]
+  \centering
+\includegraphics[width=0.8 \textwidth]{LittlewoodCylinder}
+\caption[A peridynamic cylinder uses several nodes through its thickness]{A peridynamic cylinder uses several nodes through its thickness in \cite{littlewood2010simulation}}
+\label{fig:LittlewoodCylinder}
+\end{figure}
+%
+A nonordinary model similar to those proposed by Silling in \cite{silling2007peridynamic} and \cite{silling2010peridynamic} allows for a simple bending model that can be used for one- and two-dimensional models.
+
+%Recent work by Oterkus includes additional degrees of freedom to describe the orientation of each peridynamic point, so that each bond between points has components for differential displacements and for differential orientations. 
+%These are incorporated into a bond-based thin feature model for beams, plates and shells. 
+%These models appear to include spatial derivatives and in the case of plates are constrained to the same Poisson ratio as other bond-based models.
