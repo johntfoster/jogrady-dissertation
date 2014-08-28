@@ -9,20 +9,32 @@ The finite elements in an XFEM model are ``extended'' or enriched by adding basi
 In the case of crack growth, this extension comes in the form of discontinuous basis functions.
 In 1982, Arnold~\cite{arnold1982interior} developed a mathematical basis for using discontinuous finite elements and an interior penalty method.
 This method allows modeling problems with very high gradients (as at boundaries) and greatly reduces the importance of meshing and the need for remeshing.
-Instead of remeshing along an expected crack path, the predicted direction of crack growth is used to choose discontinuous basis functions consistent with a crack along that path.
+While initially demonstrated for high-gradient heat and fluid flow problems, the method of adding discontinuities within an element had strong potential for failure problems resulting in discontinuous displacements.
+Instead of remeshing along an expected crack path, a process that would require continual remeshing, the predicted direction of crack growth is used to choose discontinuous basis functions consistent with a crack along that path.
 
 The use of discontinuous basis functions (such as \cref{fig:CrackEnrich}) to model crack progression through an element was first developed by Belytschko and Black in \cite{belytschko1999elastic} to model straight and gently curving cracks with less remeshing.
+The discontinuous function in \cref{fig:CrackEnrich} will look familiar.
+As the transverse displacement field around the tip of a Mode I crack,
+\begin{equation*}
+v(x,y)=\frac{K_I}{2\mu}\sqrt{\frac{r}{2\mu}}\cos\left(\frac{\theta}{2}\right)\left[\kappa-1+2\sin^2\left(\frac{\theta}{2}\right)\right],
+\end{equation*}
+it and the other crack-tip displacement fields are a natural choice of basis functions.
 Longer cracks would require remeshing, but at the root of the crack rather than the tip.
+Root remeshing represents a major improvement over tip remeshing because it needs to be performed far less frequently.
 \begin{figure}[h]
   \centering
   \scalebox{.55}{\input{\plotpath/CrackEnrichment.pgf}}
   \caption{XFEM includes discontinuous enrichment basis functions}
   \label{fig:CrackEnrich}
 \end{figure}
-The practice was then extended by Mo\"es et al. in~\cite{dolbow1999finite} to use different discontinuous basis functions for cracks and crack tips, allowing the modeling of cracks with greater length and curvature without remeshing.
+The practice was then extended by Mo\"es et al. in~\cite{dolbow1999finite} to use different discontinuous basis functions for cracks and crack tips.
+Adding a Haar function to model discontinuous displacements far from the crack tip allowed cracks to pass through several elements, enabling the modeling of cracks with greater length and curvature without remeshing.
+
 As with traditional finite element methods, XFEM is mesh-based and uses traditional finite element basis functions.
 The elements are enriched extrinsically by adding discontinuous basis functions to the existing basis functions using the Partition of Unity concept described by Melenk and Babuska in~\cite{melenk1996partition}.
 The enrichment functions can capture arbitrary discontinuities in both the parameter being modeled and in its gradient, but the location of the discontinuities must be predicted so that the appropriate enrichment functions can be used.
+In \cite{dolbow1999finite}, crack direction was predicted by locating the maximum circumferential stress.
+There are other options for predicting a crack's direction of travel, but they do not generally predict the formation of a crack where none existed before.
 Elements are enriched locally as illustrated in \cref{fig:XFEM} rather than globally, to capture local phenomena like crack growth.
 In some elements, every node is enriched, while in others, only some nodes are enriched.
 Some choices of enrichment functions cause difficulties in the partially enriched ``blending'' elements, a problem for which a variety of fixes are available depending on the situation.
@@ -58,6 +70,9 @@ The difference in domains between RKPM and XFEM can be seen in \cref{fig:FEMvsRK
 The key to the RKPM lies in this kernel function; by using window functions from wavelet analysis, a ``reproducing'' kernel guarantees that  integrals of interpolated properties reproduce the integral of the continuous property field.
 The ``reproducing'' kernel makes the RKPM a Partition of Unity method like XFEM, and is a major advantage of RKPM relative to other particle methods.
 It is, however, computationally expensive.
+In its original formulation, the RKPM successfully handles large deformations that would cause unacceptable distortion in Finite Element models.
+A semi-Lagrangian version implemented by Guan et al. in \cite{guan2009semi} allows for recalculation of the support function.
+This allows damage in the form of severing the relationship between points that have been pulled too far apart.
 Recent applications of the RKPM include the work of Guan et al. on fragment-impact problems~\cite{guan2011semi} and analysis of non-linear wave equations by Cheng and Kim Meow~\cite{cheng2012analyzing}.
 The RKPM has also been used by Xie and Wang~\cite{xie2014stabilized} to analyze coupled hydro-mechanical behavior.
 Wu et al. have coupled RKPM and FEM in their recent work on fragmentation and debris evolution\cite{wu2014fragmentation}.
@@ -99,9 +114,9 @@ By abandoning the use of displacement derivatives, peridynamics offers an altern
 %
 
 \section{Peridynamic Modeling}
-The term \textit{peridynamic} was coined by Silling in \cite{silling2000reformulation} to describe the new formulation of continuum mechanics he developed in \cite{silling2000reformulation}.
+The term \textit{peridynamic} was coined by Silling to describe the new formulation of continuum mechanics he developed in \cite{silling2000reformulation}.
 From the Greek roots \textit{peri} and \textit{dyna} meaning \textit{near} and \textit{force} respectively, it alludes to the nonlocal force exerted by nearby points.
-In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen, the peridynamic model casts material behavior at a point as an \textit{integral} equation of the surrounding displacement rather than the classical \textit{differential} equation.
+In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, the peridynamic model casts material behavior at a point as an \textit{integral} equation of the surrounding displacement rather than the classical \textit{differential} equation.
 Because peridynamic models do not include spatial displacement derivatives, discontinuous displacements can arise naturally and can be analyzed without special heuristics. 
 In classical continuum mechanics, linear momentum is conserved according to the local  \cref{eq:ClassicCoPV},
 %
@@ -111,17 +126,18 @@ In classical continuum mechanics, linear momentum is conserved according to the 
 \end{equation}
 %
 in which $\rho$ is the density, $\ddot{\mathbf{u}}$ is the second time derivative of displacement , $\mathbf{P}$ is the transpose of the First Piola Kirchhoff stress tensor, and $\mathbf{b}$ is the body force density, all of which are functions of position $\mathbf{x}$ and of time. 
-Because \(P\) is defined in terms of the deformation gradient, it is clear that \cref{eq:ClassicCoPV} is undefined for discontinuous displacements. 
-Strongly nonlocal models (including peridynamics) replace the divergence-of-stress term with an integral functional.
+Because \(\mathbf{P}\) is defined in terms of the deformation gradient, it is clear that \cref{eq:ClassicCoPV} is undefined for discontinuous displacements. 
+In fact, traditional models require even the first spatial derivative of displacement to be continuous.
+Strongly nonlocal models (including peridynamics) replace the divergence-of-stress term with an integral functional,
 %
 \begin{equation}
 \label{eq:PDCoPV}
-\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbi{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b}(\mathbf{x})
+\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbf{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b},(\mathbf{x})
 \end{equation}
 %
-so that, instead of the divergence of stress, we have the integral of a ``force" function $\mathbi{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$. 
+so that, instead of the divergence of stress, we have the integral of a ``force" function $\mathbf{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$. 
 This force function may depend on \(\mathbf{x}\), \(\mathbf{q}\), their deformed positions, the original and deformed positions of other points in \(\Omega\), history, etc.
-It is common for \(\mathbi{f}\) to be defined as \(0\) for any pair of points initially further than \(\delta\) apart. 
+It is common for \(\mathbf{f}\) to be defined as \(0\) for any pair of points initially further than \(\delta\) apart. 
 The points within \(\delta\) of a point \(\mathbf{x}\) are the \textit{neighborhood} of \(\mathbf{x}\) and are denoted in \cref{fig:PDbody} by \(\mathcal{H}\).
 %
 \begin{figure}[h]
