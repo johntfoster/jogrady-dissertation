@@ -1,10 +1,12 @@
 \chapter{Literature Review}
 \section{PDE-Based Failure Modeling}
 Because material failure is an important part of many problems, there are several computational methods that attempt to simulate progressing material failure. 
+Most of these methods start with the partial differential equations for conservation of momentum found in classical continuum mechanics, then extend those models to account for failure situations that are poorly modeled by the classical equations.
+
 One of the most popular is the eXtended Finite Element Method (XFEM), an excellent overview of which can be found in~\cite{fries2010extended} by Fries and Belytschko.
 Traditional finite elements use polynomial basis functions to describe unknown fields over an element.
 As a result, fields such as displacement always vary continuously across an element; discontinuities within an element are poorly approximated even by high-order polynomials.
-Discontinuities can only arise between elements, and are therefore very mesh-dependent; worse, to model a moving or evolving discontinuity requires continual remeshing around the advancing crack tip.
+When they are allowed at all, discontinuities can only arise between elements, and are therefore very mesh-dependent; worse, to model a moving or evolving discontinuity requires continual remeshing around the advancing crack tip, adding greatly to the computational complexity of the problem.
 The finite elements in an XFEM model are ``extended'' or enriched by adding basis functions that reflect the expected field behavior. 
 In the case of crack growth, this extension comes in the form of discontinuous basis functions.
 In 1982, Arnold~\cite{arnold1982interior} developed a mathematical basis for using discontinuous finite elements and an interior penalty method.
@@ -15,12 +17,14 @@ Instead of remeshing along an expected crack path, a process that would require 
 The use of discontinuous basis functions (such as \cref{fig:CrackEnrich}) to model crack progression through an element was first developed by Belytschko and Black in \cite{belytschko1999elastic} to model straight and gently curving cracks with less remeshing.
 The discontinuous function in \cref{fig:CrackEnrich} will look familiar.
 As the transverse displacement field around the tip of a Mode I crack,
-\begin{equation*}
+\begin{equation}
+\label{eq:modeIdisp}
 v(x,y)=\frac{K_I}{2\mu}\sqrt{\frac{r}{2\mu}}\cos\left(\frac{\theta}{2}\right)\left[\kappa-1+2\sin^2\left(\frac{\theta}{2}\right)\right],
-\end{equation*}
-it and the other crack-tip displacement fields are a natural choice of basis functions.
+\end{equation}
+\cref{eq:modeIdisp} and the other crack-tip displacement fields are a natural choice of basis functions.
 Longer cracks would require remeshing, but at the root of the crack rather than the tip.
 Root remeshing represents a major improvement over tip remeshing because it needs to be performed far less frequently.
+Additionally, the path of the advancing crack can travel at any angle rather than following the angle of a mesh edge.
 \begin{figure}[h]
   \centering
   \scalebox{.55}{\input{\plotpath/CrackEnrichment.pgf}}
@@ -50,7 +54,8 @@ Some choices of enrichment functions cause difficulties in the partially enriche
 \end{figure}
 %
 
-More recently, Sauerland and Fries applied XFEM to two phase flow problems \cite{sauerland2013stable}, and Holl et al.~\cite{holl2013adaptive} used XFEM in the multi scale modeling of crack propagation.
+More recently, Sauerland and Fries applied XFEM to two phase flow problems \cite{sauerland2013stable}, including standard dam-breaking and rising droplet problems.
+Holl et al.~\cite{holl2013adaptive} used XFEM in the multi scale modeling of crack propagation, including multiple interacting cracks.
 Mohammadnejad and Khoei~\cite{mohammadnejad2013hydro} and Hunsweck et al. \cite{hunsweck2013finite} modeled using XFEM the combination of fluid and fracture behavior found in hydraulic fracturing, a topic of considerable recent interest.
 
 A second common method of modeling material failure is the Reproducing Kernel Particle Method (RKPM), developed by Liu et al.~\cite{liu1995reproducing}.
@@ -70,6 +75,7 @@ The difference in domains between RKPM and XFEM can be seen in \cref{fig:FEMvsRK
 The key to the RKPM lies in this kernel function; by using window functions from wavelet analysis, a ``reproducing'' kernel guarantees that  integrals of interpolated properties reproduce the integral of the continuous property field.
 The ``reproducing'' kernel makes the RKPM a Partition of Unity method like XFEM, and is a major advantage of RKPM relative to other particle methods.
 It is, however, computationally expensive.
+
 In its original formulation, the RKPM successfully handles large deformations that would cause unacceptable distortion in Finite Element models.
 A semi-Lagrangian version implemented by Guan et al. in \cite{guan2009semi} allows for recalculation of the support function.
 This allows damage in the form of severing the relationship between points that have been pulled too far apart.
@@ -197,7 +203,7 @@ In 3D, Weckner constructed Green's functions for an infinite peridynamic solid i
 All of this work was done with peridynamic models limited to pairwise force functions.
 
 Other than Gerstle's aforementioned micropolar peridynamic model, the pairwise force function limits 3D solid materials to a Poisson ratio of  \(\nu=\sfrac{1}{4}\). 
-To model additional material behavior, Silling et al. introduced state-based peridynamic models in \cite{silling2007peridynamic}.
+To model additional material behavior, Silling et al. reinvented the underlying peridynamic concept of bonds and forces and introduced state-based peridynamic models in \cite{silling2007peridynamic}.
 By freeing the force function from the pairwise restriction, state-based models allow the force relationship between two points to depend on the collective behavior of all nearby material.
 Using the concept of a deformation vector state allows for the construction of correspondence models that can recreate any classical constitutive model.
 These correspondence models use the deformation state to approximate the deformation gradient tensor, then use the deformation gradient tensor to calculate force contributions.
@@ -245,7 +251,7 @@ Other authors use cohesive zone elements\cite{li2002analysis} or SPH\cite{maurel
 %
 
 \subsection{Peridynamic Models}
-Reduced dimension thin features such as bars\cite{silling2003deformation,weckner2005effect,emmrich2007analysis,mikata2012analytical}, plates\cite{kilic2009prediction}, and membranes\cite{silling2005peridynamic} have been modeled using peridynamics, but these models are used for in-plane forces as in \cref{fig:PDmembrane}.
+Reduced dimension thin features such as bars\cite{silling2003deformation,weckner2005effect,emmrich2007analysis,mikata2012analytical}, plates\cite{kilic2009prediction}, and membranes\cite{silling2005peridynamic} have been modeled using peridynamics, but these models are used for in-plane or membrane forces as shown in \cref{fig:PDmembrane}.
 %
 \begin{figure}[h]
   \centering
@@ -254,17 +260,47 @@ Reduced dimension thin features such as bars\cite{silling2003deformation,weckner
 \label{fig:PDmembrane}
 \end{figure}
 %
-Because traditional peridynamic models exert forces in the direction of the bonds between points, they are not well-suited for bending problems of thin shapes, in which force and displacement are both nearly perpendicular to bonds connecting material points.
+Because traditional peridynamic models exert forces in the direction of the bonds between points, they are not well-suited for bending problems of thin shapes, in which force and displacement are both nearly perpendicular to bonds connecting material points at separate points on a surface.
 Just as with solid finite elements, most peridynamic models of thin features like the tubes in \cref{fig:LittlewoodCylinder} have included several nodes through the thickness of a thin part to capture bending behavior.
-A recent paper by Taylor and Steigmann~\cite{taylor2013two} applies asymptotic analysis to reduce a 3D solid bond-based peridynamic model to 2 dimensions while retaining resistance to bending.
+Also as with solid finite elements, this leads to very fine discretization of thin features, even when the expected behavior is quite simple.
+This greatly increases the computational expense of modeling parts with thin features.
 %
 \begin{figure}[h!]
   \centering
-\includegraphics[width=0.8 \textwidth]{LittlewoodCylinder}
+\includegraphics[width=0.9 \textwidth]{LittlewoodCylinder}
 \caption[A peridynamic cylinder uses several nodes through its thickness]{A peridynamic cylinder uses several nodes through its thickness in \cite{littlewood2010simulation}}
 \label{fig:LittlewoodCylinder}
 \end{figure}
 %
+
+A recent paper by Taylor and Steigmann~\cite{taylor2013two} partially addresses this issue by starting with mathematical analysis of the continuous 3D bond-based peridynamic solid model of a thin plate.
+By using a continuous model, they avoid the difficulties associated with discretizing thin features.
+Applying asymptotic analysis to the continuous model, they reduce a 3D solid model to 2 dimensions.
+The asymptotic reduction is accomplished by the addition of degrees of freedom for the derivative of displacement with respect to the through thickness direction.
+By making the through-thickness derivative of displacement vector an independent variable, the resulting flat model includes a measure of angular deformation that allows resistance to bending.
+Using a simple bond-stretch damage criterion, the Taylor and Steigmann's reduced model was able to capture the out-of-plane displacement (\cref{fig:TaylorTransverse}) associated with crack propagation behavior (\cref{fig:TaylorCrack}) in a pre-cracked plate under tension loading.
+In general, however, the asymptotic reduction model encounters difficulty when nonlinear behaviors like damage are implemented.
+The use of a bond-stretch criterion as implemented is only appropriate when deformation is dominated by in-plane tension, as failure caused by bending will not be captured.
+Because of its basis in the 3D bond-based solid model, Taylor and Steigmann's model is limited to a Poisson's ratio of \sfrac{1}{3}.
+While it is possible that future analysis will extend the asymptotic reduction to state-based model, allowing for arbitrary Poisson's ratios, there are significant mathematical hurdles that will have to be overcome.
+
+%
+\begin{figure}[h!]
+  \centering
+\includegraphics[width=0.9 \textwidth]{TaylorTransverseDisp}
+\caption[Taylor and Steigmann plate transverse displacement]{Taylor and Steigmann's asymptotic reduction allows for bending resistance in a 2D plate in tension~\cite{taylor2013two}}
+\label{fig:TaylorTransverse}
+\end{figure}
+%
+%
+\begin{figure}[h!]
+  \centering
+\includegraphics[width=0.4 \textwidth]{Taylor2DCrack}
+\caption[Taylor and Steigmann plate cracking]{Taylor and Steigmann's crack propagation for \cref{fig:TaylorTransverse} plot \textbf{f}~\cite{taylor2013two}}
+\label{fig:TaylorCrack}
+\end{figure}
+%
+
 A nonordinary model similar to those proposed by Silling in \cite{silling2007peridynamic} and \cite{silling2010peridynamic} allows for a simple bending model that can be used for one- and two-dimensional models.
 
 %Recent work by Oterkus includes additional degrees of freedom to describe the orientation of each peridynamic point, so that each bond between points has components for differential displacements and for differential orientations. 

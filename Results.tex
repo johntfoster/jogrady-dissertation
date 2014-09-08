@@ -4,21 +4,41 @@
 \subsection{Straight Beam Results}
 The simplest test case for this model is a linear-elastic beam with a square profile.
 For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
-Even a coarse discretization successfully reproduces the elastically deformed beam shape in \cref{fig:elastic_g2000}.
-
+Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000}.
+%
 \begin{figure}[h]
   \centering
-  \resizebox{0.5\linewidth}{!}{\input{\plotpath/elastic_h20_g2000.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/elastic_h20_g2000.pgf}}
   \caption{The uniform-load elastic beam is accurately modeled with few nodes}
   \label{fig:elastic_g2000}
 \end{figure}
+%
+It is more difficult to accurately reproduce the behavior of a clamped-end beam.
+It is evident from \cref{fig:clamped_n,fig:clamped_h} that the clamped end constraint requires far more nodes and a smaller horizon to reproduce the results of a classical elastic model.
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/clamped_convergence_n.pgf}}
+  \caption{The clamped condition requires finer discretization}
+  \label{fig:clamped_n}
+\end{figure}
+%
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/clamped_convergence_h.pgf}}
+  \caption{The clamped condition requires a smaller horizon}
+  \label{fig:clamped_h}
+\end{figure}
+%
+
 
 As an elastic-perfectly-plastic beam exceeds the elastic limit of its material, plastic zones begin to grow on the top and bottom of the beam's cross section.
 This behavior is mimicked by the plasticity of the longest bond-pairs described in \cref{eq:epp_force}, producing the results shown in \cref{fig:eppu_h10_g2000}.
 To accurately capture this phenomenon and model beam plasticity, a finer discretization is required.
 \begin{figure}[h]
   \centering
-  \resizebox{0.5\linewidth}{!}{\input{\plotpath/eppu_h10_g2000.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/eppu_h10_g2000.pgf}}
   \caption{The elastic perfectly-plastic beam requires finer discretization}
   \label{fig:eppu_h10_g2000}
 \end{figure}
@@ -32,7 +52,7 @@ Accurate residual deformation modeling requires both a relatively small horizon 
 %
 \begin{figure}[h]
   \centering
-  \resizebox{0.5\linewidth}{!}{\input{\plotpath/unloaded2_h10_g2000_n.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/unloaded2_h10_g2000_n.pgf}}
   \caption{The need for fine discretization is even more apparent when representing residual plastic deformation}
   \label{fig:ResidualPlasticityN}
 \end{figure}
@@ -50,7 +70,7 @@ This is borne out by the results in \cref{fig:brittleBeam}, in which ``Nodal Hea
 
 \begin{figure}[h]
   \centering
-  \resizebox{0.5\linewidth}{!}{\input{\plotpath/brittle_h10_n200.pgf}}
+  \resizebox{0.7\linewidth}{!}{\input{\plotpath/brittle_h10_n200.pgf}}
   \caption{A brittle beam with prescribed center displacement}
   \label{fig:brittleBeam}
 \end{figure}
@@ -64,7 +84,7 @@ The simplest test case for the 2D model is a linear-elastic square plate with Po
 %
 \begin{figure}[h]
   \centering
-  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_h.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_h.pgf}}
   \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Smaller Horizons}
   \label{fig:plate_convergence_h}
 \end{figure}
@@ -72,7 +92,7 @@ The simplest test case for the 2D model is a linear-elastic square plate with Po
 \begin{figure}[h]
   \centering
 %  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_minimum_h.pgf}}
-  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_dx.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_dx.pgf}}
   \caption{Horizon Must Include Sufficient Nodes}
   \label{fig:plate_minimum_h}
 \end{figure}
@@ -81,7 +101,7 @@ Accurate results require a denser discretization than is the case for the elasti
 %
 \begin{figure}[tbp]
   \centering
-  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_n.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_n.pgf}}
   \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Finer Discretization}
   \label{fig:plate_convergence_n}
 \end{figure}
@@ -90,7 +110,7 @@ The test case for the hybrid model is a similar simply-supported square plate wi
 %
 \begin{figure}[tbp]
   \centering
-  \resizebox{0.55\linewidth}{!}{\input{\plotpath/plateStiffening.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/plateStiffening.pgf}}
   \caption{The Combined Model Accurately Captures the Influence of In-Plane Tension}
   \label{fig:plateStiffening}
 \end{figure}
@@ -99,14 +119,13 @@ The bond-multiple plate model is motivated by the desire to extend the bending m
 %
 \begin{figure}[tbp]
   \centering
-  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlatePoissonEffect.pgf}}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/elasticPlatePoissonEffect.pgf}}
   \caption{The Extended Model Matches for Arbitrary Poisson's Ratio}
   \label{fig:plate_poisson}
 \end{figure}
 %
 
 Unlike the brittle beam, failure in a brittle plate need not progress unstably. To demonstrate the behavior of this model, a controlled-displacement double-torsion fracture test was simulated with the bond-pair model. A good review of the double-torsion test is available in \cite{shyam2006double}. The simple qualitative results are shown in \cref{fig:DTdamage}, colored by the fraction of failed bond pairs around each node. For each successive displacement load, the stable progression of the damaged region extends further into the plate. As with the brittle beam, the region within one horizon of the crack shows partial damage.
-
 %
 \begin{figure}[tbp]
   \centering
@@ -114,3 +133,15 @@ Unlike the brittle beam, failure in a brittle plate need not progress unstably. 
   \caption{Crack Progression in Double Torsion Brittle Plate}
   \label{fig:DTdamage}
 \end{figure}
+%
+In the double-torsion plate, the crack is expected to progress straight across the plate.
+A more interesting failure pattern can be found if the displacement is applied to only one of the two sides of the pre-crack.
+In a ``single torsion'' cracked plate, the crack path is expected to curve, and this result can be seen in \cref{fig:SingleTorsion}.
+%
+\begin{figure}[tbp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/SingleTorsion.pgf}}
+  \caption{Crack Progression in Single Torsion Brittle Plate}
+  \label{fig:SingleTorsion}
+\end{figure}
+%

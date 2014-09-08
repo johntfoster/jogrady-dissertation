@@ -2,9 +2,12 @@
 
 \section{Peridynamic States}
 %
-Introduced by Silling et al.\ in 2007~\cite{silling2007peridynamic}, states are functions of the behavior of the continuum points surrounding each location.
+Introduced by Silling et al.\ in 2007~\cite{silling2007peridynamic}, peridynamic states are functions of the behavior of the continuum points surrounding each location.
+As is appropriate for a theory based on force-carrying bonds, states often operate on vectors.
 The most common states are scalar-states and vector-states which are scalar and vector valued, respectively.
-Unlike a second order tensor, which can only map vectors linearly to other vectors, vector-states can produce nonlinear or even discontinuous mappings.  
+As a matter of convention, scalar states are usually denoted by lowercase letters (e.g. $\sstate{a}{}{}$, $\sstate{b}{}{}$), while vector states are denoted by uppercase letters (e.g. $\vstate{A}{}{}$, $\vstate{B}{}{}$).
+A state that operates on vectors and is itself vector valued naturally brings to mind a tensor such as the deformation gradient;
+unlike a second order tensor, which can only map vectors linearly to other vectors, vector-states can produce nonlinear, discontinuous, or even noninvertable mappings.  
 This difference is illustrated in \cref{fig:VectorState}.
 %
 \begin{figure}[h]
@@ -16,7 +19,29 @@ This difference is illustrated in \cref{fig:VectorState}.
 %
 
 The mathematical properties of states and several related operators are defined in~\cite{silling2007peridynamic}.
-Important properties of states are magnitude and direction, while important operations include the addition and decomposition of states, inner and tensor products, and the Fr\'{e}chet derivative of a function with respect to a state.
+Important properties of states are magnitude and direction, while important operations include the addition and composition of states, inner and tensor products, and the Fr\'{e}chet derivative of a function with respect to a state.
+While some of these operations are intuitive, the nomenclature may not be.
+Refer to \cref{table:StateOperations} for the notation of common state operations.
+For a fuller definition and examples of the Fr\'echet derivative, see \cref{sec:frechet}.
+
+\begin{table}
+\centering
+\begin{tabular}{l >{$\displaystyle}r<{$} >{$\displaystyle}l<{$}}
+Operation & \textrm{Notation} & \textrm{Meaning} \\ \hline\hline
+Addition & (\sstate{a}{}{} + \sstate{b}{}{})\langle\boldsymbol{\xi}\rangle & \sstate{a}{}{\boldsymbol{\xi}} + \sstate{b}{}{\boldsymbol{\xi}} \\ \hline
+Multiplication & (\sstate{a}{}{}\sstate{b}{}{})\langle\boldsymbol{\xi}\rangle & \sstate{a}{}{\boldsymbol{\xi}}\sstate{b}{}{\boldsymbol{\xi}} \\  \hline
+Scalar Product & (\vstate{A}{}{} \cdot \vstate{B}{}{})\langle\boldsymbol{\xi}\rangle & \vstate{A}{}{\boldsymbol{\xi}} \cdot \vstate{B}{}{\boldsymbol{\xi}} \\  \hline
+Composition & (\vstate{A}{}{} \circ \vstate{B}{}{})\langle\boldsymbol{\xi}\rangle & \vstate{A}{}{ \vstate{B}{}{\boldsymbol{\xi}}}  \\ \hline \noalign{\smallskip}
+\multirow{2}{*}{Dot Product} & \vstate{A}{}{} \bullet \vstate{B}{}{}& \int_\mathcal{H} \vstate{A}{}{\boldsymbol{\xi}} \cdot \vstate{B}{}{\boldsymbol{\xi}} \\ \noalign{\smallskip}
+& \sstate{a}{}{} \bullet \sstate{b}{}{}&  \int_\mathcal{H} \sstate{a}{}{\boldsymbol{\xi}} \sstate{b}{}{\boldsymbol{\xi}} \\  \noalign{\smallskip} \hline \noalign{\smallskip}
+Vector Norm & |\vstate{A}{}{}|\langle\boldsymbol{\xi}\rangle &  |\vstate{A}{}{}\langle\boldsymbol{\xi}\rangle|  \\\noalign{\smallskip} \hline\noalign{\smallskip}
+State Norm & \|\vstate{A}{}{}\| & \sqrt{\vstate{A}{}{} \bullet \vstate{B}{}{}} \\ \noalign{\smallskip} \hline \noalign{\smallskip}
+\multirow{2}{*}{Fr\'echet Derivative} & \nabla\mathit{f}(\vstate{A}{}{}) & \frac{\partial \mathit{f}}{\partial \vstate{A}{}{}} \\ \noalign{\smallskip}
+& \Psi(\vstate{A}{}{},\vstate{B}{}{})_\vstate{A}{}{} & \frac{\partial \Psi}{\partial \vstate{A}{}{}} \\ \noalign{\smallskip} \hline\hline
+\end{tabular}
+\caption{Common State Operation Nomenclature}
+\label{table:StateOperations}
+\end{table}
 
 \section{State-based Models}
 Conservation of linear momentum in the \textit{state-based} peridynamic formulation results in the equation of motion
@@ -54,7 +79,9 @@ Ordinary state-based can reproduce linear elastic materials with arbitrary Poiss
 They can also model a variety of elastic and inelastic behaviors.
 
 There is no requirement that force states be in the same direction as their associated deformation states, and models in which they are not in the same direction are called \textit{nonordinary}.
-Silling et al.\ demonstrate the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} show that some correspondence models, which approximate the deformation gradient and use it to calculate bond forces, result in non-ordinary state-based constitutive models for finite deformations.
+Some additional care is needed to ensure that angular momentum is conserved in a \textit{nonordinary} state-based model, but they are still perfectly legitimate.
+Silling et al.\ demonstrate the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  
+Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} show that some correspondence models, which approximate the deformation gradient and use it to calculate bond forces, result in non-ordinary state-based constitutive models for finite deformations.
 Bond-based, ordinary state-based, and nonordinary state-based models are illustrated in \cref{fig:PDmodelTypes}.
 %
 \begin{figure}[h]
@@ -77,6 +104,14 @@ This makes bond-based models much simpler computationally than general state-bas
 %
 By choosing an appropriate function $\mathbi{f}$, this model can reproduce the results of linear elasticity for solid materials with a Poisson ration \(\nu=\sfrac{1}{4}\) and 2-dimensional materials with a Poisson ration \(\nu=\sfrac{1}{3}\). 
 It can also be used to investigate a range of nonlinear behaviors by changing the force function (examples in \cref{fig:BondForce}). 
+To conserve momentum in a bond-based model, it is only necessary that $\mathbf{f}$ satisfy
+%
+\begin{equation}
+\label{eq:PDbondF}
+ \mathbi{f}(\mathbf{u}(\mathbf{q})-\mathbf{u}(\mathbf{x}),\mathbf{q}-\mathbf{x})=-\mathbi{f}(\mathbf{u}(\mathbf{x})-\mathbf{u}(\mathbf{q}),\mathbf{x}-\mathbf{q}),
+\end{equation}
+%
+i.e. the forces exerted at the opposite ends of the bond between $\mathbf{x}$ and $\mathbf{q}$ must be equal and opposite.
 The first peridynamic models were all bond-based, and provide useful insight despite their limitations.
 %
 \begin{figure}[h]
@@ -92,67 +127,96 @@ Though they cover only a small portion of the behaviors modeled with peridynamic
 \subsection{Bond-based Elastic Solid}
 The simplest peridynamic model treats each bond as a linear spring between two points.
 In the bond-based formulation, there is no interaction between different bonds, so the force function is
+%
 \begin{equation}
 \mathbi{f}(\mathbf{u}(\mathbf{q})-\mathbf{u}(\mathbf{x}),\mathbf{q}-\mathbf{x}) = \omega(|\mathbf{q}-\mathbf{x}|)\;c\;s \left[(\mathbf{q}+\mathbf{u}(\mathbf{q}))-(\mathbf{x}+\mathbf{u}(\mathbf{x}))\right]
 \end{equation}
+%
 with weighting function $\omega$, spring constant $c$, and the stretch $s$ defined by
+%
 \begin{equation}
 \label{eq:stretch}
 s = |(\mathbf{q}+\mathbf{u}(\mathbf{q}))-(\mathbf{x}+\mathbf{u}(\mathbf{x}))| - |\mathbf{q}-\mathbf{x}|.
-\end{equation}For a small deformation gradient $\mathbf{F}$, the stretch of bond $\boldsymbol{\xi}=\mathbf{q}-\mathbf{x}$ is
+\end{equation}
+%
+For a small deformation gradient $\mathbf{F}$, the stretch of bond $\boldsymbol{\xi}=\mathbf{q}-\mathbf{x}$ is
+%
 \begin{equation*}
 s = |\mathbf{F}\boldsymbol{\xi}|-|\boldsymbol{\xi}| = \frac{\epsilon_{ij}\xi_i\xi_j}{|\boldsymbol{\xi}|}
 \end{equation*}
+%
 For reasons that will become clear in the discussion of the next model, we calibrate the spring constant $c$ following the approach of \cite{silling2007peridynamic}, by comparing the energy to that of a classical solid under purely deviatoric deformation, so that $\epsilon_{ij} = \epsilon_{ij}^d$.
 The energy of this spring will be in units of Energy per Volume-squared, so that integration over all the springs at a point gives Energy per unit Volume.
-%\begin{align}
-%w &= \frac{c\;s^2}{2}\notag \\
-%W &= \frac{c}{2}\int_\mathcal{H} \omega(|\boldsymbol{\xi}|)\left( \frac{\epsilon_{ij}^d\xi_i\xi_j}{|\boldsymbol{\xi}|} \right)\left( \frac{\epsilon_{kl}^d\xi_k\xi_l}{|\boldsymbol{\xi}|} \right)\;dV_\boldsymbol{\xi}\notag\\
-%&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \int_\mathcal{H} \frac{\omega(|\boldsymbol{\xi}|)}{|\boldsymbol{\xi}|^2}\xi_i\xi_j\xi_k\xi_l \notag
-%\end{align}
+%
 \begin{align}
+\label{eq:deviatoricStrainEnergy}
 w &= \frac{c\;s^2}{2}\notag \\
 W &= \frac{c}{2}\int_\mathcal{H} \omega(|\xi|)\left( \frac{\epsilon_{ij}^d\xi_i\xi_j}{|\xi|} \right)\left( \frac{\epsilon_{kl}^d\xi_k\xi_l}{|\xi|} \right)\;dV_\xi\notag\\
-&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \int_\mathcal{H} \frac{\omega(|\xi|)}{|\xi|^2}\xi_i\xi_j\xi_k\xi_l \notag
+&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \int_\mathcal{H} \frac{\omega(|\xi|)}{|\xi|^2}\xi_i\xi_j\xi_k\xi_l 
 \end{align}
+%
 Because $\omega$ depends only on $|\boldsymbol{\xi}|$, we can rewrite this integral in spherical coordinates as
+%
 \begin{equation}
-W= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \int_0^\delta \frac{\omega(r)}{r^2}\int_0^{2\pi}\int_0^\pi (\xi_i\xi_j\xi_k\xi_l)\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr
+W= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \int_0^\delta \frac{\omega(r)}{r^2}\int_0^{2\pi}\int_0^\pi (\xi_i\xi_j\xi_k\xi_l)\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr\notag
 \end{equation}
+%
 Recognizing that $\xi_1 = r \sin\phi\cos\theta$, $\xi_2=r\sin\phi\sin\theta$, $\xi_3=r\cos\phi$, we can see that configurations of $[i,j,k,l]$ with an odd number of any index result in integrals with an odd number of one or more of $\cos\theta$, $\sin\theta$, $\cos\phi$, and therefor are equal to 0. 
 For the remaining configurations,
+%
 \begin{equation}
-\int_0^\delta \frac{\omega(r)}{r^2}\int_0^{2\pi}\int_0^\pi (r^4 \sin^4 \phi \cos^2\theta\sin^2\theta)\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr =  \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr
+\int_0^\delta \frac{\omega(r)}{r^2}\int_0^{2\pi}\int_0^\pi (r^4 \sin^4 \phi \cos^2\theta\sin^2\theta)\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr =  \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr\notag
 \end{equation}
+%
 Also, any combination with $i=j$ or $k=l$ results in terms $\epsilon_{ii}^d$ or  $\epsilon_{kk}^d$, which will sum to 0 in deviatoric deformation. 
-This leaves only configurations such as $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta{jk})$.
+This leaves only configurations such as $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$.
+%
 \begin{align}
 W&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr (\delta_{ik}\delta_{jl}+\delta_{il}\delta{jk})\notag\\
 &= c \;\epsilon_{ij}^d\epsilon_{ij}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr \notag\\
 &= \frac{c\; \epsilon_{ij}^d\epsilon_{ij}^d }{15}m\notag
 \end{align}
+%
 To force the result to be independent of the horizon $\delta$, we normalize the expression by
+%
 \begin{equation}
 \label{eq:weighted}
-m=\int_\mathcal{H}\omega(|\boldsymbol{\xi}|) = 4\pi \int_0^\delta \omega(r)\;r^4\;dr
+m=\int_\mathcal{H}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2 = 4\pi \int_0^\delta \omega(r)\;r^4\;dr
 \end{equation}
+%
 By comparing to the classical strain energy density $\Omega = G\;\epsilon_{ij}^d\epsilon_{ij}^d$ for shear modulus $G$, we can determine the appropriate bond stiffness
+%
 \begin{equation}
 c = \frac{15\;G}{m}\notag
 \end{equation}
+%
 Applying a purely dilational deformation to the same model is far easier.
 With dilation $\theta$, the stretch of a bond in any direction is
+%
 \begin{equation}
 s = \frac{\theta}{3} r,\notag
 \end{equation}
+%
 and the corresponding energy is 
+%
 \begin{align}
 W &= \frac{c}{2}\int_\mathcal{H} \omega(|\xi|)\frac{\theta^2}{9} r^2 \;dV_\xi\notag\\
 &=\frac{c\;\theta^2}{18} \int_0^\delta \omega(r)\int_0^{2\pi}\int_0^\pi r^2\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr \notag\\
 &= \frac{c\;\theta^2}{18} m \notag\\
 &= \frac{15}{9}G\frac{\theta^2}{2}
 \end{align}
-This shows that the model based on bond-stretch has a bulk modulus that is \sfrac{15}{9} of its shear modulus, indicating a Poisson's ratio of \sfrac{1}{4}
+%
+This shows that the model based on bond-stretch has a bulk modulus that is \sfrac{15}{9} of its shear modulus, indicating a Poisson's ratio of \sfrac{1}{4}.
+
+A nearly identical analysis can be performed on a simpler 2D version of the same model, departing after \cref{eq:deviatoricStrainEnergy}.
+Applying a purely deviatoric in-plane shear to such a model, and comparing the resulting energy to that of a classical plate with thickness $t$ gives us
+%
+\begin{equation}
+c = \frac{8\;G\;t}{m_\textrm{2D}};\qquad m_\textrm{2D} =\int_\mathcal{H_\textrm{2D}}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2.  \notag
+\end{equation}
+%
+
+Applying a planar dilation deformation to a 2D plate results in strain energy consistent with a Poisson's ratio of \sfrac{1}{3} rather than the value of \sfrac{1}{4} found for the 3D solid.
 
 \subsection{State-based Elastic Solid}
 The state-based linear isotropic peridynamic solid material model is both important and illustrative.
@@ -160,27 +224,39 @@ Developed in \cite{silling2007peridynamic}, it uses many of the important charac
 The extension state $\underline{e}$ is exactly the same as the stretch $s$ in \cref{eq:stretch}.
 Classical material models dealing with metal plasticity often separate deformation into dilation and deviation components.
 Similarly, the extension state can be decomposed into isotropic and deviatoric extension states. Using $m$ from \cref{eq:weighted} as above for normalization the dilation state is defined
+%
 \begin{equation}
 \theta = \frac{3}{m} \int_\mathcal{H} \omega(\boldsymbol{\xi}) |\boldsymbol{\xi}| \underline{e}.
 \end{equation}
+%
 The isotropic and deviatoric extension states are defined in turn
+%
 \begin{equation}
 \underline{e}^i = \frac{\theta |\boldsymbol{\xi}|}{3},\qquad \underline{e}^d = \underline{e}-\underline{e}^i
 \end{equation}
+%
 If the energy associated with dilation is set to
+%
 \begin{equation}
 W^i = \frac{k\;\theta^2}{2},\notag
 \end{equation}
+%
 then the corresponding force state and peridynamic pressure are
+%
 \begin{equation}
 \underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}|,\qquad p=-k\theta\notag
 \end{equation}
+%
 We saw in the analysis of the bond-based model the necessary bond stiffness to match the energy associated with purely deviatoric deformation.
 The two can be combined for \cref{eq:lps}, a force state that clearly indicates the separate responses to dilation and deviatoric deformation.
+%
 \begin{equation}
 \label{eq:lps}
 \underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}| + \frac{15\;G}{m}\omega(\boldsymbol{\xi})\underline{e}^d
 \end{equation}
+%
+A quick examination shows that, in the case that the dilation $\theta$ is not constant, the force at either end of a bond will not satisfy \cref{eq:PDbondF}.
+Thus such a model is not possible in a bond-based framework without significant modification.
 
 \subsection{Correspondence Models}
 One way to create a peridynamic material model is to start from a material model in classical dynamics.
@@ -201,10 +277,10 @@ If the classical model in question is hyperelastic with energy density $\Omega(\
 \begin{equation}
 W(\vstate{Y}{}{}) = \Omega(\bar{\mathbf{F}}(\vstate{Y}{}{}))
 \end{equation}
-and find the force vector state by taking the Fre\'chet derivative of $W$ with respect to $\vstate{Y}{}{}$.
+and find the force vector state by taking the Fr\'echet derivative of $W$ with respect to $\vstate{Y}{}{}$.
 Alternately, the classical continuum model can be applied to find the first Piola-Kirchhoff stress $\boldsymbol{\sigma}$ associated with $\bar{\mathbf{F}}$:
 \begin{equation}
-\boldsymbol{\sigma}=\frac{\partial\Omega(\mathbf{F})}{\partial\mathbf{F}}
+\boldsymbol{\sigma}=\frac{\partial\Omega(\bar{\mathbf{F}})}{\partial\bar{\mathbf{F}}}
 \end{equation}
 The resulting force state is calculated from the stress according to
 \begin{equation}
