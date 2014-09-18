@@ -743,9 +743,41 @@ If the projection of X onto the plane defined by A, B, and C lies outside the tr
 
 \section{``Boundary'' Conditions}
 Because peridynamic models result in long range forces, it is not sufficient to apply boundary conditions to nodes on the relevant boundary; nodes near the boundary must be considered as well.
-Displacement conditions are enforced on the nodes nearest to a simply-supported plate edge, while average displacements are enforced on a small collection of nodes surrounding a beam pin support.
-Clamped boundary conditions are simulated by controlling the displacement of 1-5 nodes nearest the boundary and applying a symmetry boundary condition to nodes out to a distance of \(2\delta\) from the boundary. 
-Point loads are evenly distributed over all nodes in a region with width or diameter of \(\delta\) centered on the point load location.
+%
+\begin{figure}[tbp]
+  \centering
+  \input{\diagrampath/Boundary.tex}
+  \caption{The boundary of a peridynamic model is a region of nonzero thickness}
+  \label{fig:PDboundary}
+\end{figure}
+%
+For the peridynamic beam we consider applied forces, simple supports or rollers, and fixed or clamped supports.
+Simply-supported beams are easy to model because only displacement is constrained.
+To add a roller support to the peridynamic beam, it suffices to constrain the movement of the nearest peridynamic node in the appropriate degree(s) of freedom.
+Simulating a ``clamped'' end condition is a little less intuitive. 
+The most basic way to simulate a clamped end is to extend the beam \(2\delta\), or twice the horizon, into the clamp. The displacement of all of those nodes is set to zero, or whatever value is appropriate for a displaced or rotated clamp.
+In classical mechanics, a clamped end can be described with a symmetry condition, but the two are not peridynamically equivalent.
+Because the classical beam is a local model, material at a clamp cannot ``see'' distant material, so there is no way to distinguish between a beam end that is clamped and one that is bent symmetrically over an appropriate sawhorse.
+Distributed forces may be applied as expected to nodes in the loaded region.
+Point forces may often be applied directly to the nearest node, or to the nodes immediately surrounding the point of application.
+Point moments must also be considered more carefully because the peridynamic models in this work, like most peridynamic models, do not consider rotational degrees of freedom for peridynamic nodes.
+Rather, material rotation is the result of the relative translational displacement of multiple nodes.
+It is therefore impossible to apply a moment to a single peridynamic point.
+Instead, moments may be applied as force couples to the bonds attached to the peridynamic node nearest the location of the desired moment.
+For example, if we want to apply a moment $M$ at point $\mathbf{x}$, whose $n$ neighboring points $\mathbf{x}'_i$ are connected to $\mathbf{x}$ in the undeformed configuration by bonds $\boldsymbol{\xi}_i$.
+For an evenly discretized beam, we may distribute the moments by
+\begin{equation}
+\mathbf{M}_i = \mathbf{M} \frac{\omega(\boldsymbol{\xi}_i)}{\sum\limits_{j=1}^n \omega(\boldsymbol{\xi}_j)}\notag
+\end{equation}
+and apply them to the corresponding bonds by adding forces
+\begin{equation}
+\mathbf{F}_i = \mathbf{M}_i \times \frac{\vstate{Y}{}{\boldsymbol{\xi}_i}}{|\vstate{Y}{}{\boldsymbol{\xi}_i}|^2}\notag
+\end{equation}
+to each point $\mathbf{x}_i$ and subtracting them from the force at $\mathbf{x}$.
+
+Support configurations are similar for two-dimensional models.
+Each node along a simply-supported edge is constrained in one or more directions.
+As with the beam model, clamped edges are implemented by extending the surface into the clamp.
 Line and pressure loads are treated normally.
 
 \section{Numerical Solution Method}
@@ -763,6 +795,7 @@ Efficient parallelization is achieved using Epetra data structures for distribut
 Model force evaluations are coded in Python, making extensive use of the optimized routines in the NumPy and SciPy packages operating on the distributed Epetra objects. 
 To obtain quasistatic solutions, problems are coded into NOX objects and solved using NOX nonlinear solvers.
 Preliminary analysis was performed using a Newton Method solver on an iMac with a 3.1GHz Intel Core i7 processor and 16GB RAM, using 1-4 cores.
+Later work also performed on Shamu, a High-Performance Computing cluster at UTSA.
 The nature of the Trilinos packages and the structure of the code allow for more extensive parallel computation without major code changes.
 
 For all but the simplest loading conditions, analytical solutions to boundary condition problems become complicated.

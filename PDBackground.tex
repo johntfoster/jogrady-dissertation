@@ -62,6 +62,20 @@ Just as stress and strain are work conjugate, so too are the force and deformati
 %
 
 State-based models include surrounding material behavior illustrated in \cref{fig:pdDeformed} in the force function between each pair of continuum points. 
+It is common for the formulation of the force state $\vstate{T}{}{}$ to be scaled by a weighting function, commonly represented by $\omega$, that makes explicit the region in which the force relationship between points is nonzero.
+Perhaps the simplest and most common weight function is \cref{eq:WeightFunction}, representing a constant nonzero value for bonds shorter than the peridynamic horizon $\delta$.
+%
+\begin{equation}
+\label{eq:WeightFunction}
+\omega(\boldsymbol{\xi}) = 
+\begin{cases}
+1 & \text{if}\; |\boldsymbol{\xi}| \leq \delta \\
+0 & \text{if}\; |\boldsymbol{\xi}| > \delta
+\end{cases}
+\end{equation}
+%
+Many evaluations of forces, energies, and other states at a given point are reduced from being integrals over the entire body to being integrals over that point's neighborhood $\mathcal{H}$.
+This is particularly useful when trying to apply peridynamic models to real-world problems, especially when using computer models. 
 %
 \begin{figure}[h]
   \centering
