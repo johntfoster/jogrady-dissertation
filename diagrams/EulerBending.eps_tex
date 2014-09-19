@@ -50,9 +50,9 @@
   \makeatother%
   \begin{picture}(1,0.35405561)%
     \put(0,0){\includegraphics[width=\unitlength]{EulerBending.eps}}%
-    \put(0.07467463,0.03172987){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(\rho = \sfrac{1}{\kappa}\)}}}%
+    \put(0.07467463,0.03172987){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(\rho = \sfrac{-1}{\kappa}\)}}}%
     \put(0.42598127,0.17567346){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(t\)}}}%
-    \put(0.07531381,0.12785517){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(\epsilon = y \kappa\)}}}%
+    \put(0.07531381,0.12785517){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(\epsilon = -y \kappa\)}}}%
     \put(0.55349671,0.12785517){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(\sigma = E\epsilon\)}}}%
     \put(0.82446703,0.12785517){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(dM = y \sigma dA\)}}}%
     \put(0.69695158,0.33506776){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\(y = \sfrac{t}{2}\)}}}%

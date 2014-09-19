@@ -1,0 +1,149 @@
+\chapter{Classical Background}
+
+\section{Euler-Bernoulli Beam Theory}
+%
+The simplest representation of bending behavior is found in the Euler-Bernoulli beam equation (\cref{eq:EulerBeam}), which describes the transverse deflection of long-slender beams.
+\begin{equation}
+\label{eq:EulerBeam}
+\frac{\text{d}^2}{\text{d}x^2}\left(EI\frac{\text{d}^2 v}{\text{d} x^2}\right) = q
+\end{equation}
+The equation is for a beam in the $\hat{x}$ direction, whose displacement $v$ is perpendicular to $\hat{x}$ and parallel to the distributed load $q$ acting on the beam.
+While it is only applicable to small deformations and rotations, there are many problems that can be easily and usefully simplified by the application of Euler beams.
+
+It is important to note that \cref{eq:EulerBeam} is not a constitutive equation; it does not relate stress and strain for a material. 
+Instead, it is derived from the constitutive equation for a linearly-elastic material and some assumptions about the deformation.
+Euler-Bernoulli beam theory is much simpler than a 3D analysis of a beam as a solid material, but it requires the following assumptions to be met:
+\begin{itemize}
+ \item Slenderness: the length of the beam should be 20 times its other dimensions
+ \item Loaded transversely, no axial loads or torques
+ \item Small deformations and rotations
+ \item Plane cross-sections of the beam remain plane under deformation
+ \item Initially straight, and symmetric about the plane of bending
+\end{itemize}
+First, we take a infinitesimal slice of a beam as depicted in \cref{fig:Infinitesimal}.
+Because we will want to compare to this model later, we use a different $y$-coordinate direction than many presentations.
+We use this infinitesimal slice to derive the relationship between load, shear, and moment.
+
+%
+\begin{figure}[htbp]
+  \centering
+  \input{\diagrampath/Infinitesimal.tex}
+  \caption{Infinitesimal Beam Slice}
+  \label{fig:Infinitesimal}
+\end{figure}
+%
+A force balance demonstrates that the x-derivative of internal shear force is the applied load:
+\begin{equation}
+\label{eq:EulerShear}
+V = V + q\;\text{d}x + \text{d}V \implies \frac{\text{d}V}{\text{d}x} = -q
+\end{equation}
+The moment balance can be performed about any point, but it is simplest to use the right side:
+\begin{equation}
+\label{eq:EulerMoment}
+M - V\text{d}x +q\;\text{d}x\frac{\text{d}x}{2} = M + \text{d}M \implies \frac{\text{d} M}{\text{d}x} = -V + \mathcal{O}(\text{d}x)
+\end{equation}
+
+
+Next, we will use the deformation assumptions to frame the bending as a simple arc
+%
+\begin{figure}[htbp]
+  \centering
+  \input{\diagrampath/EulerBeam1.tex}
+  \caption{Small deformation in an Euler beam}
+  \label{fig:EulerBeam1}
+\end{figure}
+%
+from which we can deduce a relationship between the transverse displacement of a beam section and its angle and radius of curvature.
+\begin{equation}
+ \label{eq:EulerCurve}
+ \frac{1}{\rho} \approx \frac{\text{d} \theta}{\text{d} x} \approx \frac{\text{d}^2v}{\text{d}x^2} = \kappa
+\end{equation}
+The radius of curvature, $\rho$ is the radius of the arc formed by the beam's neutral axis, which does not change in length as the beam bends.
+We use this same arc to find the strain in material that is at a distance $y$ from the neutral axis.
+In a linearly elastic material, the resulting stress is proportional by Young's modulus $E$.
+To find the bending moment that results from that stress profile, we integrate the moment contribution through the beam.
+\begin{equation}
+M_\text{resisted} = \int_\text{bottom}^\text{top}y\sigma dA = \int_\text{bottom}^\text{top}y^2 E \kappa dA
+\end{equation}
+In equilibrium, the moment resisted will be equal and opposite to the moment applied.
+\begin{equation}
+\label{eq:MomentCurve}
+\kappa = \frac{M_\text{applied}}{E \int_\text{bottom}^\text{top}y^2dA}
+\end{equation}
+The integral in the denominator is the bending resistance of the beam's shape, called its second moment of area, about the neutral axis.
+The second moment of area is generally represented by $I$.
+By combining \cref{eq:EulerShear,eq:EulerMoment,eq:EulerCurve,eq:MomentCurve}, we reproduce  \cref{eq:EulerBeam}, the Euler-Bernoulli beam equation.
+If the Young's modulus and beam cross section are constant throughout the beam, the equation can be further simplified to
+\begin{equation}
+EI\frac{\text{d}^4 v}{\text{d}x^4}=q\notag
+\end{equation}
+
+Obviously, to solve for the deformed position we will require 4 constraints from boundary conditions.
+The nature of the constraints is determined by the support configuration.
+The most common end conditions are listed \cref{table:BeamBCs}.
+Other end constraints, such 
+
+\begin{table}
+\centering
+\begin{tabular}{l >{$\displaystyle}l<{$} >{$\displaystyle}l<{$}}
+End Condition & \textrm{Contraint 1} & \textrm{Constraint 2}\\ \hline\hline
+End Load & w'''=\pm F  &  w''=0  \\ \hline
+End Torque & w'''=0  &  w''= \pm \tau  \\ \hline
+Simply Supported & w''=0 & w=w_\text{support}  \\ \hline
+Clamped & w'=w'_\text{clamp} & w=w_\text{clamp}  \\ \hline\hline
+\end{tabular}
+\caption{Common Beam End Conditions}
+\label{table:BeamBCs}
+\end{table}
+
+\section{Kirchhoff-Love Plate Theory}
+Like Euler-Bernoulli beam theory, Kirchhoff-Love Plate theory begins by making simplifying assumptions about the plate and its deformation.
+\begin{itemize}
+ \item Slenderness: the length and width of the plate should be 20 times its thickness
+ \item Loaded transversely, no in-plane loads or torques
+ \item Small deformations and rotations
+ \item Straight lines normal to the plate remain normal to the center plane of the plate under deformation
+ \item Initially flat
+\end{itemize}
+These assumptions allow us to simplify our strain-displacement relationships and formulate our curvatures and strains in terms of the transverse displacement $w$.
+\begin{equation}
+    \kappa_x=\frac{\partial^2 w}{\partial x^2}, \quad \kappa_y= \frac{\partial^2 w}{\partial y^2}, \quad \kappa_{xy}=\frac{\partial^2 w}{\partial x\partial y}\notag
+\end{equation}
+\begin{equation}
+\varepsilon_x = -z \kappa_x, \quad \varepsilon_y = -z \kappa_y, \quad \gamma_{xy} = -2 z \kappa_{xy} \notag
+\end{equation}
+To find the stresses at any point, we apply Hooke's law and find
+\begin{align*}
+\sigma_x &= -\frac{E z}{1-\nu^2}\left(\kappa_x+\nu\kappa_y\right)\\
+\sigma_y &= -\frac{E z}{1-\nu^2}\left(\kappa_y+\nu\kappa_x\right)\\
+\tau_{xy} &= -\frac{Ez}{1+\nu}\kappa_{xy}
+\end{align*}
+As with the beam, these stresses can be integrated over the thickness of the plate to determine the resulting moments.
+\begin{align*}
+M_x = \int_{\sfrac{-t}{2}}^{\sfrac{t}{2}}z\sigma_x dz &=-D\left(\kappa_x+\nu\kappa_y\right)\\
+M_y = \int_{\sfrac{-t}{2}}^{\sfrac{t}{2}}z\sigma_y dz &=-D\left(\kappa_y+\nu\kappa_x\right)\\
+M_{xy} = \int_{\sfrac{-t}{2}}^{\sfrac{t}{2}}z\tau_{xy}dz &= -D\left(1-\nu\right)\kappa_{xy}
+\end{align*}
+with
+\begin{equation*}
+D=\frac{Et^3}{12\left(1-\nu^2\right)}
+\end{equation*}
+as the flexural rigidity.
+
+Constructing the governing equation is more complicated than for beams because, instead of shear $V$ and moment $M$ on an infinitesimal section, we have shears $V_x$ and $V_y$ and moments $M_x$, $M_y$, and $M_{xy}$.
+Balancing forces gives us
+\begin{equation}
+\frac{\partial V_x}{\partial x}+\frac{\partial V_y}{\partial y} = p
+\end{equation}
+for transverse pressure $p$.
+Balancing moments gives
+\begin{align}
+\text{about} \;x:\qquad& \frac{\partial M_{xy}}{\partial x}+\frac{\partial M_{y}}{\partial y} - V_y = 0\\
+\text{about} \;y:\qquad& \frac{\partial M_{xy}}{\partial y}+\frac{\partial M_{x}}{\partial x} - V_x = 0
+\end{align}
+
+Combining the force and moment balance equations generates the governing equation
+\begin{equation}
+\frac{\partial^4w}{\partial x^4}+2\frac{\partial^4w}{\partial x^2 \partial y^2}+\frac{\partial^4w}{\partial y^4}=\frac{p}{D}
+\end{equation}
+As with the beam case, we will need to apply boundary conditions in order to find the deformed configuration.
