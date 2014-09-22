@@ -4,19 +4,37 @@
 \subsection{Straight Beam Results}
 The simplest test case for this model is a linear-elastic beam with a square profile.
 For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
-Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000}.
+Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000} deformed under uniform load.
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
   \centering
   \resizebox{0.6\linewidth}{!}{\input{\plotpath/elastic_h20_g2000.pgf}}
   \caption{The uniform-load elastic beam is accurately modeled with few nodes}
   \label{fig:elastic_g2000}
 \end{figure}
 %
+Other load types are also possible; \cref{fig:pointload_h,fig:moment_n} demonstrate simply-supported elastic beams with a point load and a point moment, respectively.
+%
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/SS_pointload_h.pgf}}
+  \caption{Beam with Transverse Point Load}
+  \label{fig:pointload_h}
+\end{figure}
+%
+%
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/SSmoment_convergence_n.pgf}}
+  \caption{Beam with Point Moment at Center}
+  \label{fig:moment_n}
+\end{figure}
+%
+
 It is more difficult to accurately reproduce the behavior of a clamped-end beam.
 It is evident from \cref{fig:clamped_n,fig:clamped_h} that the clamped end constraint requires far more nodes and a smaller horizon to reproduce the results of a classical elastic model.
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
   \centering
   \resizebox{0.6\linewidth}{!}{\input{\plotpath/clamped_convergence_n.pgf}}
   \caption{The clamped condition requires finer discretization}
@@ -24,7 +42,7 @@ It is evident from \cref{fig:clamped_n,fig:clamped_h} that the clamped end const
 \end{figure}
 %
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
   \centering
   \resizebox{0.6\linewidth}{!}{\input{\plotpath/clamped_convergence_h.pgf}}
   \caption{The clamped condition requires a smaller horizon}
