@@ -24,6 +24,7 @@ Though it looks complex, \cref{eq:SillingForceNO} indicates a bond force perpend
 The force magnitude is proportional to the sine of the angle between the bonds divided by the length of the deformed bond. 
 %
 \begin{figure}[h]
+  \vspace{5mm}
 \centering
 \resizebox{0.6\linewidth}{!}{\subinputfrom{\diagrampath}{bondPair.eps_tex}}
 \caption{Deformation and force vector states}
@@ -188,7 +189,7 @@ Fibers running parallel to the neutral axis of the beam are stretched in proport
 If the fibers are linearly elastic, then the axial stress at each location is \(\sigma = E\epsilon = Ey\kappa\), and the contribution to supported moment \(dM = \kappa E y^2 dA\). 
 By comparing the formulations for the moments carried by the Euler beam in \cref{fig:EulerBending} and those of the bond-pair beam in \cref{fig:BPBending}, we see some definite parallels.
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \resizebox{0.5\linewidth}{!}{\subinputfrom{\diagrampath}{EulerBending.eps_tex}}
 \caption{Euler beam moment contribution}
@@ -196,7 +197,8 @@ By comparing the formulations for the moments carried by the Euler beam in \cref
 \end{figure}
 %
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
+  \vspace{5mm}
 \centering
 \subinputfrom{\diagrampath}{BondPairBending_edit.eps_tex}
 \caption{Bond-pair moment contribution}
@@ -297,7 +299,7 @@ and additionally recording bond pairs that have exceeded their critical angle an
 \section{Bond Pair Plate in Bending}
 The next case we will analyze is the extension of the bond pair beam model to \cref{fig:BondPairPlate}, a flat plate in the \(xy\) plane, with displacement $w$ in the \(z\)-direction. 
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \subinputfrom{\diagrampath/}{continuousPlate.eps_tex}
     \caption{Illustration of a bond pair on a plate.}
@@ -396,7 +398,8 @@ Having calibrated the bond-extension model to the shear modulus for a case of pu
 
 Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a shell.  Consider a single bond-pair in the combined model shown in Fig.~\ref{fig:hybridmodel}.
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{5mm}
   \centering
   \input{\diagrampath/bondPairCombinedV.tex}
   \caption{The Hybrid Model Combines Bending and Extension Components}
@@ -428,7 +431,8 @@ This decomposition method inspires a similar approach to our plate model. To per
 %
 The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a hemispherical bowl.  The remainder of the bending deformation, that which is left when the isotropic curvature is subtracted out, resembles a saddle. This remaining component is the deviatoric deformation, and both components are shown in \cref{fig:BendingDecomp}. Note that the orientation of the deviatoric bending will change depending on the particular curvature being decomposed, while the isotropic curvature will only change in scale.
 %
-\begin{figure}[h]
+\begin{figure}[htbp]
+  \vspace{5mm}
   \centering
   \resizebox{\linewidth}{!}{\input{\plotpath/BendingDecomp.pgf}}
   \caption{Bending Deformation Decomposed into Isotropic and Deviatoric Portions}
@@ -559,7 +563,7 @@ Discretizing the bond-pair model as proposed above requires that nodes be evenly
 %
 %
 %
-%\begin{figure}[tbp]
+%\begin{figure}[htbp]
 %  \centering
 %  \input{\diagrampath/VirtualPoint.tex}
 %  \caption{Virtual Points Pair Up Unpaired Neighbors}
@@ -651,12 +655,14 @@ Discretizing the bond-pair model as proposed above requires that nodes be evenly
 %%
 %results in strain energy that is quadratic in \(\kappa_{11}\) for small cylindrical curvature, but has not been verified for other curvature types. 
 %Additionally, this energy function is physically nonintuitive.
+\section{Numerical Model Extensions}
 \subsection{Curved Shapes}
 On a curved surface, the location of the point $\mathbf{x} - \boldsymbol{\xi}$ might be off of the surface entirely.
 One method of applying the bond-pair model to curved surfaces is through the use of ``virtual'' points.
 These points have no mass and do not have families of peridynamic neighbors, they only allow the definition of bond pairs that are straight in the undeformed configuration.
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{10mm}
   \centering
   \input{\diagrampath/VirtualPair_T.tex}
   \caption{Virtual Points Allow Straight Pairs on Curved Surfaces}
@@ -666,7 +672,8 @@ These points have no mass and do not have families of peridynamic neighbors, the
 In the simplest method, each virtual point is located just above or below a real point in the model.
 In this case, properties such as displacement are taken to be the same as for the nearby real point.
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{10mm}
   \centering
   \input{\diagrampath/VirtualPairDeformed_T.tex}
   \caption{Virtual Points Take the Displacement of Nearby Real Points}
@@ -682,7 +689,8 @@ A curved surface is not the only reason to implement virtual points, and even ma
 When discretization is irregular, due to three-dimensional curvature, irregular shapes, or a need for increased resolution in some areas, there are necessarily points at which there is no real point at the location of $\mathbf{x} - \boldsymbol{\xi}$.
 An example of changing mesh density resulting in a need for interpolation can be found in \cref{fig:virtualpoint}, which shows a small family of nodes at the edge of a change in discretization coarseness.
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{10mm}
   \centering
   \input{\diagrampath/VirtualPoint_T.tex}
   \caption{Virtual Points Pair Up Unpaired Neighbors}
@@ -692,7 +700,29 @@ An example of changing mesh density resulting in a need for interpolation can be
 Note that, while bonds \(p_2\) and \(q_2\) form a perfect bond pair, there is no bond exactly opposite \(p_1\).
 To solve this, we add a virtual point to create a bond, \(q_1\), that will form a pair with \(p_1\).
 Because this point is not part of the discretization, it has no mass, and its properties must be determined from the properties of the surrounding nodes.
+
 An easy method of determining properties (such as displacement) at virtual nodes is to use a weighted average.
+For an irregular straight beam, determining the values of properties at virtual points is simple. 
+To determine the value of a property at point $C$, we used a weighted average of the values of that property at the nearest two real points, $A$ and $B$.
+The weight value $w_B$ of $B$ is determined to make a linear interpolation (or extrapolation) using the $x$-coordinates of the nearest two real points.
+\begin{align}
+W_B &= -\frac{C_x-A_x}{A_x-B_x}\notag\\
+W_A &= 1-w_B\notag
+\end{align}
+The problem becomes a little more complicated for curved beams, but we can tackle it by projecting the virtual point onto the line between the two nearest real points.
+The weighting function then becomes
+\begin{align}
+\overline{AC}' &= \frac{\overline{AB}}{|\overline{AB}|}\left(\frac{\overline{AB}}{|\overline{AB}|} \cdot \overline{AC}\right)\notag\\
+\overline{BC}' &= \frac{\overline{BA}}{|\overline{BA}|}\left(\frac{\overline{BA}}{|\overline{BA}|}\cdot\overline{BC}\right)\notag\\
+W_B &= 
+  \begin{dcases}
+    \phantom{-}\frac{|\overline{AC}'|}{|\overline{AB}|} & \text{if } |\overline{BC}'| \leq |\overline{AB}|\\
+    -\frac{|\overline{AC}'|}{|\overline{AB}|} &\text{otherwise}
+  \end{dcases}\notag\\
+W_A &= 1-W_B\notag
+\end{align}
+
+Determining properties at virtual points is more difficult in plate and shell models.
 One method of generating useful weights that is relatively robust is barycentric interpolation.
 We start by finding the three (non-colinear) real nodes closest to the location of the virtual node, A, B, and C.
 Next, we find the signed areas of the triangles ABC, ABX, BCX, and CAX, with X being the virtual node.
@@ -701,9 +731,10 @@ Using signed areas allows the weights to be negative to extrapolate properties o
 Because these weights are calculated from the initial positions of the node, they can be stored for swift evaluation of properties at virtual nodes.
 
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{10mm}
   \centering
-  \input{\diagrampath/BaryCentric.tex}
+  \resizebox{0.4\linewidth}{!}{\input{\diagrampath/BaryCentric.tex}}
   \caption{Barycentric interpolation is based on the relative areas of sub triangles}
   \label{fig:BaryCentric}
 \end{figure}
@@ -711,13 +742,38 @@ Because these weights are calculated from the initial positions of the node, the
 
 With the properties of the virtual points determined, the model can be evaluated in the same manner as the uniformly discretized models of the previous papers.
 Where forces are calculated to act on a virtual node, those forces are redistributed to the supporting real nodes according to the weight each point has in the interpolation.
+Barycentric interpolation is linear and therefore exactly reproduces the linear displacement fields in \cref{fig:barycentric}, including extrapolation well outside the interpolation points (all of which are within the square with corners (0,0) and (1,1)).
+Unfortunately, as \cref{fig:baryPatch} demonstrates, barycentric interpolation is not exact for quadratic surfaces.
+The difference between the quadratic surface and the linear interpolation decreases with denser discretization as the curvature of the surface between interpolation points decreases, as demonstrated in \cref{fig:baryPatch}.
+This method therefore requires that the curvature of the surface be small relative to the peridynamic horizon to ensure accurate virtual node properties.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/barycentric.pgf}}
+  \caption{Barycentric estimate and error for plane interpolation}
+  \label{fig:barycentric}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/baryPatch.pgf}}
+  \caption{Barycentric estimate and error for quadratic surface}
+  \label{fig:baryPatch}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/baryPatch2.pgf}}
+  \caption{Barycentric estimate improves with denser discretization}
+  \label{fig:baryPatch2}
+\end{figure}
 
 The same method of virtual nodes also allows the modeling of curved surfaces, in which the perfect opposite of a bond may not lie near but not on the surface of the plate or shell.
 As long as the curvature of the surface is small (at the scale of the peridynamic horizon), each resulting virtual nodes will be nearly in the plane formed by its nearest neighbors.
 Finding the weights of the surrounding nodes is performed just as in the planar case, except that the areas are formed between the projection of the virtual node location X onto the plane formed by A, B, and C.
 
 %%
-%\begin{figure}[tbp]
+%\begin{figure}[htbp]
 %  \centering
 %  \input{\diagrampath/VirtualCurve.tex}
 %  \caption{Virtual Points Allow Straight Pairs on Curved Surfaces}
@@ -741,23 +797,30 @@ W_A = \frac{W'_A }{W'_A + W'_B + W'_C}
 %
 If the projection of X onto the plane defined by A, B, and C lies outside the triangle ABC,  one or two of $W_A$, $W_B$ and $W_C$ will be negative, though they will still sum to 1.
 
+%\subsection{Coupling Damage}
+%Having introduced 
+
 \section{``Boundary'' Conditions}
 Because peridynamic models result in long range forces, it is not sufficient to apply boundary conditions to nodes on the relevant boundary; nodes near the boundary must be considered as well.
 %
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+  \vspace{5mm}
   \centering
   \input{\diagrampath/Boundary.tex}
   \caption{The boundary of a peridynamic model is a region of nonzero thickness}
   \label{fig:PDboundary}
 \end{figure}
 %
-For the peridynamic beam we consider applied forces, simple supports or rollers, and fixed or clamped supports.
+
+For the peridynamic beam we consider simple supports or rollers, and fixed or clamped supports.
 Simply-supported beams are easy to model because only displacement is constrained.
 To add a roller support to the peridynamic beam, it suffices to constrain the movement of the nearest peridynamic node in the appropriate degree(s) of freedom.
 Simulating a ``clamped'' end condition is a little less intuitive. 
 The most basic way to simulate a clamped end is to extend the beam \(2\delta\), or twice the horizon, into the clamp. The displacement of all of those nodes is set to zero, or whatever value is appropriate for a displaced or rotated clamp.
 In classical mechanics, a clamped end can be described with a symmetry condition, but the two are not peridynamically equivalent.
 Because the classical beam is a local model, material at a clamp cannot ``see'' distant material, so there is no way to distinguish between a beam end that is clamped and one that is bent symmetrically over an appropriate sawhorse.
+
+The loads we apply to the peridynamic beam include applied moments, point loads and distributed loads.
 Distributed forces may be applied as expected to nodes in the loaded region.
 Point forces may often be applied directly to the nearest node, or to the nodes immediately surrounding the point of application.
 Point moments must also be considered more carefully because the peridynamic models in this work, like most peridynamic models, do not consider rotational degrees of freedom for peridynamic nodes.
