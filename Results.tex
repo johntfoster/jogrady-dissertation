@@ -18,7 +18,7 @@ Other load types are also possible; \cref{fig:pointload_h,fig:moment_n} demonstr
 \begin{figure}[htbp]
   \centering
   \resizebox{0.6\linewidth}{!}{\input{\plotpath/SS_pointload_h.pgf}}
-  \caption{Beam with Transverse Point Load}
+  \caption{Simply Supported Beam with Point Load}
   \label{fig:pointload_h}
 \end{figure}
 %
@@ -26,13 +26,14 @@ Other load types are also possible; \cref{fig:pointload_h,fig:moment_n} demonstr
 \begin{figure}[htbp]
   \centering
   \resizebox{0.6\linewidth}{!}{\input{\plotpath/SSmoment_convergence_n.pgf}}
-  \caption{Beam with Point Moment at Center}
+  \caption{Simply Supported Beam with Point Moment at Center}
   \label{fig:moment_n}
 \end{figure}
 %
 
 It is more difficult to accurately reproduce the behavior of a clamped-end beam.
 It is evident from \cref{fig:clamped_n,fig:clamped_h} that the clamped end constraint requires far more nodes and a smaller horizon to reproduce the results of a classical elastic model.
+\Cref{fig:cantilever_n} shows a cantilever beam with one clamped end and one free end, deflecting under a uniformly distributed load.
 %
 \begin{figure}[htbp]
   \centering
@@ -49,7 +50,14 @@ It is evident from \cref{fig:clamped_n,fig:clamped_h} that the clamped end const
   \label{fig:clamped_h}
 \end{figure}
 %
-
+%
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/clamped_cantilever_n.pgf}}
+  \caption{Uniformly Loaded Cantilever Beam}
+  \label{fig:cantilever_n}
+\end{figure}
+%
 
 As an elastic-perfectly-plastic beam exceeds the elastic limit of its material, plastic zones begin to grow on the top and bottom of the beam's cross section.
 This behavior is mimicked by the plasticity of the longest bond-pairs described in \cref{eq:epp_force}, producing the results shown in \cref{fig:eppu_h10_g2000}.
@@ -186,9 +194,27 @@ In a ``single torsion'' cracked plate, the crack path is expected to curve, and 
 \subsection{Irregular Discretization Results}
 While it is simple to discretize the shapes examined thus far so that bonds pair up nicely, that is tougher to do for most shapes we are interested in analyzing.
 To combine the analytical simplicity of the previous shapes with a demonstration of the ability to handle irregular shapes, we discretize simple shapes in an irregular fashion.
+The first is a return to the simply-supported beam under uniform load.
+\Cref{fig:BeamIrreg} shows that the irregularly-discretized beam has the same deflection under uniform load as the regular discretization.
+%
+\begin{figure}[tbhp]
+  \centering
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/IrregularBeam.pgf}}
+  \caption{Irregular Beam}
+  \label{fig:BeamIrreg}
+\end{figure}
+%
 
-An example of an irregularly discretized plate is shown in \cref{fig:unevenmesh}.
+An example of a regularly-discretized plate is shown in \cref{fig:regularmesh}, while an irregularly discretized plate is shown in \cref{fig:unevenmesh}.
 To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element.
+%
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{regularmesh.eps}
+  \caption{Regular Plate Mesh}
+  \label{fig:regularmesh}
+\end{figure}
+%
 %
 \begin{figure}[h]
   \centering
@@ -247,6 +273,6 @@ The loading of the ring is the same as the beam-based ring, and in cross-section
 \end{figure}
 %
 
-Finish and insert 3D ring results.
+ XXXXFinish and insert 3D ring results. XXXX
 
 

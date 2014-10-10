@@ -1,42 +1,44 @@
 \chapter{Conclusion}
 
-As far as we know, these are the first peridynamic state-based thin feature models.
+This work develops what we believe to be the first state-based peridynamic thin feature models.
+These models allow for the simulation of bending in peridynamic beams, plates, and shells.
+They are verified by comparing their strain energies to the strain energy of classical models for small homogenous deformations, which are matched for both Euler-Bernoulli beams and for Kirchhoff-Love plates as the peridynamic horizon approaches zero.
+In addition to matching linear elastic models for these structures, it has been shown that the peridynamic models also match with Eringen-style gradient elasticity as the horizon decreases.
 
-The models developed so far provide allow for peridynamic modeling of peridynamic beams and plates in elastic bending.
-The models are validated by comparing their strain energies to the strain energy of classical models for small, homogenous deformations.
-Code was written to evaluate both beam and plate bond-pair models for linear elastic, brittle, nonlinear elastic, and elastic perfectly plastic materials.
-Simulations run with the developed models provide results in agreement with conventional methods for simple cantilever beam tests.
-Plate simulation results are promising but not yet verified for either elastic or elastic perfectly plastic materials.
-The proposed damage model successfully reproduces the impact of nonlinear elasticity on deformation of a rectangular cantilever, and the framework is laid to allow application of the same model to plates and I-beams.
-Plastic deformation results for rectangular cantilevers are promising, but the residual deformation for a plastically deformed beam does not yet match expected results.
+The bond-pair version of the bending model resists only bending deformation and is limited to plates with Poisson's ratios $\nu = \sfrac{1}{3}$.
+To simulate loading incorporating forces both in-plane and transverse to the beam or plate, the pure bending model was combined with a conventional peridynamic model for in-plane deformation.
+The result is a hybrid bending-extension model.
+The Poisson's ratio limitation was overcome by decomposing bending deformation into isotropic and deviatoric components, allowing for a bond-multiple isotropic bending correction to the deformation energy.
+With this correction, the deformation energy was shown to match that of a Kirchhoff-Love plate for any (valid) Poisson's ratio.
 
-There are still several several goals that will improve the reliability, applicability, and usability of these models.
-While a few cantilever beam cases have been validated, extended validation will consider fixed-displacement (pinned) boundary conditions and additional load cases.
-Correctly modeling each case will require a more careful consideration of the appropriate way to apply various loads and enforce various boundary conditions.
-Further testing will also include brittle failure and plasticity in I-beams and in plates.
-Specifically, the hysteresis associated with plastic deformation must be reconciled.
+To further extend the utility of the model, a reformulation was developed to gracefully include curved and irregularly discretized areas.
+By adding virtual points at locations where no nodes is present, the bond-pair model can be applied to regions where bonds are not initially organized into equal and opposite pairs.
+This includes curved surfaces, where a virtual point may be added slightly above or below the surface, as well as irregularly discretized regions in which virtual points may be added between peridynamic nodes.
 
-To maximize computational efficiency, the presented results were obtained by fixing the in-plane coordinates of each node and allowing only the vertical component to vary.
-The presented cases are expected to exhibit almost no lateral displacements, but to generalize the model it will need to include all three degrees of freedom for each node.
-The code to accomplish this task was written and commented out to improve performance, so this should be a relatively easy change.
-The increased computational complexity may require implementation of a different solver method such the Nonlinear Conjugate Gradient Method.
-Neither the bond-pair nor the bond-multiple models resist bond extension, so full degree-of-freedom models must also incorporate an extension energy term to prevent infinite transverse displacements.
+Code was written to evaluate both beam and plate models for a variety of support configurations, load configurations, and materials.
+Although many problems of interest result in purely transverse deformation, both mathematical models and computer code are fully 3D.
+The nature of peridynamic models results in large but easily parallelizable problems.
+The code was written with this in mind, and scales easily to large problems on multiple machines.
+Simulations run with the developed models provide results in agreement with conventional methods for several support configurations, including simply-supported, clamped, and free end conditions.
+Good agreement was also reached for applied displacements, moments, and both point and distributed loading conditions.
+The proposed damage model successfully reproduces the impact of nonlinear elasticity on deformation of a rectangular beam, and the framework is laid to allow application of the same model to a variety of beam cross sections.
+Brittle fracture results for both beam and plate simulations are also consistent with expectation.
+A single-torsion plate demonstrates the peridynamic advantages of natural crack path development without the need to predict direction of propagation.
+The hybrid bending-extension model resists transverse, in-plane, and combined deformation, allowing it to successfully reproduce the stiffening effect of adding in-plane tension to a transversely-loaded plate.
+With the bond-multiple correction, the extended model demonstrated the effect of varying Poisson's ratio on plate bending.
+Because it was inspired by a similar decomposition used in extension models, there same procedure can be used for combined in-plane and transverse deformations.
+Implementation of the virtual point extension greatly increases the practical utility of the model, a fact demonstrated by accurate simulations of the displacements of irregularly discretized plates and beams.
+Finally, the addition of virtual points allows application to curved features, as demonstrated by successful simulation of beam and plate based rings.
 
-A full degree-of-freedom model is necessary to extend the plate model for use with 3D thin shells.
-Shells are similar to plates but are not initially a flat plane.
-It is expected that shells can be successfully by starting with a plate and applying initial plastic deformations to all bond pairs that are not initially collinear.
+The state-based nature of these models allows them to resist bending as a basic deformation mode, in a way that is fundamentally different from previous peridynamic models, both 3D solid and thin-feature.
+While the examples in this work focus on conventional elastic and inelastic behavior, treating bending as a basic deformation opens the possibility of modeling thin features whose resistance to bending is not simply a function of stresses that vary through the thickness to produce a moment, and suggests a wide variety of possible applications: 
+Graphene sheets are only one atom thick, so their bending behavior cannot be the result of through-thickness variation in stress. 
+Some biological membranes resist isotropic bending but not deviatoric stresses.
+Highly-structured metamaterials may also have bending properties that cannot be derived solely from bulk solid properties.
 
-By incorporating extension energy into the model, we will also gain the ability to model buckling and tension-stiffening, both of which are important to thin feature failure.
-Beam, plate, and shell elements should all exhibit buckling and tension stiffening behavior as a natural result of combining models that resist bending with those that resist elongation.
-
-To make these models more useful for analysis of real parts, they should be extended to be usable with irregular discretization.
-For beams, this may be accomplished by using the bond-multiple model.
-For plates, irregular discretization might be possible using a modified bond-multiple method, or it may require the implementation of virtual points at the edges of regions with finer discretization.
-
-Finally, the fact that the bond-pair plate model describes a material with the same Poisson ratio as a bond-pair 2D peridynamic solid suggests a means of modeling plates with arbitrary Poisson ratios.
-Just as the state-based linear peridynamic solid divides the deformation state into dilatory and deviatoric deformation, it may be possible to divide the bending state of a plate into spherical and deviatoric bending.
-
-
+Peridynamic modeling is a technique that is swiftly growing in popularity, especially among those concerned with the propagation of material failure.
+The bending behavior of thin features is a critical part of many engineering analyses that has been largely out of reach for reasonably-sized peridynamic models. 
+These peridynamic bending models extend the domain of problems to which peridynamic modeling can be applied.
 
 \appendix
 \chapter{Fr\'echet Derivative}
@@ -132,9 +134,5 @@ This demonstrates the bond-length dependent ``pressure'' applied to each point i
 
 \chapter{Notations }
 
-Here we show the use of multiple appendixes.
-
-
-\section{Math Notations}
-
-Each appendix can have sub-sections as a regular chapter.
+Peridynamics is a new field, and different authors use a variety of notations to represent a variety of concepts.
+Although chosen to be as consistent as possible with other authors, the following notation is therefore not portable to other works.

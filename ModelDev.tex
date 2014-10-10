@@ -475,17 +475,17 @@ A weighting function \(\omega(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensur
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
 %
 \begin{align}
-%\label{eq:discreteBeamw}
+%
 w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right] \notag \\
-&\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2 \notag
+&\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\notag
 \end{align}
 %
 in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the point $\mathbf{x}$ to each of the $n$ points within distance $\delta$ of point $\mathbf{x}$.
 %
 \begin{align}
-%\label{eq:discretebeam}
+\label{eq:discreteBeamw}
 \alpha &= \frac{c\; \Delta x}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies \nonumber \\
-W&=\Delta x \sum_{i=1}^n \frac{EI}{2}\omega(\boldsymbol{\xi}_i)\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\notag
+W&=\Delta x \sum_{i=1}^n \frac{EI}{2}\omega(\boldsymbol{\xi}_i)\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2
 \end{align}
 %
 Discretization of the original model results in the equation of motion
@@ -529,7 +529,8 @@ As with the beam, discretizing the bond-pair model is primarily matter of exchan
 %in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the point $\mathbf{x}$ to each of the $n$ points within distance $\delta$ of point $\mathbf{x}$.
 %
 \begin{align}
-    \alpha &= \frac{c\; (\Delta x)^2}{m} ;\; c= \frac{G}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies \nonumber \\
+\label{eq:discreteplate}
+    \alpha &= \frac{c\; (\Delta x)^2}{m} ;\; c= \frac{G}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies  \\
     W&=(\Delta x)^2 \sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\frac{G}{2(1-\nu)}\frac{h^3}{12}\left(\frac{w(\mathbf{x}+\boldsymbol{\xi}_i)-2w(\mathbf{x})+w(\mathbf{x}-\boldsymbol{\xi}_i)}{|\boldsymbol{\xi}_i|}\right)^2 \notag
 \end{align}
 %
@@ -797,9 +798,23 @@ W_A = \frac{W'_A }{W'_A + W'_B + W'_C}
 %
 If the projection of X onto the plane defined by A, B, and C lies outside the triangle ABC,  one or two of $W_A$, $W_B$ and $W_C$ will be negative, though they will still sum to 1.
 
-%\subsection{Coupling Damage}
-%Having introduced 
-
+\subsection{Extended Discretization}
+With the addition of virtual points and the incorporation of irregular discretizations, it is necessary to reformulate the discretized bending model.
+The bond pair coefficients at point $\mathbf{x}$ of a beam in bending (\cref{eq:discreteBeamw}) become
+%
+\begin{align}
+\label{eq:discreteBeamw2}
+\alpha_i &= \frac{c\; l(\mathbf{x})\;l(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 l(\mathbf{x}+\boldsymbol{\xi}_i) \notag
+\end{align}
+with $l(\mathbf{x})$ and $l(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the lengths of beam represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
+Similarly, the plate coefficients from \cref{eq:discreteplate} become
+%
+\begin{align}
+    \alpha_i &= \frac{c\; A(\mathbf{x})A(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= \frac{G}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2A(\mathbf{x}+\boldsymbol{\xi}_i) \notag
+\end{align}
+%
+with $A(\mathbf{x})$ and $A(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the areas represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
+Note that for both plate and beam, the value of $\alpha$ now varies between bonds.
 \section{``Boundary'' Conditions}
 Because peridynamic models result in long range forces, it is not sufficient to apply boundary conditions to nodes on the relevant boundary; nodes near the boundary must be considered as well.
 %
@@ -858,7 +873,7 @@ Efficient parallelization is achieved using Epetra data structures for distribut
 Model force evaluations are coded in Python, making extensive use of the optimized routines in the NumPy and SciPy packages operating on the distributed Epetra objects. 
 To obtain quasistatic solutions, problems are coded into NOX objects and solved using NOX nonlinear solvers.
 Preliminary analysis was performed using a Newton Method solver on an iMac with a 3.1GHz Intel Core i7 processor and 16GB RAM, using 1-4 cores.
-Later work also performed on Shamu, a High-Performance Computing cluster at UTSA.
+Later work also performed on Shamu, a High-Performance Computing cluster at UTSA, and Stampede, a High-Performance Computing cluster at UT Austin.
 The nature of the Trilinos packages and the structure of the code allow for more extensive parallel computation without major code changes.
 
 For all but the simplest loading conditions, analytical solutions to boundary condition problems become complicated.
