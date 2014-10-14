@@ -43,6 +43,7 @@ State Norm & \|\vstate{A}{}{}\| & \sqrt{\vstate{A}{}{} \bullet \vstate{B}{}{}} \
 \label{table:StateOperations}
 \end{table}
 
+
 \section{State-based Models}
 Conservation of linear momentum in the \textit{state-based} peridynamic formulation results in the equation of motion
 %
@@ -104,6 +105,23 @@ Bond-based, ordinary state-based, and nonordinary state-based models are illustr
 \caption[Illustration of the three types of peridynamic models]{Illustration of the three types of peridynamic models, from specific to general \cite{silling2007peridynamic}}
 \label{fig:PDmodelTypes}
 \end{figure}
+
+It should be clear that many of the concepts of classical continuum mechanics have direct equivalents in peridynamic modeling.
+\Cref{table:PDconcepts} lays out some of the simplest parallels between classical and peridynamic formulations.
+
+\begin{table}
+\centering
+\begin{tabular}{l >{$\displaystyle}r<{$} >{$\displaystyle}l<{$}}
+Concept & \textrm{Classical} & \textrm{Peridynamic} \\ \hline\hline
+Kinematics & \mathbf{F} & \tvstate{Y}{}{} \\ \hline \noalign{\smallskip}
+Linear Momentum & \nabla \cdot \boldsymbol{\sigma} & \int_\Omega (\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}-\vstate{T}{\mathbf{q}}{\mathbf{x}-\mathbf{q}}) dV_\mathbf{q} \\    \noalign{\smallskip} \hline \noalign{\smallskip}
+Angular Momentum &\boldsymbol{\sigma} - \boldsymbol{\sigma}^T  & \int_\Omega \vstate{Y}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}\times\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}dV_\mathbf{q}\\   \noalign{\smallskip} \hline
+Constitutive Law & \boldsymbol{\sigma} = \boldsymbol{\sigma}(\boldsymbol{\epsilon}) &\tvstate{T}{}{}=\tvstate{T}{}{}(\tvstate{Y}{}{}) \\  \hline
+First Law & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
+\end{tabular}
+\caption{Peridynamic Equivalents of Classical Concepts}
+\label{table:PDconcepts}
+\end{table}
 
 \section{Bond-based peridynamics}
 %
@@ -279,11 +297,11 @@ Peridynamic \textit{correspondence} models use the relative positions of a point
 %
 \begin{equation}
 \label{eq:PDapproxGradient}
-\bar{\mathbf{F}}(\vstate{Y}{}{}) = \left[\int_\mathcal{H} \omega(|\boldsymbol{\xi}|)(\vstate{Y}{}{\boldsymbol{\xi}}\otimes \boldsymbol{\xi})\;dV_{\boldsymbol{\xi}} \right]\bar{\mathbf{K}}^{-1}
+\bar{\mathbf{F}}(\vstate{Y}{}{}) = \left[\int_\mathcal{H} \omega(|\boldsymbol{\xi}|)(\vstate{Y}{}{\boldsymbol{\xi}}\otimes \boldsymbol{\xi})\;dV_{\boldsymbol{\xi}} \right]\mathbf{K}^{-1}
 \end{equation}
 with the shape tensor $\mathbf{K}$ defined by
 \begin{equation}
-\bar{\mathbf{K}} = \int_\mathcal{H}\omega(|\boldsymbol{\xi}|)(\boldsymbol{\xi} \otimes \boldsymbol{\xi})\;dV_{\boldsymbol{\xi}} \notag
+\mathbf{K} = \int_\mathcal{H}\omega(|\boldsymbol{\xi}|)(\boldsymbol{\xi} \otimes \boldsymbol{\xi})\;dV_{\boldsymbol{\xi}} \notag
 \end{equation}
 %
 When $\mathbf{F}$ is constant, $\bar{\mathbf{F}}(\vstate{Y}{}{})$ is exactly equal to $\mathbf{F}$.
@@ -292,13 +310,13 @@ If the classical model in question is hyperelastic with energy density $\Omega(\
 W(\vstate{Y}{}{}) = \Omega(\bar{\mathbf{F}}(\vstate{Y}{}{}))
 \end{equation}
 and find the force vector state by taking the Fr\'echet derivative of $W$ with respect to $\vstate{Y}{}{}$.
-Alternately, the classical continuum model can be applied to find the first Piola-Kirchhoff stress $\boldsymbol{\sigma}$ associated with $\bar{\mathbf{F}}$:
+Alternately, the classical continuum model can be applied to find the first Piola-Kirchhoff stress $\mathbf{P}$ associated with $\bar{\mathbf{F}}$:
 \begin{equation}
-\boldsymbol{\sigma}=\frac{\partial\Omega(\bar{\mathbf{F}})}{\partial\bar{\mathbf{F}}}
+\mathbf{P}=\frac{\partial\Omega(\bar{\mathbf{F}})}{\partial\bar{\mathbf{F}}}
 \end{equation}
 The resulting force state is calculated from the stress according to
 \begin{equation}
-\vstate{T}{}{\boldsymbol{\xi}} = \omega(\boldsymbol{\xi})\boldsymbol{\sigma}\mathbf{K}^{-1}\boldsymbol{\xi}
+\vstate{T}{}{\boldsymbol{\xi}} = \omega(\boldsymbol{\xi})\mathbf{P}\mathbf{K}^{-1}\boldsymbol{\xi}
 \end{equation}
 For homogenous deformations, the result is a peridynamic model that exactly reproduces the classical model without ever taking a derivative.
 For problems with very inhomogenous (on the scale of the peridynamic horizon) deformations, the peridynamic model will exhibit scale effects not seen in the classical model, acting to smooth out the effect of short-scale deformations.

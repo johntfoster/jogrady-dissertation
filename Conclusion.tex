@@ -136,3 +136,96 @@ This demonstrates the bond-length dependent ``pressure'' applied to each point i
 
 Peridynamics is a new field, and different authors use a variety of notations to represent a variety of concepts.
 Although chosen to be as consistent as possible with other authors, the following notation is therefore not portable to other works.
+
+%\begin{table}
+%\centering
+%\begin{tabular}{>{$\displaystyle}l<{$} r}
+\begin{longtable}{>{$\displaystyle}l<{$} r}
+\textrm{Notation} & Meaning \\ \hline\hline
+\mathbf{x},\mathbf{q} & undeformed location vectors \\
+\mathbf{u} & displacement vector \\
+\mathbf{y} & deformed location vector\\
+\boldsymbol{\xi}, \boldsymbol{\zeta} & undeformed bond vectors \\
+\nu & Poisson's ratio\\ 
+K_I & mode I fracture toughness\\
+\kappa & Kolosov constant\\
+\theta & angle from crack tip\\
+r & distance from crack tip\\
+\mu & shear modulus\\
+\rho &density\\
+\mathbf{P} & first Piola-Kirchhoff stress tensor\\
+\mathbf{b} & body force vector\\
+\Omega & undeformed body\\
+\mathbf{f} & force vector\\
+\boldsymbol{\sigma} & Cauchy stress tensor\\
+E & Young's modulus\\
+I & second moment of area\\
+q & distributed load (1D)\\
+v & displacement in $\hat{y}$ direction\\
+M & moment\\
+V & shear force\\
+\rho & radius of curvature\\
+\mathcal{O} & order notation\\
+\theta & beam deflection angle\\
+\kappa & beam curvature\\
+A & area\\
+w & displacement in $\hat{z}$ direction\\
+F & applied force\\
+\epsilon & uniaxial strain\\
+\boldsymbol{\epsilon} & strain tensor\\
+\kappa_x = \kappa_{xx} = \kappa_1 = \frac{\partial^2 w}{\partial x^2} & \multirow{3}{*}{Plate Curvatures} \\
+\kappa_y = \kappa_{yy} = \kappa_2 = \frac{\partial^2 w}{\partial y^2} & \\
+\kappa_{xy} = \kappa_3 = \frac{\partial^2 w}{\partial x\partial y} & \\
+D & plate flexural rigidity\\
+p & distributed load (2D)\\
+\vstate{T}{}{} & force vector state\\
+\vstate{Y}{}{} & deformation vector state\\
+\omega & weight function\\
+\delta & horizon\\
+\mathcal{H} & neighborhood\\
+c & bond stiffness\\
+s & bond stretch\\
+\mathbf{F} & deformation gradient tensor\\
+\xi_i & $i$-th component of vector $\boldsymbol{\xi}$\\
+\xi & magnitude of vector $\boldsymbol{\xi}$\\
+\boldsymbol{\xi}_i & $i$-th of $n$ vectors vector $\boldsymbol{\xi}_1$ to $\boldsymbol{\xi}_n$  \\
+\mathbf{p},\mathbf{q},\mathbf{r} & deformed bond vectors\\
+w & bond energy, bond-pair energy\\
+W & strain or deformation energy density\\
+\epsilon^d & deviatoric strain\\
+m & peridynamic normalization constant\\
+\theta & dilation\\
+G & shear modulus\\
+t & thickness\\
+\underline{e} & bond stretch\\
+\underline{e}^i &isotropic portion of bond stretch\\
+\underline{e}^d &deviatoric portion of bond stretch\\
+\mathbf{K} & shape tensor\\
+\Omega & classical strain energy density function\\
+\alpha & peridynamic bending stiffness\\
+\theta & bond-pair angle\\
+\bar{\kappa} & nonlocal curvature\\
+K & Eringen's nonlocal modulus\\
+\mathbf{t} & Eringen nonlocal stress\\
+\tau^2l^2 & scale parameter\\
+t_{1D} & 1D Eringen nonlocal stress\\
+\sigma_{1D} & 1D local stress\\
+b & beam width\\
+\epsilon_c & critical strain\\
+\theta_c & critical angle\\
+\theta_2 & 2D dilation\\
+\bar{\kappa} & scalar isotropic curvature\\
+\bar{\boldsymbol{\kappa}} & vector isotropic curvature\\
+W' & energy discrepancy\\
+\vstate{T'}{}{} & correction force vector state\\
+\alpha^{\textrm{iso}} & isotropic bending stiffness\\
+f^\textrm{iso} & isotropic bending ``pressure''\\
+\hline\hline
+%\end{tabular}
+\caption{Peridynamic Notation}
+\label{table:PDnotation}
+\end{longtable}
+%\end{table}
+
+
+

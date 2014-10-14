@@ -33,7 +33,7 @@
 \usepackage{morefloats}
 \usepackage{cleveref}
 %\usepackage{autonum}
-
+\usepackage{longtable}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -88,15 +88,15 @@
 \providecommand{\theoremname}{Theorem}
 
 
-%\includeonly{FrontMatter
-%%,Introduction
-%%,LitReview
-%%,PDBackground
-%%,ClassicBackground
+\includeonly{FrontMatter
+%,Introduction
+%,LitReview
+%,PDBackground
+%,ClassicBackground
 %,ModelDev
-%%,Results
-%%,Conclusion
-%}
+%,Results
+,Conclusion
+}
 \begin{document}
 
 \include{FrontMatter}
