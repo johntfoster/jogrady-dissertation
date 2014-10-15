@@ -216,10 +216,10 @@ To force the result to be independent of the horizon $\delta$, we normalize the 
 m=\int_\mathcal{H}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2 = 4\pi \int_0^\delta \omega(r)\;r^4\;dr
 \end{equation}
 %
-By comparing to the classical strain energy density $\Omega = G\;\epsilon_{ij}^d\epsilon_{ij}^d$ for shear modulus $G$, we can determine the appropriate bond stiffness
+By comparing to the classical strain energy density $\Omega = \mu\;\epsilon_{ij}^d\epsilon_{ij}^d$ for shear modulus $\mu$, we can determine the appropriate bond stiffness
 %
 \begin{equation}
-c = \frac{15\;G}{m}\notag
+c = \frac{15\;\mu}{m}\notag
 \end{equation}
 %
 Applying a purely dilational deformation to the same model is far easier.
@@ -235,7 +235,7 @@ and the corresponding energy is
 W &= \frac{c}{2}\int_\mathcal{H} \omega(|\xi|)\frac{\theta^2}{9} r^2 \;dV_\xi\notag\\
 &=\frac{c\;\theta^2}{18} \int_0^\delta \omega(r)\int_0^{2\pi}\int_0^\pi r^2\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr \notag\\
 &= \frac{c\;\theta^2}{18} m \notag\\
-&= \frac{15}{9}G\frac{\theta^2}{2}
+&= \frac{15}{9}\mu\frac{\theta^2}{2}
 \end{align}
 %
 This shows that the model based on bond-stretch has a bulk modulus that is \sfrac{15}{9} of its shear modulus, indicating a Poisson's ratio of \sfrac{1}{4}.
@@ -244,7 +244,7 @@ A nearly identical analysis can be performed on a simpler 2D version of the same
 Applying a purely deviatoric in-plane shear to such a model, and comparing the resulting energy to that of a classical plate with thickness $t$ gives us
 %
 \begin{equation}
-c = \frac{8\;G\;t}{m_\textrm{2D}};\qquad m_\textrm{2D} =\int_\mathcal{H_\textrm{2D}}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2.  \notag
+c = \frac{8\;\mu\;t}{m_\textrm{2D}};\qquad m_\textrm{2D} =\int_\mathcal{H_\textrm{2D}}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2.  \notag
 \end{equation}
 %
 
@@ -284,7 +284,7 @@ The two can be combined for \cref{eq:lps}, a force state that clearly indicates 
 %
 \begin{equation}
 \label{eq:lps}
-\underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}| + \frac{15\;G}{m}\omega(\boldsymbol{\xi})\underline{e}^d
+\underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}| + \frac{15\;\mu}{m}\omega(\boldsymbol{\xi})\underline{e}^d
 \end{equation}
 %
 A quick examination shows that, in the case that the dilation $\theta$ is not constant, the force at either end of a bond will not satisfy \cref{eq:PDbondF}.
