@@ -144,31 +144,31 @@ Eringen's model for nonlocal elasticity in \cite{eringen1983differential} begins
 \mathbf{t} = \int_\mathbf{V} K(|\mathbf{x}'-\mathbf{x}|,\tau)\boldsymbol{\sigma}(\mathbf{x}')dv(\mathbf{x}').\notag
 \end{equation}
 In the local limit these relationships take the form of higher-order gradients.
-Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{l\tau}e^{-\frac{|x|}{l\tau}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\)
+Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\)
 \begin{align}
-\left(1-\tau^2l^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D},\notag
+\left(1-(\tau l)^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D},\notag
 \end{align}
-in which \(\tau^2l^2\) is a scale-based material parameter.
-For well-behaved \(t_\text{1D}\) and \(\sigma_\text{1D}\) and small values of \(\sigma_\text{1D}''''\) and \(\tau^2l^2\), we can see that this relationship could be reformulated as
+in which \((\tau l)\) is a scale-based material parameter.
+For well-behaved \(t_\text{1D}\) and \(\sigma_\text{1D}\) and small values of \(\sigma_\text{1D}''''\) and \((\tau l)^2\), we can see that this relationship could be reformulated as
 \begin{equation}
 \label{eq:NLstress}
-t_\text{1D}=\left(1+\tau^2l^2\frac{\partial^2}{\partial x^2}\right)\sigma_\text{1D}.\notag
+t_\text{1D}=\left(1+(\tau l)^2\frac{\partial^2}{\partial x^2}\right)\sigma_\text{1D}.\notag
 \end{equation}
 If we consider the results of the previous section and let \(dM = y\sigma dA\) and \(\sigma = Ey\kappa\), the contribution to moment resulting from Eringen's nonlocal elasticity in a fiber at \(y\)
 \begin{equation}
 \label{eq:EringenMoment}
-E y^2 (\kappa+\tau^2l^2\kappa''), \\
+E y^2 (\kappa+(\tau l)^2\kappa''), \\
 \end{equation}
 and the resulting strain energy
 \begin{equation}
 \label{eq:EringenEnergy}
-\int_{-\frac{t}{2}}^{\frac{t}{2}} b(y) E \frac{y^2}{2} \kappa (\kappa+\tau^2l^2\kappa'')  dy,\notag
+\int_{-\frac{t}{2}}^{\frac{t}{2}} b(y) E \frac{y^2}{2} \kappa (\kappa+(\tau l)^2\kappa'')  dy,\notag
 \end{equation}
 bear a striking resemblance to \cref{eq:NLbending}.
 In fact, by carefully choosing peridynamic parameter values, the results can be made identical.
 For a rectangular beam of width \(b\) and thickness \(t\), choosing 
 \begin{equation}
-\omega(\xi) = |\xi|b ;\qquad \delta = \tau l \sqrt{3} ;\qquad \alpha = \frac{E b t^3}{54 \tau^4 l^4}\notag
+\omega(\xi) = |\xi|b ;\qquad \delta = \tau l \sqrt{3} ;\qquad \alpha = \frac{E b t^3}{54 (\tau l)^4}\notag
 \end{equation}
 results in
 \begin{equation}
@@ -412,7 +412,7 @@ As the two sides are pulled apart, the magnitude of the extension force in each 
 Although many materials have Poisson ratios of \(\nu\approx \sfrac{1}{3}\), it is nonetheless desirable to extend the model to materials with arbitrary Poisson ratios.  For isotropic, linearly elastic models of solid materials, Silling et al.\ extended the peridynamic material model to arbitrary material parameters in \cite{silling2007peridynamic} by decomposing the deformation into isotropic and deviatoric components.  In the absence of plastic deformation, we need only find the difference between the strain energy of a deformed bond-based plate and the strain energy of an elastic plate with Poisson's ratio \(\nu \neq \sfrac{1}{3}\).  The difference is a function of the isotropic strain in two dimensions, \(\theta_{2D}\)
 %
 \begin{align}
-    W' &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 \notag \\
+    W^\star &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 \notag \\
 %    \theta_{2D} &= \frac{2}{m}\left(\underline{\omega x}\right)\bullet\underline{e} \notag \\
     \theta_{2D} &= \frac{2}{m}\int_A \omega(\boldsymbol{\xi})|\boldsymbol{\xi}|(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|)\;dA_{\boldsymbol{\xi}} \notag \\
 %    W_\text{total} &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 + \frac{4\;\mu\;h}{m}\left(\underline{\omega e}\right)\bullet\underline{e}\notag
@@ -424,9 +424,9 @@ This is to be expected because the bond-based model was calibrated to the shear 
 This decomposition method inspires a similar approach to our plate model. To perform the same extension for the plate model in bending, we find the error in the 1-parameter strain energy for \(\nu \neq \sfrac{1}{3}\)
 %
 \begin{align}
-    W'=&\frac{\mu h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_2+2(1-\nu)\kappa_3^2 \right)\notag\\
+    W^\star=&\frac{\mu h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_2+2(1-\nu)\kappa_3^2 \right)\notag\\
     &-\frac{\mu h^3}{12(1-\frac{1}{3})} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\nu\kappa_1\kappa_2+2(1-\frac{1}{3})\kappa_3^2 \right) \notag \\
-    W'=&2\mu \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2.\notag
+    W^\star=&2\mu \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2.\notag
 \end{align}
 %
 The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a hemispherical bowl.  The remainder of the bending deformation, that which is left when the isotropic curvature is subtracted out, resembles a saddle. This remaining component is the deviatoric deformation, and both components are shown in \cref{fig:BendingDecomp}. Note that the orientation of the deviatoric bending will change depending on the particular curvature being decomposed, while the isotropic curvature will only change in scale.
@@ -457,13 +457,13 @@ The weighting function \(\omega(\xi)\) performs the same function as in the prev
 We can rewrite the energy discrepancy in terms of \(\bar{\boldsymbol{\kappa}}\).
 %
 \begin{equation}
-    W'=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
+    W^\star=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
 \end{equation}
 %
 We can take the Fr\'{e}chet derivative (details in \ref{sec:frechet}) to produce a correction force vector state
 %
 \begin{equation}
-    \vstate{T'}{}{\boldsymbol{\xi}}=\frac{8\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}},
+    \vstate{T^\star}{}{\boldsymbol{\xi}}=\frac{8\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}},
     \label{eq:pressureState}
 \end{equation}
 %
@@ -786,14 +786,14 @@ To compute the weight of node A in the interpolation of properties at virtual no
 %
 \begin{equation}
 \label{eq:BarycentricArea}
-W'_A = \frac{B-X}{2}\bullet \left[BC \times \left(\frac{BC \times BA}{|BC \times BA|}\right)\right]
+\hat{W}_A = \frac{B-X}{2}\bullet \left[BC \times \left(\frac{BC \times BA}{|BC \times BA|}\right)\right]
 \end{equation}
 %
-After finding $W'_B$ and $W'_C$ in similar fashion,
+After finding $\hat{W}_B$ and $\hat{W}_C$ in similar fashion,
 %
 \begin{equation}
 \label{eq:BarycentricWeight}
-W_A = \frac{W'_A }{W'_A + W'_B + W'_C}
+W_A = \frac{\hat{W}_A }{\hat{W}_A + \hat{W}_B + \hat{W}_C}
 \end{equation}
 %
 If the projection of X onto the plane defined by A, B, and C lies outside the triangle ABC,  one or two of $W_A$, $W_B$ and $W_C$ will be negative, though they will still sum to 1.

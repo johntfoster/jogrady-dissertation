@@ -223,19 +223,19 @@ c = \frac{15\;\mu}{m}\notag
 \end{equation}
 %
 Applying a purely dilational deformation to the same model is far easier.
-With dilation $\theta$, the stretch of a bond in any direction is
+With dilation $\theta_{3D}$, the stretch of a bond in any direction is
 %
 \begin{equation}
-s = \frac{\theta}{3} r,\notag
+s = \frac{\theta_{3D}}{3} r,\notag
 \end{equation}
 %
 and the corresponding energy is 
 %
 \begin{align}
-W &= \frac{c}{2}\int_\mathcal{H} \omega(|\xi|)\frac{\theta^2}{9} r^2 \;dV_\xi\notag\\
-&=\frac{c\;\theta^2}{18} \int_0^\delta \omega(r)\int_0^{2\pi}\int_0^\pi r^2\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr \notag\\
-&= \frac{c\;\theta^2}{18} m \notag\\
-&= \frac{15}{9}\mu\frac{\theta^2}{2}
+W &= \frac{c}{2}\int_\mathcal{H} \omega(|\xi|)\frac{\theta^2_{3D}}{9} r^2 \;dV_\xi\notag\\
+&=\frac{c\;\theta^2_{3D}}{18} \int_0^\delta \omega(r)\int_0^{2\pi}\int_0^\pi r^2\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr \notag\\
+&= \frac{c\;\theta^2_{3D}}{18} m \notag\\
+&= \frac{15}{9}\mu\frac{\theta^2_{3D}}{2}
 \end{align}
 %
 This shows that the model based on bond-stretch has a bulk modulus that is \sfrac{15}{9} of its shear modulus, indicating a Poisson's ratio of \sfrac{1}{4}.
@@ -258,25 +258,25 @@ Classical material models dealing with metal plasticity often separate deformati
 Similarly, the extension state can be decomposed into isotropic and deviatoric extension states. Using $m$ from \cref{eq:weighted} as above for normalization the dilation state is defined
 %
 \begin{equation}
-\theta = \frac{3}{m} \int_\mathcal{H} \omega(\boldsymbol{\xi}) |\boldsymbol{\xi}| \underline{e}.
+\theta_{3D} = \frac{3}{m} \int_\mathcal{H} \omega(\boldsymbol{\xi}) |\boldsymbol{\xi}| \underline{e}.
 \end{equation}
 %
 The isotropic and deviatoric extension states are defined in turn
 %
 \begin{equation}
-\underline{e}^i = \frac{\theta |\boldsymbol{\xi}|}{3},\qquad \underline{e}^d = \underline{e}-\underline{e}^i
+\underline{e}^i = \frac{\theta_{3D} |\boldsymbol{\xi}|}{3},\qquad \underline{e}^d = \underline{e}-\underline{e}^i
 \end{equation}
 %
 If the energy associated with dilation is set to
 %
 \begin{equation}
-W^i = \frac{k\;\theta^2}{2},\notag
+W^i = \frac{k\;\theta^2_{3D}}{2},\notag
 \end{equation}
 %
 then the corresponding force state and peridynamic pressure are
 %
 \begin{equation}
-\underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}|,\qquad p=-k\theta\notag
+\underline{t} = \frac{3k\theta_{3D}}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}|,\qquad p=-k\theta_{3D}\notag
 \end{equation}
 %
 We saw in the analysis of the bond-based model the necessary bond stiffness to match the energy associated with purely deviatoric deformation.
@@ -284,10 +284,10 @@ The two can be combined for \cref{eq:lps}, a force state that clearly indicates 
 %
 \begin{equation}
 \label{eq:lps}
-\underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}| + \frac{15\;\mu}{m}\omega(\boldsymbol{\xi})\underline{e}^d
+\underline{t} = \frac{3k\theta_{3D}}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}| + \frac{15\;\mu}{m}\omega(\boldsymbol{\xi})\underline{e}^d
 \end{equation}
 %
-A quick examination shows that, in the case that the dilation $\theta$ is not constant, the force at either end of a bond will not satisfy \cref{eq:PDbondF}.
+A quick examination shows that, in the case that the dilation $\theta_{3D}$ is not constant, the force at either end of a bond will not satisfy \cref{eq:PDbondF}.
 Thus such a model is not possible in a bond-based framework without significant modification.
 
 \subsection{Correspondence Models}

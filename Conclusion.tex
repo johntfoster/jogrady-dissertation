@@ -102,7 +102,7 @@ We combine all of these to get the expression for bond force found in \cref{eq:S
 To derive the bending ``pressure'' force, we start with the isotropic energy discrepancy
 %
 \begin{equation}
-    W'=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
+    W^\star=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
 \end{equation}
 %
 with
@@ -111,7 +111,7 @@ with
     \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
     &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag
 \end{align}
-Because $\bar{\boldsymbol{\kappa}}$ is itself a vector-state, we will need to begin with the change in $\bar{\boldsymbol{\kappa}}$ with respect to $\vstate{Y}{}{}$ and carry the result through to find the change in $W'$.
+Because $\bar{\boldsymbol{\kappa}}$ is itself a vector-state, we will need to begin with the change in $\bar{\boldsymbol{\kappa}}$ with respect to $\vstate{Y}{}{}$ and carry the result through to find the change in $W^\star$.
 \begin{align}
     \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
     &= \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag 
@@ -119,12 +119,12 @@ Because $\bar{\boldsymbol{\kappa}}$ is itself a vector-state, we will need to be
 %
 %
 \begin{align}
-    W'\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\left[\bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right)\right]^2 \notag \\
+    W^\star\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\left[\bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right)\right]^2 \notag \\
     &=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left\{ \vphantom{\int_0^\delta} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)\right. \notag \\
     &\phantom{=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}} + \frac{4}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
     &\phantom{=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}}\left. + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi\right\} \notag \\
-    &=W'\left(\vstate{Y}{}{}\right)+ 2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \frac{4}{m} \frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \bullet \Delta\vstate{Y}{}{} + o\left(||\Delta\vstate{Y}{}{}||\right)\notag \\
-    \nabla W'\!\left(\vstate{Y}{}{}\right) &= \vstate{T}{}{\boldsymbol{\xi}} =  \frac{8 \mu}{m} \frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\notag
+    &=W^\star\left(\vstate{Y}{}{}\right)+ 2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \frac{4}{m} \frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \bullet \Delta\vstate{Y}{}{} + o\left(||\Delta\vstate{Y}{}{}||\right)\notag \\
+    \nabla W^\star\!\left(\vstate{Y}{}{}\right) &= \vstate{T^\star}{}{\boldsymbol{\xi}} =  \frac{8 \mu}{m} \frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\notag
 \end{align}
 %
 This demonstrates the bond-length dependent ``pressure'' applied to each point in the neighborhood of a point with average curvature $\bar{\boldsymbol{\kappa}}$.
@@ -207,7 +207,7 @@ Although chosen to be as consistent as possible with other authors, the followin
 %\bar{\kappa} & nonlocal curvature\\
 %K & Eringen's nonlocal modulus\\
 %\mathbf{t} & Eringen nonlocal stress\\
-%\tau^2l^2 & scale parameter\\
+%(\tau l)^2 & scale parameter\\
 %t_{1D} & 1D Eringen nonlocal stress\\
 %\sigma_{1D} & 1D local stress\\
 %b & beam width\\
@@ -216,8 +216,8 @@ Although chosen to be as consistent as possible with other authors, the followin
 %\theta_2 & 2D dilation\\
 %\bar{\kappa} & scalar isotropic curvature\\
 %\bar{\boldsymbol{\kappa}} & vector isotropic curvature\\
-%W' & energy discrepancy\\
-%\vstate{T'}{}{} & correction force vector state\\
+%W^\star & energy discrepancy\\
+%\vstate{T^\star}{}{} & correction force vector state\\
 %\alpha^{\textrm{iso}} & isotropic bending stiffness\\
 %f^\textrm{iso} & isotropic bending ``pressure''\\
 %\hline\hline
@@ -240,16 +240,20 @@ E & Young's modulus\\
 \underline{e}^i &isotropic portion of bond stretch\\
 \underline{e}^d &deviatoric portion of bond stretch\\
 F & applied force\\
-\mathbf{f} & force vector\\
 \mathbf{F} & deformation gradient tensor\\
+\bar{\mathbf{F}} & approximated deformation gradient tensor\\
+\mathbf{f} & force vector\\
 f^\textrm{iso} & isotropic bending ``pressure''\\
 \mathcal{H} & neighborhood\\
 I & second moment of area\\
 K & Eringen's nonlocal modulus\\
+k & bulk modulus\\
 \mathbf{K} & shape tensor\\
+l & beam length represented by node (1D)\\
 M & moment\\
 m & peridynamic normalization constant\\
 \mathcal{O} & order notation\\
+p & pressure\\
 p & distributed pressure load (2D)\\
 \mathbf{P} & first Piola-Kirchhoff stress tensor\\
 \mathbf{p},\mathbf{q},\mathbf{r} & deformed bond vectors\\
@@ -259,32 +263,30 @@ t & thickness\\
 \mathbf{t} & Eringen nonlocal stress\\
 t_{1D} & 1D Eringen nonlocal stress\\
 \vstate{T}{}{} & force vector state\\
-\vstate{T'}{}{} & correction force vector state\\
+\vstate{T^\star}{}{} & correction force vector state\\
 \mathbf{u} & displacement vector \\
 V & shear force\\
 v & displacement in $\hat{y}$ direction\\
 w & displacement in $\hat{z}$ direction\\
 w & bond energy, bond-pair energy\\
 W & strain or deformation energy density\\
-W' & energy discrepancy\\
+W^\star & energy discrepancy\\
 \hat{x},\hat{y},\hat{z} & coordinate vectors\\
 \mathbf{x},\mathbf{q} & undeformed location vectors \\
 \mathbf{y} & deformed location vector\\
 \vstate{Y}{}{} & deformation vector state\\
 
-
 \alpha & peridynamic bending stiffness\\
 \alpha^{\textrm{iso}} & isotropic bending stiffness\\
 \delta & horizon\\
+\Delta x & distance between nodes in regular discretization\\
 \epsilon & uniaxial strain\\
 \boldsymbol{\epsilon} & strain tensor\\
 \epsilon_c & critical strain\\
 \epsilon^d & deviatoric strain\\
-\theta & beam deflection angle\\
-\theta & dilation\\
 \theta & bond-pair angle\\
 \theta_c & critical angle\\
-\theta_{2D} & 2D dilation\\
+\theta_{3D},\theta_{2D} & dilation\\
 \kappa & beam curvature\\
 \bar{\kappa} & nonlocal curvature\\
 \bar{\boldsymbol{\kappa}} & vector isotropic curvature\\
@@ -301,7 +303,9 @@ W' & energy discrepancy\\
 \rho & radius of curvature\\
 \sigma_{1D} & 1D local stress\\
 \boldsymbol{\sigma} & Cauchy stress tensor\\
-\tau^2l^2 & scale parameter\\
+(\tau l)^2 & scale parameter\\
+\phi & beam deflection angle\\
+\phi & bond orientation angle\\
 \Omega & undeformed body\\
 \Omega & classical strain energy density function\\
 \omega & weight function\\
