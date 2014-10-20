@@ -15,9 +15,9 @@ If we call the deformed angle between these bonds \(\theta\), and choose the pot
 %
 \begin{align}
 \label{eq:SillingForceNO}
-\vstate{T}{}{\boldsymbol{\xi}} &= \nabla w\!\left(\vstate{Y}{}{\boldsymbol{\xi}}\right)\notag \\
+\vstate{T}{}{\boldsymbol{\xi}} &= \nabla w\!\left(\vstate{Y}{}{\boldsymbol{\xi}}\right)\, ,\notag \\
 %
-&=\omega(\boldsymbol{\xi})\frac{-\alpha}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \left[\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \frac{\vstate{Y}{}{-\boldsymbol{\xi}}}{|\vstate{Y}{}{-\boldsymbol{\xi}}|}\right]
+&=\omega(\boldsymbol{\xi})\frac{-\alpha}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \left[\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \frac{\vstate{Y}{}{-\boldsymbol{\xi}}}{|\vstate{Y}{}{-\boldsymbol{\xi}}|}\right]\, .
 \end{align}
 %
 Though it looks complex, \cref{eq:SillingForceNO} indicates a bond force perpendicular to the deformed bond and in the plane containing both the deformed bond and its partner as illustrated in \cref{fig:Bondpair}. 
@@ -60,41 +60,41 @@ To determine an appropriate choice of $\alpha$ for \cref{eq:SillingForceNO}, we 
 where $v$ is the vertical displacement of material point.  Momentarily assuming that $v$ is continuous and using a Taylor series to expand the right-hand-side of eq.~(\ref{eq:beamdtheta})  
 %
 \begin{align}
-\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) &\approx \pi-\xi \frac{\partial^2 v}{\partial x^2}+\mathcal{O}(\xi^3) \notag \\
-&\approx  \pi-\xi \kappa +\mathcal{O}(\xi^3); 
+\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) &\approx \pi-\xi \frac{\partial^2 v}{\partial x^2}+\mathcal{O}(\xi^3)\, , \notag \\
+&\approx  \pi-\xi \kappa +\mathcal{O}(\xi^3)\, ; 
 \label{eq:beamdtheta2}
 \end{align}
 with
 \begin{equation}
-\kappa = \frac{\partial^2 v}{\partial x^2}.\notag
+\kappa = \frac{\partial^2 v}{\partial x^2}\, .\notag
 \end{equation}
 %
 Substituting eq.~(\ref{eq:beamdtheta2}) into the equation for the strain energy density of a single bond-pair,
 %
 \begin{align}
 \label{eq:continuousBeamw}
-w(\xi) &= \omega(\xi) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}})) \right] \notag\\
-&\approx \omega(\xi) \alpha\frac{\xi^2}{2}(\kappa)^2 +\mathcal{O}(\xi^4).\notag
+w(\xi) &= \omega(\xi) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}})) \right]\, , \notag\\
+&\approx \omega(\xi) \alpha\frac{\xi^2}{2}(\kappa)^2 +\mathcal{O}(\xi^4)\, .\notag
 \end{align}
 %
 If we use a weighting function \(\omega(\xi)=\omega(|\xi|)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \,\, \forall \,\, \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic beam is
 %
 \begin{equation}
-W = \frac{\alpha}{2}\kappa^2 \int_{-\delta}^\delta \omega(\xi)\xi^2 {\rm d}\xi + \mathcal{O}(\delta^5).\notag
+W = \frac{\alpha}{2}\kappa^2 \int_{-\delta}^\delta \omega(\xi)\xi^2 {\rm d}\xi + \mathcal{O}(\delta^5)\, .\notag
 \end{equation}
 %
 Equating $W$ with the classical Euler-Bernoulli beam strain-energy density, $\Omega$, and taking the limit as $\delta \to 0$ we can solve for $\alpha$
 %
 \begin{align}
-    \lim_{\delta \to 0}  W &= \Omega, \notag \\
-    \frac{\alpha}{2} m \kappa^2 &= \frac{EI}{2} \kappa^2, \notag \\
-    \alpha &= \frac{EI}{m},
+    \lim_{\delta \to 0}  W &= \Omega\, , \notag \\
+    \frac{\alpha}{2} m \kappa^2 &= \frac{EI}{2} \kappa^2\, , \notag \\
+    \alpha &= \frac{EI}{m}\, ,
 \label{eq:alpha}
 \end{align}
 %
 with 
 \begin{equation}
-    m = \int_{-\delta}^{\delta} \omega(\xi) \xi^2 {\rm d}\xi \notag.
+    m = \int_{-\delta}^{\delta} \omega(\xi) \xi^2 {\rm d}\xi \notag \, .
 \end{equation}
 
 While this demonstrates the model's equivalence to a linearly-elastic Euler beam, if we keep an additional term from the Taylor series approximation of \cref{eq:beamdtheta}, we recover a slightly more complex expressions for change in angle that is demonstrated in \ref{sec:EringenCompare} to reproduce an Euler beam governed by Eringen's model of nonlocal elasticity.
@@ -107,7 +107,7 @@ If we keep an additional term from the Taylor series approximation of \cref{eq:b
 \begin{equation}
 \label{eq:beamdthetaHOT}
 %\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) \approx \pi-\xi \frac{\partial^2 y}{\partial x^2} -\frac{\xi^3}{12} \frac{\partial^4 y}{\partial x^4}  +\mathcal{O}(\xi^5)=  \pi-\xi \kappa-\frac{\xi^3}{12} \kappa''+\mathcal{O}(\xi^5)\notag
-\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) \approx \arctan\left(\pi-\xi \frac{\partial^2 v}{\partial x^2} -\frac{\xi^3}{12} \frac{\partial^4 v}{\partial x^4}  +\mathcal{O}(\xi^5)\right)\notag
+\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) \approx \arctan\left(\pi-\xi \frac{\partial^2 v}{\partial x^2} -\frac{\xi^3}{12} \frac{\partial^4 v}{\partial x^4}  +\mathcal{O}(\xi^5)\right)\notag\, ,
 \end{equation}
 %
 and for the strain energy (again substituting \(\kappa = v''\) for readability),
@@ -119,13 +119,13 @@ and for the strain energy (again substituting \(\kappa = v''\) for readability),
 %
 \begin{equation}
 %W \approx \int_{-\delta}^\delta \omega(\xi)\alpha(\frac{\xi^2}{2}\kappa^2+\frac{\xi^4}{12}\kappa\kappa''-\frac{\xi^4}{24}\kappa^4+\mathcal{O}(\xi^6)) d\xi .\notag
-W \approx \int_{-\delta}^\delta \omega(\xi)\alpha(\frac{\xi^2}{2}\kappa^2+\frac{\xi^4}{12}\kappa\kappa''-\frac{3\; \xi^4}{8}\kappa^4+\mathcal{O}(\xi^6)) d\xi.\notag
+W \approx \int_{-\delta}^\delta \omega(\xi)\alpha(\frac{\xi^2}{2}\kappa^2+\frac{\xi^4}{12}\kappa\kappa''-\frac{3\; \xi^4}{8}\kappa^4+\mathcal{O}(\xi^6)) d\xi\, .\notag
 \end{equation}
 %
 As the horizon \(\delta\) becomes small, higher-order \(\xi\) terms become relatively less important, and \(\xi^4\kappa^4\) is dominated by \(\xi^2\kappa^2\) for large \(\kappa\) and by \(\xi^4\kappa\kappa''\) for small \(\kappa\).
 The remaining terms can be rearranged,
 \begin{align}
-W &\approx \int_{-\delta}^\delta \omega(\xi)\alpha \frac{\xi^2}{2}\kappa(\kappa + \frac{\xi^2}{6}\kappa'') d\xi, \notag
+W &\approx \int_{-\delta}^\delta \omega(\xi)\alpha \frac{\xi^2}{2}\kappa(\kappa + \frac{\xi^2}{6}\kappa'') d\xi\, , \notag
 \end{align}
 in a manner strongly suggesting an alternative bending resistance term.
 We can picture a bending resistance based on the bond length and proportional to the nonlocal curvature  \(\bar{\kappa}=(\kappa + \frac{\xi^2}{6}\kappa'')\), so that 
@@ -133,7 +133,7 @@ We can picture a bending resistance based on the bond length and proportional to
 \begin{align}
 \label{eq:NLbending}
 \bar{\kappa}&=(\kappa + \frac{\xi^2}{6}\kappa'') \implies  \\
-W &\approx \int_{-\delta}^\delta \omega(\xi)\alpha \frac{\xi^2}{2}\kappa\bar{\kappa}d\xi .\notag
+W &\approx \int_{-\delta}^\delta \omega(\xi)\alpha \frac{\xi^2}{2}\kappa\bar{\kappa}d\xi\,  .\notag
 \end{align}
 %  
 The same analysis can be taken further to obtain higher-order energy terms with even powers of \(\xi\) and even order derivatives of \(\kappa\). 
@@ -141,28 +141,28 @@ Not all of these higher-order terms can be separated into the product of a local
 
 Eringen's model for nonlocal elasticity in \cite{eringen1983differential} begins with a nonlocal modulus (denoted here as \(K(|\mathbf{x}'-\mathbf{x}|,\tau)\)) that relates the nonlocal stress \(\mathbf{t}\) at a point to the classical (local) stress \(\boldsymbol{\sigma}\) in the nearby material through the integral
 \begin{equation}
-\mathbf{t} = \int_\mathbf{V} K(|\mathbf{x}'-\mathbf{x}|,\tau)\boldsymbol{\sigma}(\mathbf{x}')dv(\mathbf{x}').\notag
+\mathbf{t} = \int_\mathbf{V} K(|\mathbf{x}'-\mathbf{x}|,\tau)\boldsymbol{\sigma}(\mathbf{x}')dv(\mathbf{x}')\, .\notag
 \end{equation}
 In the local limit these relationships take the form of higher-order gradients.
 Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\)
 \begin{align}
-\left(1-(\tau l)^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D},\notag
+\left(1-(\tau l)^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D}\, ,\notag
 \end{align}
 in which \((\tau l)\) is a scale-based material parameter.
 For well-behaved \(t_\text{1D}\) and \(\sigma_\text{1D}\) and small values of \(\sigma_\text{1D}''''\) and \((\tau l)^2\), we can see that this relationship could be reformulated as
 \begin{equation}
 \label{eq:NLstress}
-t_\text{1D}=\left(1+(\tau l)^2\frac{\partial^2}{\partial x^2}\right)\sigma_\text{1D}.\notag
+t_\text{1D}=\left(1+(\tau l)^2\frac{\partial^2}{\partial x^2}\right)\sigma_\text{1D}\, .\notag
 \end{equation}
 If we consider the results of the previous section and let \(dM = y\sigma dA\) and \(\sigma = Ey\kappa\), the contribution to moment resulting from Eringen's nonlocal elasticity in a fiber at \(y\)
 \begin{equation}
 \label{eq:EringenMoment}
-E y^2 (\kappa+(\tau l)^2\kappa''), \\
+E y^2 (\kappa+(\tau l)^2\kappa'')\, , \\
 \end{equation}
 and the resulting strain energy
 \begin{equation}
 \label{eq:EringenEnergy}
-\int_{-\frac{t}{2}}^{\frac{t}{2}} b(y) E \frac{y^2}{2} \kappa (\kappa+(\tau l)^2\kappa'')  dy,\notag
+\int_{-\frac{t}{2}}^{\frac{t}{2}} b(y) E \frac{y^2}{2} \kappa (\kappa+(\tau l)^2\kappa'')  dy\, ,\notag
 \end{equation}
 bear a striking resemblance to \cref{eq:NLbending}.
 In fact, by carefully choosing peridynamic parameter values, the results can be made identical.
@@ -172,7 +172,7 @@ For a rectangular beam of width \(b\) and thickness \(t\), choosing
 \end{equation}
 results in
 \begin{equation}
-W \approx E b \frac{t^3}{12} \frac{\kappa}{2}(\kappa+\tau^2 l^2 \kappa''), \notag
+W \approx E b \frac{t^3}{12} \frac{\kappa}{2}(\kappa+\tau^2 l^2 \kappa'')\, , \notag
 \end{equation}
 the same result for both models.
 
@@ -205,19 +205,24 @@ By comparing the formulations for the moments carried by the Euler beam in \cref
 \label{fig:BPBending}
 \end{figure}
 %
+\begin{subequations}
+\label{eq:MomentParellels}
 \begin{align}
-M_\text{E}&=\int_{-\frac{t}{2}}^{\frac{t}{2}} \sigma \; y \; dA &= \int_{-\frac{t}{2}}^{\frac{t}{2}} E \kappa \; y^2 \; b(y) dy\notag \\
+\label{eq:MomentEuler}
+M_\text{E}&=\int_{-\frac{t}{2}}^{\frac{t}{2}} \sigma \; y \; dA &= \int_{-\frac{t}{2}}^{\frac{t}{2}} E \kappa \; y^2 \; b(y) dy\, , \\
 %
-M_\text{PD}&=\int_{-\delta}^{\delta} \vstate{T}{}{\xi}\; \xi \; d\xi &\notag \\
-&= \int_{-\delta}^{\delta} \alpha \frac{\sin(\Delta\theta)}{|\xi|} \; \xi \; \omega(\xi) d\xi\: &\approx \int_{-\delta}^{\delta} \alpha \kappa |\xi| \; \omega(\xi) d\xi\notag
+\label{eq:MomentPD}
+M_\text{PD}&=\int_{-\delta}^{\delta} \vstate{T}{}{\xi}\; \xi \;, d\xi &\notag \\
+&= \int_{-\delta}^{\delta} \alpha \frac{\sin(\Delta\theta)}{|\xi|} \; \xi \; \omega(\xi) d\xi\: &\approx \int_{-\delta}^{\delta} \alpha \kappa |\xi| \; \omega(\xi) d\xi\,.
 \end{align}
+\end{subequations}
 %
 The term \(y\) is the distance from the beam's neutral axis and \(b(y)\) is the width of the beam at that distance from the neutral axis. 
-The similarity between classical and peridynamic moment formulations suggests a possible formulation for the weighting function:
+The similarity between classical and peridynamic moment formulations in \cref{eq:MomentEuler,eq:MomentPD} suggests a possible formulation for the weighting function:
 %
 \begin{equation}
 \label{eq:WeightFunction}
-\omega(\xi) = |\xi| b\left(y\right) \quad \text{at} \quad y=\frac{\xi}{\delta} \frac{t}{2}
+\omega(\xi) = |\xi| b\left(y\right) \quad \text{at} \quad y=\frac{\xi}{\delta} \frac{t}{2}, .
 \end{equation}
 %
 \begin{figure}[h]
@@ -236,7 +241,7 @@ The similarity between classical and peridynamic moment formulations suggests a 
 %
 This weight function analogizes the relative contributions of bond pairs of different lengths to the relative contributions of fibers at different distances from the centerline. 
 An example for a rectangular beam is illustrated in \cref{fig:WeightProfileUniform}.
-For an I beam with height \(h_\text{beam}\), width \(w_\text{beam}\), web height \(h_\text{web}\), and web width \(w_\text{web}\), substituting the beam profile
+For an I beam with height \(h_\text{beam}\), width \(w_\text{beam}\), web height \(h_\text{web}\), and web width \(w_\text{web}\), substituting the beam profile \todo{label cases}
 \begin{equation}
 b(y) = 
   \begin{dcases}
@@ -272,11 +277,11 @@ To model this behavior, consider a bond pair with similar behavior: for angular 
 %
 to determine the critical angle \(\theta_c\), we let the onset of plasticity in pairs of the longest bonds to coincide with the onset of plasticity in the fibers at the top and bottom surfaces of the classical beam. 
 For small curvatures \(\Delta\theta = \xi\kappa\implies\Delta\theta_c = \frac{2\delta\epsilon_c}{t}\). 
-For curvatures \(|\kappa| > \kappa_c=\frac{2\epsilon_c}{t}\), the radius within which bonds are in the elastic region is \(\delta_e = \delta \frac{\kappa_c}{\kappa}\), and parallels the distance from the beam centerline that fibers are in the elastic region \(y_e = \frac{t}{2} \frac{\kappa_c}{\kappa}\)
+For curvatures \(|\kappa| > \kappa_c=\frac{2\epsilon_c}{t}\), the radius within which bonds are in the elastic region is \(\delta_e = \delta \frac{\kappa_c}{\kappa}\), and parallels the distance from the beam centerline that fibers are in the elastic region \(y_e = \frac{t}{2} \frac{\kappa_c}{\kappa}\).
 %
 \begin{align}
-  M_\text{classical} &= 2 \int_{0}^{y_e}E b(y)y^2 \kappa dy +2 \int_{y_e}^{\frac{t}{2}}E b(y) \epsilon_c y dy\notag \\
-  M_\text{PD} &= 2 \int_{0}^{\delta_e}\alpha \omega(\xi) \xi^2 \kappa d\xi +2 \int_{\delta_e}^{\delta}\alpha \omega(\xi) \Delta\theta_c \xi d\xi \notag
+  M_\text{classical} &= 2 \int_{0}^{y_e}E b(y)y^2 \kappa dy +2 \int_{y_e}^{\frac{t}{2}}E b(y) \epsilon_c y dy\, ,\notag \\
+  M_\text{PD} &= 2 \int_{0}^{\delta_e}\alpha \omega(\xi) \xi^2 \kappa d\xi +2 \int_{\delta_e}^{\delta}\alpha \omega(\xi) \Delta\theta_c \xi d\xi \, .\notag
 \end{align}
 %
 Of course, as long as the force is independent of history, this model only represents a nonlinear elastic material. 
@@ -312,50 +317,50 @@ The next case we will analyze is the extension of the bond pair beam model to \c
 As with the beam model, we determine an appropriate choice of $\alpha$ so that our peridynamic model will have an equivalent strain energy density to a classical Kirckhoff plate in the \emph{local limit}.  We will begin with the assumptions from Kirckhoff plate theory: straight lines normal to the mid-surface remain both straight and normal to the deformed mid-surface, and the plate thickness does not change with deformation.  As with the Euler beam energy equivalence, we will start with the original assumptions from Kirchhoff-Love plate theory of small displacements and rotations, but they will not constrain the validity of the model for larger displacements and rotations.  For small vertical displacements we have
 %
 \begin{equation}
-    \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{w(\mathbf{x}+\boldsymbol{\xi})-2w(\mathbf{x})+w(\mathbf{x}-\boldsymbol{\xi})}{|\boldsymbol{\xi}|},
+    \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{w(\mathbf{x}+\boldsymbol{\xi})-2w(\mathbf{x})+w(\mathbf{x}-\boldsymbol{\xi})}{|\boldsymbol{\xi}|}\, ,
     \label{eq:platetheta}
 \end{equation}
 %
 where $w$ is the vertical displacement of material point.  Taking \(\boldsymbol{\xi}=\xi (\cos(\phi),\sin(\phi))\) in cartesian coordinates and momentarily assuming continuous displacements for the sake of comparison, we use a Taylor series to expand the right-hand-side of eq.~(\ref{eq:platetheta}) about \(\xi = 0\) 
 %
 \begin{equation}
-    \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{\xi}{2} \left(\cos^2(\phi) \kappa_1+\sin^2(\phi) \kappa_2+2\sin(\phi)\cos(\phi)\kappa_3\right)+\mathcal{O}(\xi^3)
+    \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{\xi}{2} \left(\cos^2(\phi) \kappa_1+\sin^2(\phi) \kappa_2+2\sin(\phi)\cos(\phi)\kappa_3\right)+\mathcal{O}(\xi^3)\, ,
     \label{eq:platetheta2}
 \end{equation}
 %
 with
 %
 \begin{equation}
-    \kappa_1=\frac{\partial^2 w}{\partial x_1^2}, \quad \kappa_2= \frac{\partial^2 w}{\partial x_2^2}, \quad \kappa_3=\frac{\partial^2 w}{\partial x_1\partial x_2}\notag
+    \kappa_1=\frac{\partial^2 w}{\partial x_1^2}, \quad \kappa_2= \frac{\partial^2 w}{\partial x_2^2}, \quad \kappa_3=\frac{\partial^2 w}{\partial x_1\partial x_2}\,.\notag
 \end{equation}
 %
-substituting eq.~(\ref{eq:platetheta2}) into the equation for the strain energy density of a single bond-pair,
+Substituting eq.~(\ref{eq:platetheta2}) into the equation for the strain energy density of a single bond-pair,
 %
 \begin{align}
 %\label{eq:continuousBeamw}
-    w &= \omega(\boldsymbol{\xi}) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) ) \right] \notag \\
+    w &= \omega(\boldsymbol{\xi}) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) ) \right]\, , \notag \\
     &= \omega(\boldsymbol{\xi}) \alpha\frac{\xi^2}{8}(\kappa_1^2\cos^4(\phi)+\kappa_2^2\sin^4(\phi)+2\kappa_1\kappa_2\cos^2(\phi)\sin^2(\phi)+4\kappa_3^2\cos^2(\phi)\sin^2(\phi) \notag \\
-    &+ 4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4).\notag
+    & \quad + 4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4)\, .\notag
 \end{align}
 %
 If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is \todo{is the order right here?  $\delta^6$???}
 %
 \begin{align}
-    W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi ,\notag \\
-    =& \alpha \frac{3\pi}{8} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)\int_{0}^\delta \omega(\xi)\xi^3{\rm d}\xi + \mathcal{O}(\delta^6).\notag 
+    W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi \, ,\notag \\
+    =& \alpha \frac{3\pi}{8} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)\int_{0}^\delta \omega(\xi)\xi^3{\rm d}\xi + \mathcal{O}(\delta^6)\, .\notag 
 \end{align}
 %
 Equating $W$ with the classical Kirchhoff plate strain-energy density, $\Omega$, and taking the limit as $\delta \to 0$ we can solve for $\alpha$
 %
 \begin{align}
-    \lim_{\delta \to 0}  W &= \Omega, \notag \\
-    \alpha \frac{3 \pi}{8} m \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)&= \left[ \frac{\mu h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_1+2(1-\nu)\kappa_3^2 \right) \right]_{\nu=1/3}, \notag \\
+    \lim_{\delta \to 0}  W &= \Omega\, , \notag \\
+    \alpha \frac{3 \pi}{8} m \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)&= \left[ \frac{\mu h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_1+2(1-\nu)\kappa_3^2 \right) \right]_{\nu=1/3}\, , \notag \\
 %    \nu = \frac{1}{3},\:\: \alpha &= \frac{8}{3 \pi m} \frac{\mu h^3}{12(1-\nu)},
-    \alpha &= \frac{2 \mu h^3}{3 m}, \\
+    \alpha &= \frac{2 \mu h^3}{3 m}\, , \\
     \text{with}\qquad \qquad \notag \\
 %    \label{eq:platealpha}
 %    m = \int_{0}^{\delta} \omega(\xi) \xi^3 {\rm d}\xi \notag.
-    m &= \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag,
+    m &= \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag \, ,
 \end{align}
 %
 where $\mu$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchhoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  Because $\alpha$ is inversely proportional to $m$, the energy does not change with varying choices for $\omega$ and $\delta$. It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
@@ -365,7 +370,7 @@ The bond-pair bending model does not resist in-plane stretching or shear deforma
 %
 \begin{equation}
     \label{eq:bondextension}
-    \vstate{T}{}{\boldsymbol{\xi}} =\beta\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|}
+    \vstate{T}{}{\boldsymbol{\xi}} =\beta\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|}\, .
 \end{equation}
 %
 By matching the energy of a 2D material in shear deformation, we can relate \(\beta\) to the shear modulus and thickness of the shell.  Following the example of \cite{silling2007peridynamic}, we begin with a 2D material under pure in-plane shear.  In Einstein notation, the strain energy of this material is
@@ -377,21 +382,23 @@ By matching the energy of a 2D material in shear deformation, we can relate \(\b
 %\end{align*}
 %
 \begin{align*}
-    W_\text{C} &= \mu \; h \; \epsilon_{ij}^d \epsilon_{ij}^d,  \\  \\
-    W_\text{PD} &= \frac{\beta}{2}\int_A \omega(\xi)\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)^2 \; {\rm d}A_{\boldsymbol{\xi}}, \\
-    &=\frac{\beta}{2}\int_A  \omega(\xi) \frac{\epsilon_{ij}\xi_i \xi_j }{|\boldsymbol{\xi}|} \frac{\epsilon_{kl} \xi_k \xi_l }{|\boldsymbol{\xi}|}\;{\rm d}A_{\boldsymbol{\xi}},\\
-    &=\frac{\beta}{2} \epsilon_{ij}^d \epsilon_{kl}^d \int_A \frac{ \omega(\xi)}{|\boldsymbol{\xi}|^2}\xi_i \xi_j \xi_k \xi_l \;{\rm d}A_{\boldsymbol{\xi}}.
+    W_\text{C} &= \mu \; h \; \epsilon_{ij}^d \epsilon_{ij}^d\, ,  \\  \\
+    W_\text{PD} &= \frac{\beta}{2}\int_A \omega(\xi)\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)^2 \; {\rm d}A_{\boldsymbol{\xi}}\, , \\
+    &=\frac{\beta}{2}\int_A  \omega(\xi) \frac{\epsilon_{ij}\xi_i \xi_j }{|\boldsymbol{\xi}|} \frac{\epsilon_{kl} \xi_k \xi_l }{|\boldsymbol{\xi}|}\;{\rm d}A_{\boldsymbol{\xi}}\, ,\\
+    &=\frac{\beta}{2} \epsilon_{ij}^d \epsilon_{kl}^d \int_A \frac{ \omega(\xi)}{|\boldsymbol{\xi}|^2}\xi_i \xi_j \xi_k \xi_l \;{\rm d}A_{\boldsymbol{\xi}}\, ,
 \end{align*}
 %
-where $\epsilon^d$ is the deviatoric strain tensor.  Now, to evaluate the integral we will exploit the symmetry properties. With $i, j, k, l = 1,2$. For a circular $\omega(\xi) = \omega(|\xi|)$, combinations of $\{i,j,k,l\}$ with an odd number of each index, such as $\{1,1,1,2\}$ or $\{2,1,2,2\}$, will result in odd powers of sine and cosine and integrate to 0.
+where $\epsilon^d$ is the deviatoric strain tensor.  
+To evaluate the integral we will exploit the symmetry properties. 
+With $i, j, k, l = 1,2$. For a circular $\omega(\xi) = \omega(|\xi|)$, combinations of $\{i,j,k,l\}$ with an odd number of each index, such as $\{1,1,1,2\}$ or $\{2,1,2,2\}$, will result in odd powers of sine and cosine and integrate to 0.
 %
 \begin{align*}
 %    m&=(\underline{\omega}\:\underline{x}) \bullet \underline{x}\\
-    m &= \int_A \omega(\xi)|\boldsymbol{\xi}|^2\; dA_{\boldsymbol{\xi}} \\
-    W^d_\text{PD} &= \frac{\beta \; m}{16}[3(\epsilon_{11}\epsilon_{11}+\epsilon_{22}\epsilon_{22})+(\epsilon_{11}\epsilon_{22}+\epsilon_{12}\epsilon_{12}+\epsilon_{12}\epsilon_{21}+\epsilon_{21}\epsilon_{12}+\epsilon_{21}\epsilon_{21}+\epsilon_{22}\epsilon_{11})]\\
-    &= \frac{\beta \; m}{16} \epsilon_{ij}^d \epsilon_{kl}^d (\delta_{ij}\delta_{kl}+\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\\
+    m &= \int_A \omega(\xi)|\boldsymbol{\xi}|^2\; dA_{\boldsymbol{\xi}}\, , \\
+    W^d_\text{PD} &= \frac{\beta \; m}{16}[3(\epsilon_{11}\epsilon_{11}+\epsilon_{22}\epsilon_{22})+(\epsilon_{11}\epsilon_{22}+\epsilon_{12}\epsilon_{12}+\epsilon_{12}\epsilon_{21}+\epsilon_{21}\epsilon_{12}+\epsilon_{21}\epsilon_{21}+\epsilon_{22}\epsilon_{11})]\, ,\\
+    &= \frac{\beta \; m}{16} \epsilon_{ij}^d \epsilon_{kl}^d (\delta_{ij}\delta_{kl}+\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\, ,\\
     &= \frac{\beta \; m}{8} \epsilon_{ij}^d \epsilon_{ij}^d \implies\\
-     \beta &= \frac{8 \; \mu\;h}{m}
+     \beta &= \frac{8 \; \mu\;h}{m}\, .
 \end{align*}
 %
 Having calibrated the bond-extension model to the shear modulus for a case of pure in-plane shear, applying a different uniform strain (such as might result from uniaxial tension) reveals the bond-based model to result in a one-parameter linearly-elastic model with Poisson's ratio \(\nu=\sfrac{1}{3}\).  
@@ -412,11 +419,11 @@ As the two sides are pulled apart, the magnitude of the extension force in each 
 Although many materials have Poisson ratios of \(\nu\approx \sfrac{1}{3}\), it is nonetheless desirable to extend the model to materials with arbitrary Poisson ratios.  For isotropic, linearly elastic models of solid materials, Silling et al.\ extended the peridynamic material model to arbitrary material parameters in \cite{silling2007peridynamic} by decomposing the deformation into isotropic and deviatoric components.  In the absence of plastic deformation, we need only find the difference between the strain energy of a deformed bond-based plate and the strain energy of an elastic plate with Poisson's ratio \(\nu \neq \sfrac{1}{3}\).  The difference is a function of the isotropic strain in two dimensions, \(\theta_{2D}\)
 %
 \begin{align}
-    W^\star &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 \notag \\
+    W^\star &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 \, ,\notag \\
 %    \theta_{2D} &= \frac{2}{m}\left(\underline{\omega x}\right)\bullet\underline{e} \notag \\
-    \theta_{2D} &= \frac{2}{m}\int_A \omega(\boldsymbol{\xi})|\boldsymbol{\xi}|(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|)\;dA_{\boldsymbol{\xi}} \notag \\
+    \theta_{2D} &= \frac{2}{m}\int_A \omega(\boldsymbol{\xi})|\boldsymbol{\xi}|(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|)\;dA_{\boldsymbol{\xi}}\, , \notag \\
 %    W_\text{total} &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 + \frac{4\;\mu\;h}{m}\left(\underline{\omega e}\right)\bullet\underline{e}\notag
-    W_\text{total} &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 + \frac{4\;\mu\;h}{m}\int_A \omega(\boldsymbol{\xi})(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|)^2\;dA_{\boldsymbol{\xi}}\notag
+    W_\text{total} &= \frac{\mu\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_{2D}^2 + \frac{4\;\mu\;h}{m}\int_A \omega(\boldsymbol{\xi})(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|)^2\;dA_{\boldsymbol{\xi}}\, .\notag
 \end{align}
 %
 This is to be expected because the bond-based model was calibrated to the shear strain energy, leaving discrepancies proportional to the isotropic strain energy that fall to 0 as Poisson's ratio approaches \(\nu = \sfrac{1}{3}\).
@@ -425,8 +432,8 @@ This decomposition method inspires a similar approach to our plate model. To per
 %
 \begin{align}
     W^\star=&\frac{\mu h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_2+2(1-\nu)\kappa_3^2 \right)\notag\\
-    &-\frac{\mu h^3}{12(1-\frac{1}{3})} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\nu\kappa_1\kappa_2+2(1-\frac{1}{3})\kappa_3^2 \right) \notag \\
-    W^\star=&2\mu \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2.\notag
+    &-\frac{\mu h^3}{12(1-\frac{1}{3})} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\nu\kappa_1\kappa_2+2(1-\frac{1}{3})\kappa_3^2 \right)\, , \notag \\
+    W^\star=&2\mu \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2\, .\notag
 \end{align}
 %
 The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a hemispherical bowl.  The remainder of the bending deformation, that which is left when the isotropic curvature is subtracted out, resembles a saddle. This remaining component is the deviatoric deformation, and both components are shown in \cref{fig:BendingDecomp}. Note that the orientation of the deviatoric bending will change depending on the particular curvature being decomposed, while the isotropic curvature will only change in scale.
@@ -442,28 +449,28 @@ The discrepancy in energy is proportional to the square of average curvature, \(
 A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.  For a single bond pair we can represent the curvature vector along the bond pair as 
 %
 \begin{equation}
-    \boldsymbol{\kappa} _{\hat{\boldsymbol{\xi}}} = \frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{|\boldsymbol{\xi}|^2}\notag
+    \boldsymbol{\kappa} _{\hat{\boldsymbol{\xi}}} = \frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{|\boldsymbol{\xi}|^2}\, .\notag
 \end{equation}
 %
 For large rotations, we can define an average curvature vector \(\bar{\boldsymbol{\kappa}}\).
 This leads us to model the average curvature as 
 %
 \begin{align}
-    \bar{\boldsymbol{\kappa}} &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi ;\notag \\
-    m &= \int_0^\delta \int_0^{2\pi}\omega(\xi)\xi {\rm d}\phi {\rm d}\xi. \notag
+    \bar{\boldsymbol{\kappa}} &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \, ,\notag \\
+    m &= \int_0^\delta \int_0^{2\pi}\omega(\xi)\xi {\rm d}\phi {\rm d}\xi\, . \notag
 \end{align}
 %
 The weighting function \(\omega(\xi)\) performs the same function as in the previous section.
 We can rewrite the energy discrepancy in terms of \(\bar{\boldsymbol{\kappa}}\).
 %
 \begin{equation}
-    W^\star=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
+    W^\star=2\mu\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2\, . \notag
 \end{equation}
 %
 We can take the Fr\'{e}chet derivative (details in \ref{sec:frechet}) to produce a correction force vector state
 %
 \begin{equation}
-    \vstate{T^\star}{}{\boldsymbol{\xi}}=\frac{8\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}},
+    \vstate{T^\star}{}{\boldsymbol{\xi}}=\frac{8\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}}\, ,
     \label{eq:pressureState}
 \end{equation}
 %
@@ -477,7 +484,7 @@ Discretizing the bond-pair model is primarily matter of exchanging integrals for
 %
 \begin{align}
 %
-w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right] \notag \\
+w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right]\, , \notag \\
 &\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\notag
 \end{align}
 %
@@ -497,14 +504,14 @@ Discretization of the original model results in the equation of motion
 \end{align}
 with
 \begin{align}
-\mathbf{p}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x});\notag\\
-\mathbf{q}_i &= -\boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}-\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x});\notag\\
-\mathbf{r}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+2\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i).\notag
+\mathbf{p}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}), ,\notag\\
+\mathbf{q}_i &= -\boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}-\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}), ,\notag\\
+\mathbf{r}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+2\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i), ,\notag
 \end{align}
 and for small displacements and rotations in a uniform beam,
 \begin{align}
 \rho(\mathbf{x})\ddot{v}(\mathbf{x}) = &f(\mathbf{x})\notag \\
-+&\alpha \sum_i 2\omega(\xi_i)\left(\frac{v(\mathbf{x}-2 \boldsymbol{\xi}_i)-4v(\mathbf{x}- \boldsymbol{\xi}_i)+6v(\mathbf{x})-4v(\mathbf{x}+ \boldsymbol{\xi}_i)+v(\mathbf{x}+2 \boldsymbol{\xi}_i)}{ \boldsymbol{\xi}_i^2}\right) \notag
++&\alpha \sum_i 2\omega(\xi_i)\left(\frac{v(\mathbf{x}-2 \boldsymbol{\xi}_i)-4v(\mathbf{x}- \boldsymbol{\xi}_i)+6v(\mathbf{x})-4v(\mathbf{x}+ \boldsymbol{\xi}_i)+v(\mathbf{x}+2 \boldsymbol{\xi}_i)}{ \boldsymbol{\xi}_i^2}\right)\, . \notag
 \end{align}
 It is worth noting the similarity between this expression and a finite-difference fourth derivative of displacement, a result expected from Euler beam theory.
 This discretization requires that nodes be evenly spaced along the entire beam, otherwise the displacement \(v(\mathbf{x}- \boldsymbol{\xi}_i)\) is ill-defined. 
@@ -553,10 +560,10 @@ Discretization of the 1-parameter bending model results in the same equation of 
 Implementing the 2-parameter model requires finding the isotropic curvature at each point.
 %
 \begin{align*}
-    \bar{\boldsymbol{\kappa}}(\mathbf{x}) &= \frac{1}{m} \sum_i \omega(\boldsymbol{\xi}_i)\frac{\mathbf{p}_i +\mathbf{q}_i }{\boldsymbol{\xi}_i^2};\notag \\
-    m(\mathbf{x})  &= \sum_i \omega(\boldsymbol{\xi}_i); \notag \\
-    \alpha^\text{iso}(\mathbf{x}) &= \frac{4\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}(\Delta x)^2;\\
-    f^\text{iso}(\mathbf{x}) &= \sum_j \left\{\left[\alpha^\text{iso}(\mathbf{x})\bar{\boldsymbol{\kappa}}(\mathbf{x})-\alpha^\text{iso}(\mathbf{x}+\boldsymbol{\xi}_j)\bar{\boldsymbol{\kappa}}(\mathbf{x}+\boldsymbol{\xi}_j) \right] \frac{\omega(\boldsymbol{\xi}_j)}{\boldsymbol{\xi}_j^2} \right\}
+    \bar{\boldsymbol{\kappa}}(\mathbf{x}) &= \frac{1}{m} \sum_i \omega(\boldsymbol{\xi}_i)\frac{\mathbf{p}_i +\mathbf{q}_i }{\boldsymbol{\xi}_i^2}\, ,\notag \\
+    m(\mathbf{x})  &= \sum_i \omega(\boldsymbol{\xi}_i)\, , \notag \\
+    \alpha^\text{iso}(\mathbf{x}) &= \frac{4\mu}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}(\Delta x)^2\, ,\\
+    f^\text{iso}(\mathbf{x}) &= \sum_j \left\{\left[\alpha^\text{iso}(\mathbf{x})\bar{\boldsymbol{\kappa}}(\mathbf{x})-\alpha^\text{iso}(\mathbf{x}+\boldsymbol{\xi}_j)\bar{\boldsymbol{\kappa}}(\mathbf{x}+\boldsymbol{\xi}_j) \right] \frac{\omega(\boldsymbol{\xi}_j)}{\boldsymbol{\xi}_j^2} \right\}\, .
 \end{align*}
 %
 As with the discretized beam, the discretization of the bond-pair plate (\cref{fig:discretePlate}) must be absolutely regular. 
@@ -708,20 +715,20 @@ For an irregular straight beam, determining the values of properties at virtual 
 To determine the value of a property at point $C$, we used a weighted average of the values of that property at the nearest two real points, $A$ and $B$.
 The weight value $w_B$ of $B$ is determined to make a linear interpolation (or extrapolation) using the $x$-coordinates of the nearest two real points.
 \begin{align}
-W_B &= -\frac{C_x-A_x}{A_x-B_x}\notag\\
-W_A &= 1-w_B\notag
+W_B &= -\frac{C_x-A_x}{A_x-B_x}\, ,\notag\\
+W_A &= 1-w_B\, .\notag
 \end{align}
 The problem becomes a little more complicated for curved beams, but we can tackle it by projecting the virtual point onto the line between the two nearest real points.
 The weighting function then becomes
 \begin{align}
-\overline{AC}' &= \frac{\overline{AB}}{|\overline{AB}|}\left(\frac{\overline{AB}}{|\overline{AB}|} \cdot \overline{AC}\right)\notag\\
-\overline{BC}' &= \frac{\overline{BA}}{|\overline{BA}|}\left(\frac{\overline{BA}}{|\overline{BA}|}\cdot\overline{BC}\right)\notag\\
+\overline{AC}' &= \frac{\overline{AB}}{|\overline{AB}|}\left(\frac{\overline{AB}}{|\overline{AB}|} \cdot \overline{AC}\right)\, ,\notag\\
+\overline{BC}' &= \frac{\overline{BA}}{|\overline{BA}|}\left(\frac{\overline{BA}}{|\overline{BA}|}\cdot\overline{BC}\right)\, ,\notag\\
 W_B &= 
   \begin{dcases}
     \phantom{-}\frac{|\overline{AC}'|}{|\overline{AB}|} & \text{if } |\overline{BC}'| \leq |\overline{AB}|\\
     -\frac{|\overline{AC}'|}{|\overline{AB}|} &\text{otherwise}
   \end{dcases}\notag\\
-W_A &= 1-W_B\notag
+W_A &= 1-W_B \, .\notag
 \end{align}
 
 Determining properties at virtual points is more difficult in plate and shell models.
@@ -787,14 +794,14 @@ To compute the weight of node A in the interpolation of properties at virtual no
 %
 \begin{equation}
 \label{eq:BarycentricArea}
-\hat{W}_A = \frac{B-X}{2}\bullet \left[BC \times \left(\frac{BC \times BA}{|BC \times BA|}\right)\right]
+\hat{W}_A = \frac{B-X}{2}\bullet \left[BC \times \left(\frac{BC \times BA}{|BC \times BA|}\right)\right]\, .
 \end{equation}
 %
 After finding $\hat{W}_B$ and $\hat{W}_C$ in similar fashion,
 %
 \begin{equation}
 \label{eq:BarycentricWeight}
-W_A = \frac{\hat{W}_A }{\hat{W}_A + \hat{W}_B + \hat{W}_C}
+W_A = \frac{\hat{W}_A }{\hat{W}_A + \hat{W}_B + \hat{W}_C}\, .
 \end{equation}
 %
 If the projection of X onto the plane defined by A, B, and C lies outside the triangle ABC,  one or two of $W_A$, $W_B$ and $W_C$ will be negative, though they will still sum to 1.
@@ -805,13 +812,13 @@ The bond pair coefficients at point $\mathbf{x}$ of a beam in bending (\cref{eq:
 %
 \begin{align}
 \label{eq:discreteBeamw2}
-\alpha_i &= \frac{c\; l(\mathbf{x})\;l(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 l(\mathbf{x}+\boldsymbol{\xi}_i) \notag
+\alpha_i &= \frac{c\; l(\mathbf{x})\;l(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 l(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
 \end{align}
 with $l(\mathbf{x})$ and $l(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the lengths of beam represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
 Similarly, the plate coefficients from \cref{eq:discreteplate} become
 %
 \begin{align}
-    \alpha_i &= \frac{c\; A(\mathbf{x})A(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= \frac{\mu}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2A(\mathbf{x}+\boldsymbol{\xi}_i) \notag
+    \alpha_i &= \frac{c\; A(\mathbf{x})A(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= \frac{\mu}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2A(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
 \end{align}
 %
 with $A(\mathbf{x})$ and $A(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the areas represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
@@ -846,7 +853,7 @@ Instead, moments may be applied as force couples to the bonds attached to the pe
 For example, if we want to apply a moment $M$ at point $\mathbf{x}$, whose $n$ neighboring points $\mathbf{x}'_i$ are connected to $\mathbf{x}$ in the undeformed configuration by bonds $\boldsymbol{\xi}_i$.
 For an evenly discretized beam, we may distribute the moments by
 \begin{equation}
-\mathbf{M}_i = \mathbf{M} \frac{\omega(\boldsymbol{\xi}_i)}{\sum\limits_{j=1}^n \omega(\boldsymbol{\xi}_j)}\notag
+\mathbf{M}_i = \mathbf{M} \frac{\omega(\boldsymbol{\xi}_i)}{\sum\limits_{j=1}^n \omega(\boldsymbol{\xi}_j)}\, ,\notag
 \end{equation}
 and apply them to the corresponding bonds by adding forces
 \begin{equation}

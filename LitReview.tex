@@ -1,4 +1,5 @@
 \chapter{Literature Review}
+\label{ch:LitReview}
 \section{PDE-Based Failure Modeling}
 Because material failure is an important part of many problems, there are several computational methods that attempt to simulate progressing material failure. 
 Most of these methods start with the partial differential equations for conservation of momentum found in classical continuum mechanics, then extend those models to account for failure situations that are poorly modeled by the classical equations.
@@ -19,7 +20,7 @@ The discontinuous function in \cref{fig:CrackEnrich} will look familiar.
 As the transverse displacement field around the tip of a Mode I crack,
 \begin{equation}
 \label{eq:modeIdisp}
-v(x,y)=\frac{K_I}{2\mu}\sqrt{\frac{r}{2\mu}}\cos\left(\frac{\theta}{2}\right)\left[\kappa-1+2\sin^2\left(\frac{\theta}{2}\right)\right],
+v(x,y)=\frac{K_I}{2\mu}\sqrt{\frac{r}{2\mu}}\cos\left(\frac{\theta}{2}\right)\left[\kappa-1+2\sin^2\left(\frac{\theta}{2}\right)\right]\, ,
 \end{equation}
 \cref{eq:modeIdisp} and the other crack-tip displacement fields are a natural choice of basis functions.
 Longer cracks would require remeshing, but at the root of the crack rather than the tip.
@@ -122,13 +123,14 @@ By abandoning the use of displacement derivatives, peridynamics offers an altern
 \section{Peridynamic Modeling}
 The term \textit{peridynamic} was coined by Silling to describe the new formulation of continuum mechanics he developed in \cite{silling2000reformulation}.
 From the Greek roots \textit{peri} and \textit{dyna} meaning \textit{near} and \textit{force} respectively, it alludes to the nonlocal force exerted by nearby points.
-In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, the peridynamic model casts material behavior at a point as an \textit{integral}\todo{Note Eringen's stress is an integral function of strain. Might be worth being specific.} equation of the surrounding displacement rather than the classical \textit{differential} equation.
+%In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, the peridynamic model casts material behavior at a point as an \textit{integral} \todo{Note Eringen's stress is an integral function of strain. Might be worth being specific.} equation of the surrounding displacement rather than the classical \textit{differential} equation.
+In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, which formulate behavior as an integral function of strain (itself a spatial derivative of displacement), the peridynamic model casts material behavior at a point as an \textit{integral equation of the surrounding displacement} rather than the classical \textit{differential} equation.
 Because peridynamic models do not include spatial displacement derivatives, discontinuous displacements can arise naturally and can be analyzed without special heuristics \todo{or even discretization}. 
 In classical continuum mechanics, linear momentum is conserved according to the local  \cref{eq:ClassicCoPV},
 %
 \begin{equation}
 \label{eq:ClassicCoPV}
-\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \nabla \cdot \mathbf{P}(\mathbf{x}) + \mathbf{b}(\mathbf{x})
+\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \nabla \cdot \mathbf{P}(\mathbf{x}) + \mathbf{b}(\mathbf{x})\, ,
 \end{equation}
 %
 in which $\rho$ is the density, $\ddot{\mathbf{u}}$ is the second time derivative of displacement , $\mathbf{P}$ is the transpose of the First Piola Kirchhoff stress tensor, and $\mathbf{b}$ is the body force density, all of which are functions of position $\mathbf{x}$ and of time. 
@@ -138,7 +140,7 @@ Strongly nonlocal models (including peridynamics) replace the divergence-of-stre
 %
 \begin{equation}
 \label{eq:PDCoPV}
-\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbf{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b}(\mathbf{x}),
+\rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbf{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b}(\mathbf{x})\, ,
 \end{equation}
 %
 so that, instead of the divergence of stress, we have the integral of a ``force" function $\mathbf{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$. 
@@ -154,15 +156,16 @@ The points within \(\delta\) of a point \(\mathbf{x}\) are the \textit{neighborh
 \end{figure}
 % 
 By including the behavior of nearby material, these models introduce an inherent length scale to the model. 
-This length scale may be determined by material properties \todo{it should be, or is theoretical understood as such} or by \todo{sometimes limited in choice by computational considerations} computational demands.
+This length scale is theoretically determined by material properties, though choice of length scale is sometimes limited by computational demands.
 
 Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.
+The form of the simplest such function is a peridynamic ``bond'' between two points that is modeled by a pairwise force function.
 While the simplest force functions recreate a one-parameter linear elastic solid material, other force functions can be used to model a wide variety of material behaviors, some of which will be outlined here.
 Most simulation of material behavior uses an equation of motion reformulated for a discretized model.
-When discretized \todo{The typical discretization is a mesh-free\ldots}, peridynamics is typically a mesh-free numerical method in which there are no geometrical connectivities between various nodes.
+The typical discretization is a mesh-free numerical method in which there are no geometrical connectivities between various nodes.
 
 A force function can be restricted to being pairwise (depending solely on the displacement of the two points \(\mathbf{x}\) and \(\mathbf{q}\)), and still model complex and varied behavior.
-By including a damage parameter that sets the force contribution of ``damaged'' bonds \todo{What is a bond?} to \(0\), Silling and Askari\cite{silling2005meshfree} were able to model a brittle material with natural crack formation, propagation, and branching.
+By including a damage parameter that sets the force contribution of ``damaged'' bonds to \(0\), Silling and Askari\cite{silling2005meshfree} were able to model a brittle material with natural crack formation, propagation, and branching.
 Other examples of damage propagation include impacts against brittle structures as in \cref{fig:PDimpact} modeled by Demmie and Silling\cite{demmie2007approach} and fracturing of thermally-stressed glass modeled by Kilic and Madenci\cite{kilic2009prediction}. 
 %
 \begin{figure}[h]
@@ -203,7 +206,7 @@ In 3D, Weckner constructed Green's functions for an infinite peridynamic solid i
 All of this work was done with peridynamic models limited to pairwise force functions.
 
 Other than Gerstle's aforementioned micropolar peridynamic model, the pairwise force function limits 3D solid materials to a Poisson ratio of  \(\nu=\sfrac{1}{4}\). 
-To model additional material behavior, Silling et al. reinvented \todo{I'd say ``generalized''.  The state-based theory was outlined in the last section of the original paper.} the underlying peridynamic concept of bonds and forces and introduced state-based peridynamic models in \cite{silling2007peridynamic}.
+To model additional material behavior, Silling et al. generalized the underlying peridynamic concept of bonds and forces and introduced state-based peridynamic models in \cite{silling2007peridynamic}.
 By freeing the force function from the pairwise restriction, state-based models allow the force relationship between two points to depend on the collective behavior of all nearby material.
 Using the concept of a deformation vector-state allows for the construction of correspondence models that can recreate any classical constitutive model.
 These correspondence models use the deformation state to approximate the deformation gradient tensor, then use the deformation gradient tensor to calculate force contributions.

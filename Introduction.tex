@@ -14,17 +14,18 @@ For these reasons, accurate and reliable models for the progression of failure f
 
 \section{Scope}
 
-This dissertation presents a peridynamic \todo{You have not introduced the word ``peridynamic'' yet, you might just say nonlocal.} equivalent to an Euler-Bernoulli beam, along with a methodology for representing non-uniform cross-sections, plastic behavior, and failure.
-Unlike many continuum beam theories that derive new equations of motion (such as fourth order PDE's) from the three-dimensional elastic constitutive model \todo{Is this really how the equations are derived?  Or are they introduced independently of the three-dimensional constitutive model?}, the new model is not derived from prior ordinary peridynamic models based on bond extension, but is a material model that directly resists bending deformation while maintaining the same conservation of momentum equation as the three-dimensional model.\todo{i.e., the resistance to bending is introduced at the constitutive model level.}
+This dissertation presents a nonlocal equivalent to an Euler-Bernoulli beam, along with a methodology for representing non-uniform cross-sections, plastic behavior, and failure.
+Unlike many continuum beam theories that derive new equations of motion (such as fourth order PDE's) from the three-dimensional elastic constitutive model \todo{Is this really how the equations are derived?  Or are they introduced independently of the three-dimensional constitutive model?}, the new model is not derived from prior ordinary peridynamic models based on bond extension, but is a material model that directly resists bending deformation while maintaining the same conservation of momentum equation as the three-dimensional model.
+In other words, bending is a fundamental mode of deformation to this model, which resists it at the constitutive level.
 This beam model is demonstrated to be equivalent to Eringen's nonlocal elasticity for small peridynamic horizons.
 The one-dimensional beam model is then extended to two dimensions to model the bending behavior of flat Kirchhoffoff-Love plates.
 The resulting 1-parameter model is constrained to a Poisson ratio \(\nu=\sfrac{1}{3}\).  
 By introducing an \emph{isotropic bending-state}, the model is extended to any valid Poisson ratio.  
-The model is combined with an extension-based model to capture the effect of in-plane forces on bending behavior, resulting in a flat shell model.
-Introducing the concept of virtual points \todo{In the discretization?  Does a continuum theory need virtual points?} results in a model that is more practically applicable and able to model non-uniform distributions of peridynamic points, as might result from a meshing software.
+The model is combined with an extension-based model to capture the effect of in-plane forces on bending behavior, resulting in a flat shell model that is easily discretized to model simple shapes.
+Introducing the concept of virtual points results in a discretized model that is more practically applicable and able to model non-uniform distributions of peridynamic points, as might result from a meshing software.
 Using virtual points also allows the simulation of curved shells, greatly expanding the class of problems that can be approached with this model.
 Because many analyses of interest are partly or wholly comprised of these types of features, their development is an important addition to the capabilities of peridynamic analysis.
 
 \section{Outline}
 
-The second section  of this dissertation reviews the literature for material modeling, focussing on the most prominent PDE-based material failure modeling techniques, alternative nonlocal models, peridynamics, and thin feature modeling. Section 3  provides necessary background information on peridynamic models. Section 4  develops the new bond-pair and bond-multiple peridynamic bending models. Section 5 shows the results of those models for some simple comparison cases. Conclusions and avenues for future development are laid out in Section 6. \todo{I think all the ``Section'' labels should be ``Chapter''.}
+\Cref{ch:LitReview} of this dissertation reviews the literature for material modeling, focussing on the most prominent PDE-based material failure modeling techniques, alternative nonlocal models, peridynamics, and thin feature modeling. Section 3  provides necessary background information on peridynamic models. Section 4  develops the new bond-pair and bond-multiple peridynamic bending models. Section 5 shows the results of those models for some simple comparison cases. Conclusions and avenues for future development are laid out in Section 6. \todo{I think all the ``Section'' labels should be ``Chapter''.}
