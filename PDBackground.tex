@@ -6,7 +6,7 @@ Introduced by Silling et al.\ in 2007~\cite{silling2007peridynamic}, peridynamic
 As is appropriate for a theory based on force-carrying bonds, states often operate on vectors.
 The most common states are scalar-states and vector-states which are scalar and vector valued, respectively.
 As a matter of convention, scalar states are usually denoted by lowercase letters (e.g. $\sstate{a}{}{}$, $\sstate{b}{}{}$), while vector states are denoted by uppercase letters (e.g. $\vstate{A}{}{}$, $\vstate{B}{}{}$).
-A state that operates on vectors and is itself vector valued naturally brings to mind a tensor such as the deformation gradient;
+A state that operates on vectors and is itself vector valued naturally brings to mind a \todo{two-point} tensor such as the deformation gradient;
 unlike a second order tensor, which can only map vectors linearly to other vectors, vector-states can produce nonlinear, discontinuous, or even noninvertable mappings.  
 This difference is illustrated in \cref{fig:VectorState}.
 %
@@ -22,7 +22,7 @@ The mathematical properties of states and several related operators are defined 
 Important properties of states are magnitude and direction, while important operations include the addition and composition of states, inner and tensor products, and the Fr\'{e}chet derivative of a function with respect to a state.
 While some of these operations are intuitive, the nomenclature may not be.
 Refer to \cref{table:StateOperations} for the notation of common state operations.
-For a fuller definition and examples of the Fr\'echet derivative, see \cref{sec:frechet}.
+For a fuller \todo{more rigorous} definition and examples of the Fr\'echet derivative, see \cref{sec:frechet}.
 
 \begin{table}
 \centering
@@ -86,7 +86,7 @@ This is particularly useful when trying to apply peridynamic models to real-worl
 \end{figure}
 %
 If the force state $\vstate{T}{}{}$ is always in the same direction as the deformation state $\vstate{Y}{}{}$, then the force exerted by a ``bond'' between points is in the same direction as the deformed bond, and the model is called \textit{ordinary}.  
-Ordinary state-based can reproduce linear elastic materials with arbitrary Poisson ratios by separating dilatory and deviatoric deformations and the energy corresponding to each.
+Ordinary state-based models can reproduce linear elastic materials with arbitrary Poisson ratios by separating dilatory and deviatoric deformations and the energy corresponding to each.
 %\begin{equation}
 %\label{eq:wLPS}
 %  \hat{W} ( \mathbf{\underline{Y}} ) = \frac{1}{2} \left( k - \frac{\alpha m}{9} \right) \vartheta^2+\frac{\alpha}{2} \int_{\mathcal{H}} \omega ( | \boldsymbol{\xi} | ) \underline{e}^2 \langle \boldsymbol{\xi} \rangle dV_{\boldsymbol{\xi}}
@@ -95,7 +95,7 @@ They can also model a variety of elastic and inelastic behaviors.
 
 There is no requirement that force states be in the same direction as their associated deformation states, and models in which they are not in the same direction are called \textit{nonordinary}.
 Some additional care is needed to ensure that angular momentum is conserved in a \textit{nonordinary} state-based model, but they are still perfectly legitimate.
-Silling et al.\ demonstrate the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  
+Silling et al.\ demonstrates the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  
 Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} show that some correspondence models, which approximate the deformation gradient and use it to calculate bond forces, result in non-ordinary state-based constitutive models for finite deformations.
 Bond-based, ordinary state-based, and nonordinary state-based models are illustrated in \cref{fig:PDmodelTypes}.
 %
@@ -107,6 +107,7 @@ Bond-based, ordinary state-based, and nonordinary state-based models are illustr
 \end{figure}
 
 It should be clear that many of the concepts of classical continuum mechanics have direct equivalents in peridynamic modeling.
+\todo{I think ``First Law'' should be ``Stress Power''}
 \Cref{table:PDconcepts} lays out some of the simplest parallels between classical and peridynamic formulations.
 
 \begin{table}
@@ -115,9 +116,9 @@ It should be clear that many of the concepts of classical continuum mechanics ha
 Concept & \textrm{Classical} & \textrm{Peridynamic} \\ \hline\hline
 Kinematics & \mathbf{F} & \tvstate{Y}{}{} \\ \hline \noalign{\smallskip}
 Linear Momentum & \nabla \cdot \boldsymbol{\sigma} & \int_\Omega (\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}-\vstate{T}{\mathbf{q}}{\mathbf{x}-\mathbf{q}}) dV_\mathbf{q} \\    \noalign{\smallskip} \hline \noalign{\smallskip}
-Angular Momentum &\boldsymbol{\sigma} - \boldsymbol{\sigma}^T  & \int_\Omega \vstate{Y}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}\times\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}dV_\mathbf{q}\\   \noalign{\smallskip} \hline
+Angular Momentum &\boldsymbol{\sigma} = \boldsymbol{\sigma}^T  & \int_\Omega \vstate{Y}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}\times\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}dV_\mathbf{q} = 0\\   \noalign{\smallskip} \hline
 Constitutive Law & \boldsymbol{\sigma} = \boldsymbol{\sigma}(\boldsymbol{\epsilon}) &\tvstate{T}{}{}=\tvstate{T}{}{}(\tvstate{Y}{}{}) \\  \hline
-First Law & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
+First Law  & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
 \end{tabular}
 \caption{Peridynamic Equivalents of Classical Concepts}
 \label{table:PDconcepts}
@@ -125,7 +126,7 @@ First Law & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bul
 
 \section{Bond-based peridynamics}
 %
-If the force state \(\vstate{T}{\mathbf{x}}{\boldsymbol{\xi}} \) depends only on the deformation state \(\vstate{Y}{\mathbf{x}}{\boldsymbol{\xi}} \) of the same vector, then the model is called \textit{bond-based}.
+If the force state \(\vstate{T}{\mathbf{x}}{\boldsymbol{\xi}} \) depends only on the deformation state \(\vstate{Y}{\mathbf{x}}{\boldsymbol{\xi}} \) \todo{This could be stated more simply by saying ``\ldots depends only on the deformed positions of the points at the end of a bond.''} of the same vector, then the model is called \textit{bond-based}.
 In \textit{bond-based} peridynamic models, each pair of points is treated separately, without consideration of the behavior of other points. 
 This makes bond-based models much simpler computationally than general state-based models, and reduces the equation of motion to
 %
@@ -144,7 +145,7 @@ To conserve momentum in a bond-based model, it is only necessary that $\mathbf{f
 \end{equation}
 %
 i.e. the forces exerted at the opposite ends of the bond between $\mathbf{x}$ and $\mathbf{q}$ must be equal and opposite.
-The first peridynamic models were all bond-based, and provide useful insight despite their limitations.
+The first peridynamic models were all bond-based, and provide useful insight \todo{into what?  you might say useful insight into many complex material failure phenomenon despite\ldots} despite their limitations.
 %
 \begin{figure}[h]
   \centering
@@ -171,14 +172,14 @@ with weighting function $\omega$, spring constant $c$, and the stretch $s$ defin
 s = |(\mathbf{q}+\mathbf{u}(\mathbf{q}))-(\mathbf{x}+\mathbf{u}(\mathbf{x}))| - |\mathbf{q}-\mathbf{x}|.
 \end{equation}
 %
-For a small deformation gradient $\mathbf{F}$, the stretch of bond $\boldsymbol{\xi}=\mathbf{q}-\mathbf{x}$ is
+For a small deformation gradient $\mathbf{F}$ \todo{I would say for small uniform displacements, i.e. $\nabla \mathbf{u} << 1$}, the stretch of bond $\boldsymbol{\xi}=\mathbf{q}-\mathbf{x}$ is
 %
 \begin{equation*}
 s = |\mathbf{F}\boldsymbol{\xi}|-|\boldsymbol{\xi}| = \frac{\epsilon_{ij}\xi_i\xi_j}{|\boldsymbol{\xi}|}
 \end{equation*}
 %
 For reasons that will become clear in the discussion of the next model, we calibrate the spring constant $c$ following the approach of \cite{silling2007peridynamic}, by comparing the energy to that of a classical solid under purely deviatoric deformation, so that $\epsilon_{ij} = \epsilon_{ij}^d$.
-The energy of this spring will be in units of Energy per Volume-squared, so that integration over all the springs at a point gives Energy per unit Volume.
+The energy of this spring will be in units of energy per volume squared, so that integration over all the springs at a point gives energy per unit volume.
 %
 \begin{align}
 \label{eq:deviatoricStrainEnergy}
@@ -201,10 +202,10 @@ For the remaining configurations,
 \end{equation}
 %
 Also, any combination with $i=j$ or $k=l$ results in terms $\epsilon_{ii}^d$ or  $\epsilon_{kk}^d$, which will sum to 0 in deviatoric deformation. 
-This leaves only configurations such as $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$.
+This leaves only configurations such as $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$ \todo{What about $\delta_{ij}\delta{kl}$?}.
 %
 \begin{align}
-W&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr (\delta_{ik}\delta_{jl}+\delta_{il}\delta{jk})\notag\\
+W&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr (\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\notag\\
 &= c \;\epsilon_{ij}^d\epsilon_{ij}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr \notag\\
 &= \frac{c\; \epsilon_{ij}^d\epsilon_{ij}^d }{15}m\notag
 \end{align}
@@ -244,7 +245,7 @@ A nearly identical analysis can be performed on a simpler 2D version of the same
 Applying a purely deviatoric in-plane shear to such a model, and comparing the resulting energy to that of a classical plate with thickness $t$ gives us
 %
 \begin{equation}
-c = \frac{8\;\mu\;t}{m_\textrm{2D}};\qquad m_\textrm{2D} =\int_\mathcal{H_\textrm{2D}}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2.  \notag
+    c = \frac{8\;\mu\;t}{m_\textrm{2D}};\qquad m_\textrm{2D} =\int_\mathcal{H_\textrm{2D}}\omega(|\boldsymbol{\xi}|)|\boldsymbol{\xi}|^2 dV_{\boldsymbol{\xi}}.  \notag
 \end{equation}
 %
 
@@ -258,7 +259,7 @@ Classical material models dealing with metal plasticity often separate deformati
 Similarly, the extension state can be decomposed into isotropic and deviatoric extension states. Using $m$ from \cref{eq:weighted} as above for normalization the dilation state is defined
 %
 \begin{equation}
-\theta = \frac{3}{m} \int_\mathcal{H} \omega(\boldsymbol{\xi}) |\boldsymbol{\xi}| \underline{e}.
+    \theta = \frac{3}{m} \int_\mathcal{H} \omega(\boldsymbol{\xi}) |\boldsymbol{\xi}| \underline{e} dV_{\boldsymbol{\xi}}.
 \end{equation}
 %
 The isotropic and deviatoric extension states are defined in turn
@@ -273,7 +274,7 @@ If the energy associated with dilation is set to
 W^i = \frac{k\;\theta^2}{2},\notag
 \end{equation}
 %
-then the corresponding force state and peridynamic pressure are
+then the corresponding force state and peridynamic pressure are \todo{did you mean to have $\underline{t}^i$ here?  Also, why even define the peridynamic pressure if you don't use it?  I would use it in the constiutive model or omit it.}
 %
 \begin{equation}
 \underline{t} = \frac{3k\theta}{m}\omega(\boldsymbol{\xi})|\boldsymbol{\xi}|,\qquad p=-k\theta\notag
@@ -288,7 +289,7 @@ The two can be combined for \cref{eq:lps}, a force state that clearly indicates 
 \end{equation}
 %
 A quick examination shows that, in the case that the dilation $\theta$ is not constant, the force at either end of a bond will not satisfy \cref{eq:PDbondF}.
-Thus such a model is not possible in a bond-based framework without significant modification.
+Thus such a model is not possible in a bond-based framework without significant modification. \todo{If your looking to add a few pages the dissertation, you could include the recent work by Tupek on non-linear bond-strain models.  Just a thought.}
 
 \subsection{Correspondence Models}
 One way to create a peridynamic material model is to start from a material model in classical dynamics.
@@ -321,4 +322,4 @@ The resulting force state is calculated from the stress according to
 For homogenous deformations, the result is a peridynamic model that exactly reproduces the classical model without ever taking a derivative.
 For problems with very inhomogenous (on the scale of the peridynamic horizon) deformations, the peridynamic model will exhibit scale effects not seen in the classical model, acting to smooth out the effect of short-scale deformations.
 For discontinuous deformations, the classical model cannot be evaluated at all, but the peridynamic correspondence model will have no such problem.
-It may be necessary however to revisit the choice of model or implement some damage condition.
+It may be necessary however to revisit the choice of model or implement some damage condition. \todo{The transition to the next chapter is a bit abrupt, you might consider adding a paragraph that explains how the models are different from the model you are going to develop in the next chapter.}
