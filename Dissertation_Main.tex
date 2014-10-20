@@ -35,6 +35,9 @@
 %\usepackage{autonum}
 \usepackage{longtable}
 
+%todonotes, when disabled, don't forget to set margins back to correct ones in UTSA style file
+\usepackage[color=red!40, textsize=scriptsize, textwidth=1.25in]{todonotes}
+
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \graphicspath{ {../} }
@@ -89,12 +92,12 @@
 
 
 %\includeonly{FrontMatter
-%%,Introduction
-%%,LitReview
+%,Introduction
+%,LitReview
 %,PDBackground
-%%,ClassicBackground
-%%,ModelDev
-%%,Results
+%,ClassicBackground
+%,ModelDev
+%,Results
 %,Conclusion
 %}
 \begin{document}

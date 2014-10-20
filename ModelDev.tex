@@ -338,7 +338,7 @@ substituting eq.~(\ref{eq:platetheta2}) into the equation for the strain energy 
     &+ 4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4).\notag
 \end{align}
 %
-If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is
+If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is \todo{is the order right here?  $\delta^6$???}
 %
 \begin{align}
     W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi ,\notag \\
@@ -471,6 +471,7 @@ that is not directly dependent on the deformation of a single bond pair.  Instea
 A weighting function \(\omega(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.  This extra term that is dependent on the bending of all the pairs around a material point means that the extension is not properly a \textit{bond-pair} model.  Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.  In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
 %
 \chapter{Numerical Simulation}
+\todo{This chapter needs an introduction, possible mentioning other discretization choices you could make.}
 \section{Discretized Bond Pair Beam}
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
 %
@@ -878,4 +879,4 @@ The nature of the Trilinos packages and the structure of the code allow for more
 
 For all but the simplest loading conditions, analytical solutions to boundary condition problems become complicated.
 As load conditions and material behavior become more complex, there are no analytical solutions.
-For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
+For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases. \todo{If you have time and the inclination, I would expand this section significantly.  The code work was a considerable part of your research and only dedicating a few paragraphs does not do it justice.}

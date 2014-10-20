@@ -32,7 +32,7 @@ We use this infinitesimal slice to derive the relationship between load, shear, 
   \label{fig:Infinitesimal}
 \end{figure}
 %
-A force balance demonstrates that the x-derivative of internal shear force is the applied load:
+\todo{Where are your arrows on the figure}. A force balance demonstrates that the x-derivative of internal shear force is the applied load:
 \begin{equation}
 \label{eq:EulerShear}
 V = V + q\;\text{d}x + \text{d}V \implies \frac{\text{d}V}{\text{d}x} = -q
@@ -53,14 +53,14 @@ Next, we will use the deformation assumptions to frame the bending as a simple a
   \label{fig:EulerBeam1}
 \end{figure}
 %
-from which we can deduce a relationship between the transverse displacement of a beam section and its angle and radius of curvature.
+from which we can deduce a relationship between the transverse displacement of a beam section and its angle and radius of curvature. \todo{I just noticed this, but your equations need to be punctuated like they are part of a sentence}
 \begin{equation}
  \label{eq:EulerCurve}
  \frac{1}{\rho} \approx \frac{\text{d} \phi}{\text{d} x} \approx \frac{\text{d}^2v}{\text{d}x^2} = \kappa
 \end{equation}
 The radius of curvature, $\rho$ is the radius of the arc formed by the beam's neutral axis, which does not change in length as the beam bends.
 We use this same arc to find the strain in material that is at a distance $y$ from the neutral axis.
-In a linearly elastic material, the resulting stress is proportional by Young's modulus $E$.
+In a linearly elastic material, the resulting stress is proportional to Young's modulus $E$.
 To find the bending moment that results from that stress profile, we integrate the moment contribution through the beam.
 \begin{equation}
 M_\text{resisted} = \int_\text{bottom}^\text{top}y\sigma dA = \int_\text{bottom}^\text{top}y^2 E \kappa dA
