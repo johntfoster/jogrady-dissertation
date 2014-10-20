@@ -4,7 +4,7 @@
 \subsection{Straight Beam Results}
 The simplest test case for this model is a linear-elastic beam with a square profile.
 For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
-Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000} deformed under uniform load.
+Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000} deformed under uniform load.\todo{Your figures should not have titles on top of them.}
 %
 \begin{figure}[htbp]
   \centering
@@ -73,7 +73,7 @@ A material that is plastically deformed does not return to its original state wh
 For a beam in bending, the residual deformations can be seen in a beam that has been loaded beyond the onset of plastic deformation and then unloaded.
 The Abaqus model retains slightly more than \sfrac{1}{10} of its loaded displacement after being completely unloaded.
 This result is observed in the bond-pair plasticity model, shown in \cref{fig:ResidualPlasticityN,fig:ResidualPlasticityH}. 
-Accurate residual deformation modeling requires both a relatively small horizon and a fairly large number of nodes.
+Accurate residual deformation modeling requires both a relatively small horizon and a fairly large number of nodes. \todo{It might be worth mentioning that, the reason for this is because the nonlocality regularizes the solution; however, if the plasticity model where to include softening, this would lead to convergent damage fields, whereas the classical models would lead to localization into a single element.}
 
 %
 \begin{figure}[h]
@@ -180,7 +180,7 @@ As with the brittle beam, the region within one horizon of the crack shows parti
 %
 In the double-torsion plate, the crack is expected to progress straight across the plate.
 A more interesting failure pattern can be found if the displacement is applied to only one of the two sides of the pre-crack.
-In a ``single torsion'' cracked plate, the crack path is expected to curve, and this result can be seen in \cref{fig:SingleTorsion}.
+In a ``single torsion'' cracked plate, the crack path is expected to curve, and this result can be seen in \cref{fig:SingleTorsion}. \todo{Can you blow the figures up a little.}
 %
 \begin{figure}[tbhp]
   \centering
@@ -195,7 +195,7 @@ In a ``single torsion'' cracked plate, the crack path is expected to curve, and 
 While it is simple to discretize the shapes examined thus far so that bonds pair up nicely, that is tougher to do for most shapes we are interested in analyzing.
 To combine the analytical simplicity of the previous shapes with a demonstration of the ability to handle irregular shapes, we discretize simple shapes in an irregular fashion.
 The first is a return to the simply-supported beam under uniform load.
-\Cref{fig:BeamIrreg} shows that the irregularly-discretized beam has the same deflection under uniform load as the regular discretization.
+\Cref{fig:BeamIrreg} shows that the irregularly-discretized beam has the same deflection under uniform load as the regular discretization. \todo{What is meant in the figure by ``error'', it looks like displacement.  When we write the paper on this we should show how they converge in the L2 norm.}
 %
 \begin{figure}[tbhp]
   \centering
@@ -206,7 +206,7 @@ The first is a return to the simply-supported beam under uniform load.
 %
 
 An example of a regularly-discretized plate is shown in \cref{fig:regularmesh}, while an irregularly discretized plate is shown in \cref{fig:unevenmesh}.
-To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element.
+To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element. \todo{it might make more sense to just show the PD nodes here.  The FE mesh seems confusing.}
 %
 \begin{figure}[h]
   \centering
