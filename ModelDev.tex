@@ -241,22 +241,22 @@ The similarity between classical and peridynamic moment formulations in \cref{eq
 %
 This weight function analogizes the relative contributions of bond pairs of different lengths to the relative contributions of fibers at different distances from the centerline. 
 An example for a rectangular beam is illustrated in \cref{fig:WeightProfileUniform}.
-For an I beam with height \(h_\text{beam}\), width \(w_\text{beam}\), web height \(h_\text{web}\), and web width \(w_\text{web}\), substituting the beam profile \todo{label cases}
+For an I beam with height \(h_\text{beam}\), width \(w_\text{beam}\), web height \(h_\text{web}\), and web width \(w_\text{web}\), substituting the beam profile
 \begin{equation}
 b(y) = 
   \begin{dcases}
-    w_\text{web} & \text{if } |y| \leq \frac{h_\text{web}}{2} \\
-    w_\text{beam} & \text{if } \frac{h_\text{web}}{2} < |y| \leq \frac{h_\text{beam}}{2} \\
-    0 &\text{otherwise}
+    w_\text{web} & \text{if } |y| \leq \frac{h_\text{web}}{2}\, , \\
+    w_\text{beam} & \text{if } \frac{h_\text{web}}{2} < |y| \leq \frac{h_\text{beam}}{2}\, , \\
+    0 &\text{otherwise}\, .
   \end{dcases}\notag
 \end{equation}
 into \cref{eq:WeightFunction} gives the weight function
 \begin{equation}
 \omega(\xi) = 
   \begin{dcases}
-    |\xi| w_\text{web}& \text{if } |\xi| \leq \delta\frac{h_\text{web}}{h_\text{beam}} \\
-    |\xi| w_\text{beam} & \text{if } \delta\frac{h_\text{web}}{h_\text{beam}} < |\xi| \leq \delta \\
-    0 &\text{otherwise}
+    |\xi| w_\text{web}& \text{if } |\xi| \leq \delta\frac{h_\text{web}}{h_\text{beam}}\, , \\
+    |\xi| w_\text{beam} & \text{if } \delta\frac{h_\text{web}}{h_\text{beam}} < |\xi| \leq \delta\, , \\
+    0 &\text{otherwise}\,,
   \end{dcases}\notag
 \end{equation}
 and is ilustrated in \cref{fig:WeightProfileIbeam}.
@@ -264,18 +264,18 @@ and is ilustrated in \cref{fig:WeightProfileIbeam}.
 
 In a deformed elastic perfectly-plastic beam, axial fibers are still stretched in proportion to their distance from the neutral axis, but the relationship \(\sigma = E\epsilon = Ey\kappa\) only holds for \(|\epsilon| = |y\kappa| < \epsilon_c\). 
 For greater stretches, the relationship becomes \(\sigma = \pm E\epsilon_c \). 
-To model this behavior, consider a bond pair with similar behavior: for angular deformation less than some critical angle, the model behaves as previously described, but the magnitude of the force remains constant above a critical deformation
+To model this behavior, consider a bond pair with similar behavior: for angular deformation less than some critical angle, the model behaves as previously described, but the magnitude of the force remains constant above a critical deformation according to
 %
 \begin{equation}
 |\vstate{T}{}{\xi}| = 
   \begin{cases}
-    \alpha \omega(\xi) \frac{\sin(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}))}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta < \theta_c\\
-    \alpha \omega(\xi) \frac{\sin(\theta_c)}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta \geq \theta_c\
+    \alpha \omega(\xi) \frac{\sin(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}))}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta < \theta_c\,,\\
+    \alpha \omega(\xi) \frac{\sin(\theta_c)}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta \geq \theta_c\,. \\
   \end{cases}
   \label{eq:epp_force}
 \end{equation}
 %
-to determine the critical angle \(\theta_c\), we let the onset of plasticity in pairs of the longest bonds to coincide with the onset of plasticity in the fibers at the top and bottom surfaces of the classical beam. 
+To determine the critical angle \(\theta_c\), we let the onset of plasticity in pairs of the longest bonds to coincide with the onset of plasticity in the fibers at the top and bottom surfaces of the classical beam. 
 For small curvatures \(\Delta\theta = \xi\kappa\implies\Delta\theta_c = \frac{2\delta\epsilon_c}{t}\). 
 For curvatures \(|\kappa| > \kappa_c=\frac{2\epsilon_c}{t}\), the radius within which bonds are in the elastic region is \(\delta_e = \delta \frac{\kappa_c}{\kappa}\), and parallels the distance from the beam centerline that fibers are in the elastic region \(y_e = \frac{t}{2} \frac{\kappa_c}{\kappa}\).
 %
@@ -292,8 +292,8 @@ More simply, we can model a brittle material by setting the force to zero for bo
 \begin{equation}
 |\vstate{T}{}{\xi}| = 
   \begin{cases}
-    \alpha \omega(\xi) \frac{\sin(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}))}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta < \theta_c\\
-    0 & \quad \text{if } \theta \geq \theta_c\
+    \alpha \omega(\xi) \frac{\sin(\theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}))}{|\vstate{Y}{}{\xi}|} & \quad \text{if } \theta < \theta_c\,,\\
+    0 & \quad \text{if } \theta \geq \theta_c\,,
   \end{cases}
   \label{eq:brittle_force}
 \end{equation}
@@ -343,7 +343,7 @@ Substituting eq.~(\ref{eq:platetheta2}) into the equation for the strain energy 
     & \quad + 4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4)\, .\notag
 \end{align}
 %
-If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is \todo{is the order right here?  $\delta^6$???}
+If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is
 %
 \begin{align}
     W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi \, ,\notag \\
@@ -478,7 +478,12 @@ that is not directly dependent on the deformation of a single bond pair.  Instea
 A weighting function \(\omega(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.  This extra term that is dependent on the bending of all the pairs around a material point means that the extension is not properly a \textit{bond-pair} model.  Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.  In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
 %
 \chapter{Numerical Simulation}
-\todo{This chapter needs an introduction, possible mentioning other discretization choices you could make.}
+\label{ch:NumericalSimulation}
+The models developed in \cref{ch:ModelDev} are all based on a continuum material containing an infinite number of points.
+The model parameters and behaviors are defined by integrals over length or area, and only make sense if properties are defined continuously.
+This is not to say that the properties themselves need be continuous, but they cannot be defined only at a finite number of points.
+While such models are mathematically convenient, they are less convenient for performing many engineering problems.
+For the analysis of these problems, it is useful to have a discretized version of the model that can be evaluated from the properties of a finite number of peridynamic nodes that represent the continuous feature.
 \section{Discretized Bond Pair Beam}
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
 %

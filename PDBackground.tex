@@ -1,4 +1,5 @@
 \chapter{Peridynamics Background}
+\label{ch:PDBackground}
 
 \section{Peridynamic States}
 %
@@ -108,7 +109,6 @@ Bond-based, ordinary state-based, and nonordinary state-based models are illustr
 \end{figure}
 
 It should be clear that many of the concepts of classical continuum mechanics have direct equivalents in peridynamic modeling.
-\todo{I think ``First Law'' should be ``Stress Power''}
 \Cref{table:PDconcepts} lays out some of the simplest parallels between classical and peridynamic formulations.
 
 \begin{table}
@@ -119,7 +119,7 @@ Kinematics & \mathbf{F} & \tvstate{Y}{}{} \\ \hline \noalign{\smallskip}
 Linear Momentum & \nabla \cdot \boldsymbol{\sigma} & \int_\Omega (\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}-\vstate{T}{\mathbf{q}}{\mathbf{x}-\mathbf{q}}) dV_\mathbf{q} \\    \noalign{\smallskip} \hline \noalign{\smallskip}
 Angular Momentum &\boldsymbol{\sigma} = \boldsymbol{\sigma}^T  & \int_\Omega \vstate{Y}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}\times\vstate{T}{\mathbf{x}}{\mathbf{q}-\mathbf{x}}dV_\mathbf{q} = 0\\   \noalign{\smallskip} \hline
 Constitutive Law & \boldsymbol{\sigma} = \boldsymbol{\sigma}(\boldsymbol{\epsilon}) &\tvstate{T}{}{}=\tvstate{T}{}{}(\tvstate{Y}{}{}) \\  \hline
-First Law  & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
+Stress Power  & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
 \end{tabular}
 \caption{Peridynamic Equivalents of Classical Concepts}
 \label{table:PDconcepts}
@@ -203,8 +203,9 @@ For the remaining configurations,
 \int_0^\delta \frac{\omega(r)}{r^2}\int_0^{2\pi}\int_0^\pi (r^4 \sin^4 \phi \cos^2\theta\sin^2\theta)\;r^2 \sin(\phi)\;d\phi\;d\theta\;dr =  \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr\, .\notag
 \end{equation}
 %
-Also, any combination with $i=j$ or $k=l$ results in terms $\epsilon_{ii}^d$ or  $\epsilon_{kk}^d$, which will sum to 0 in deviatoric deformation. 
-This leaves only configurations such as $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$ \todo{What about $\delta_{ij}\delta{kl}$? See previous sentence}.
+This leaves only configurations such as $[1,1,3,3]$, $[1,2,1,2]$ and $[3,2,2,3]$, which we can indicate by $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}+\delta_{ij}\delta{kl})$ \todo{What about $\delta_{ij}\delta{kl}$? See previous sentence}.
+Additionally, any combination with $i=j$ or $k=l$ results in terms $\epsilon_{ii}^d$ or  $\epsilon_{kk}^d$.
+Such terms sum to 0 in deviatoric deformation, leaving only $(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})$.
 %
 \begin{align}
 W&= \frac{c}{2}\epsilon_{ij}^d \epsilon_{kl}^d \frac{4\pi}{15} \int_0^\delta \omega(r)r^4\;dr (\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\, ,\notag\\
@@ -324,4 +325,10 @@ The resulting force state is calculated from the stress according to
 For homogenous deformations, the result is a peridynamic model that exactly reproduces the classical model without ever taking a derivative.
 For problems with very inhomogenous (on the scale of the peridynamic horizon) deformations, the peridynamic model will exhibit scale effects not seen in the classical model, acting to smooth out the effect of short-scale deformations.
 For discontinuous deformations, the classical model cannot be evaluated at all, but the peridynamic correspondence model will have no such problem.
-It may be necessary however to revisit the choice of model or implement some damage condition. \todo{The transition to the next chapter is a bit abrupt, you might consider adding a paragraph that explains how the models are different from the model you are going to develop in the next chapter.}
+It may be necessary however to revisit the choice of model or implement some damage condition. 
+
+All three of these models are based on solid materials.
+In such materials, the fundamental deformation mode is stretch or extension.
+Consider instead a thin beam deflecting under transverse load; at the scale of the whole beam, the deflection behavior is the result of bending deformation.
+To model the beam with a solid material model, it is necessary to use a much smaller scale - one in which the beam can be seen to stretch on one side and compress on the other.
+Alternatively, in a model whose fundamental mode of deformation is bending, the same beam could be modeled at the same scale as its behavior.

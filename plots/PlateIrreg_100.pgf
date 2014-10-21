@@ -1076,9 +1076,6 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.075000in,y=5.469444in,,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Simply Supported Plate Slice}}%
-\end{pgfscope}%
-\begin{pgfscope}%
 \pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%

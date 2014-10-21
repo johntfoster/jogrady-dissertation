@@ -1,4 +1,5 @@
 \chapter{Conclusion}
+\label{ch:Conclusion}
 
 This work develops what we believe to be the first state-based peridynamic thin feature models.
 These models allow for the simulation of bending in peridynamic beams, plates, and shells.
@@ -39,6 +40,14 @@ Highly-structured metamaterials may also have bending properties that cannot be 
 Peridynamic modeling is a technique that is swiftly growing in popularity, especially among those concerned with the propagation of material failure.
 The bending behavior of thin features is a critical part of many engineering analyses that has been largely out of reach for reasonably-sized peridynamic models. 
 These peridynamic bending models extend the domain of problems to which peridynamic modeling can be applied. \todo{Add a few paragraphs suggesting some future work extending this.}
+
+There are many directions in which the models developed in this work can be improved upon.
+While the results presented here are both illustrative and persuasive, they do not represent a mathematically rigorous demonstration of the convergence properties of the bending models, and future work focusing specifically on discretization and convergence issues would be valuable.
+Both the plastic and brittle material models developed in this work are proofs of concepts, demonstrating the capabilities of peridynamics and the new bending models.
+It will be necessary to develop a thermodynamically consistent failure model before using this model to make predictions regarding failure propagation, especially when rapid progression is expected.
+Ideally, the material parameters of such a model could be determined from existing datasets and material parameters.
+
+Other useful avenues of inquiry include combining these 2D models with peridynamic solid models to analyze features comprised of both thick and thin parts.
 
 \appendix
 \chapter{Fr\'echet Derivative}

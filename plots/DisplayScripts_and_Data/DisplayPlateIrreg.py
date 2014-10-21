@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -80,7 +80,7 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 # abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
 
 #Load PD plate data
-PDfile1name = "./Plate_Regular_n100_h31_g1/Plate_Regular_n100_h31_g1_1_exp_113.npz"
+PDfile1name = "./Plate_Regular_n100_h31_g1_1_exp_113.npz"
 PDlabel1 = "101x101 nodes, h10, ext10"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -124,7 +124,7 @@ difference1 = pdZ1c-analyticalZ1
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./Plate_Irregular_n100_h31_g1/Plate_Irregular_n100_h31_g1_1_exp_39.npz"
+PDfile2name = "./Plate_Irregular_n100_h31_g1_1_exp_39.npz"
 PDlabel2 = "101x101 nodes, h05, ext10"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -166,49 +166,6 @@ analyticalZ2 = analyticalZ2*multiplier
 
 difference2 = pdZ2c-analyticalZ2
 
-#Load PD plate data
-pdHorizon3 = 0.05
-PDfile3name = "./Nu33_n101_h05_g0pt1/Nu33_n101_h05_g0pt1_1_exp_8.npz"
-PDlabel3 = "101x101 nodes, h05, ext10"
-PDdata3 = np.load(PDfile3name)
-ux3 = PDdata3['ux']
-uy3 = PDdata3['uy']
-uz3 = PDdata3['uz']
-x03 = PDdata3['x0']
-y03 = PDdata3['y0']
-
-data3mask = np.logical_or(
-    np.logical_or(0.0-eps>x03,plate_length+eps<x03),
-    np.logical_or((plate_width/2.0)-eps>y03,(plate_width/2.0)+eps<y03))
-
-pdX3 = ma.array(ux3,mask=data3mask)
-pdY3 = ma.array(uy3,mask=data3mask)
-pdZ3 = ma.array(uz3,mask=data3mask)
-
-pdX3c=pdX3.compressed()
-pdY3c=pdY3.compressed()
-pdZ3c=pdZ3.compressed()
-
-pdX03 = ma.array(x03,mask=data3mask)
-pdY03 = ma.array(y03,mask=data3mask)
-pdX03c=pdX03.compressed()
-pdY03c=pdY03.compressed()
-
-#Elastic Displacement for uniform load of gamma
-analyticalX3 = pdX03c
-analyticalY3 = pdY03c
-analyticalZ3 = 0.0*pdZ3c
-multiplier = 16.0*(gamma/(plate_length*plate_width))*(yieldstrain/thickness)/(np.pi**6.0)
-for m in range(1,10,2):
-    for n in range(1,10,2):
-        denominator = (m*n*((m/plate_length)**2.0+(n/plate_width)**2.0)**2.0)
-        mnterm =(np.sin(m*np.pi*analyticalX3/plate_length)
-            *np.sin(n*np.pi*analyticalY3/plate_width)
-            /denominator)
-        analyticalZ3 = analyticalZ3+mnterm
-analyticalZ3 = analyticalZ3*multiplier
-
-difference3 = pdZ3c-analyticalZ3
 
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
@@ -216,15 +173,8 @@ ax = fig.add_subplot(111)
 ax1=ax.plot(analyticalX1,analyticalZ1,label="Analytical")
 ax2=ax.plot(pdX01c+pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,10),label="100 nodes, regular")
 ax3=ax.plot(pdX02c+pdX2c,pdZ2c,ls="None", marker="s",markevery=(5,10),label="100 nodes, irregular")
-# ax = fig.add_subplot(311)
-# ax1=ax.plot(analyticalX1,analyticalZ1,label="Analytical")
-# ax2=ax.plot(pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,8),label="100 nodes, regular")
-# ax3=ax.plot(pdX2c,pdZ2c,ls="None", marker="s",markevery=(2,6),label="100 nodes, irregular")
 
-# ax4=ax.plot(pdX3c,pdZ3c,ls="None", marker="o",markevery=(4,6),label="100 nodes, h=0.05")
-# ax = fig.add_subplot(211, projection='3d')
-# ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-plt.title('Simply Supported Plate Slice')
+# plt.title('Simply Supported Plate Slice')
 
 plt.legend(loc=9, borderaxespad=0.)
 
@@ -236,8 +186,8 @@ ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/PlateIrreg_100.pgf")
+#     make_sure_path_exists("./writeup/plots")
+    fig.savefig("../PlateIrreg_100.pgf")
 plt.show()
 
 

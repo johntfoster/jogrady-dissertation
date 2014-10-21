@@ -102,6 +102,9 @@ This is borne out by the results in \cref{fig:brittleBeam}, in which ``Nodal Hea
 \end{figure}
 
 Unlike a local model, partial failure is observed at nodes near the plastic hinge, as pairs of bonds that straddle the hinge are broken.
+This is an important feature of peridynamics; the damaged region of the brittle beam depends on the peridynamic horizon, not on the density of the discretization.
+In a finite element model, damage will occur between elements or within a single element.
+Either way, mesh refinement will eventually result in an infinitely small damage region.
 
 \FloatBarrier
 \subsection{Flat Plate Results}
@@ -173,18 +176,18 @@ As with the brittle beam, the region within one horizon of the crack shows parti
 %
 \begin{figure}[tbhp]
   \centering
-  \resizebox{0.6\linewidth}{!}{\input{\plotpath/DoubleTorsionDD.pgf}}
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/DoubleTorsionDD.pgf}}
   \caption{Crack Progression in Double Torsion Brittle Plate}
   \label{fig:DTdamage}
 \end{figure}
 %
 In the double-torsion plate, the crack is expected to progress straight across the plate.
 A more interesting failure pattern can be found if the displacement is applied to only one of the two sides of the pre-crack.
-In a ``single torsion'' cracked plate, the crack path is expected to curve, and this result can be seen in \cref{fig:SingleTorsion}. \todo{Can you blow the figures up a little.}
+In a ``single torsion'' cracked plate, the crack path is expected to curve, and this result can be seen in \cref{fig:SingleTorsion}.
 %
 \begin{figure}[tbhp]
   \centering
-  \resizebox{0.6\linewidth}{!}{\input{\plotpath/SingleTorsion.pgf}}
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/SingleTorsion.pgf}}
   \caption{Crack Progression in Single Torsion Brittle Plate}
   \label{fig:SingleTorsion}
 \end{figure}
@@ -195,7 +198,7 @@ In a ``single torsion'' cracked plate, the crack path is expected to curve, and 
 While it is simple to discretize the shapes examined thus far so that bonds pair up nicely, that is tougher to do for most shapes we are interested in analyzing.
 To combine the analytical simplicity of the previous shapes with a demonstration of the ability to handle irregular shapes, we discretize simple shapes in an irregular fashion.
 The first is a return to the simply-supported beam under uniform load.
-\Cref{fig:BeamIrreg} shows that the irregularly-discretized beam has the same deflection under uniform load as the regular discretization. \todo{What is meant in the figure by ``error'', it looks like displacement.  When we write the paper on this we should show how they converge in the L2 norm.}
+\Cref{fig:BeamIrreg} shows that the irregularly-discretized beam has the same deflection under uniform load as the regular discretization.
 %
 \begin{figure}[tbhp]
   \centering
@@ -206,20 +209,36 @@ The first is a return to the simply-supported beam under uniform load.
 %
 
 An example of a regularly-discretized plate is shown in \cref{fig:regularmesh}, while an irregularly discretized plate is shown in \cref{fig:unevenmesh}.
-To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element. \todo{it might make more sense to just show the PD nodes here.  The FE mesh seems confusing.}
+To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element. 
+%%
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=0.6\textwidth]{regularmesh.eps}
+%  \caption{Regular Plate Mesh}
+%  \label{fig:regularmesh}
+%\end{figure}
+%%
+%%
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=0.6\textwidth]{unevenmesh.eps}
+%  \caption{Irregular Plate Mesh}
+%  \label{fig:unevenmesh}
+%\end{figure}
+%%
+%
 %
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\textwidth]{regularmesh.eps}
-  \caption{Regular Plate Mesh}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/regularMesh50.pgf}}
+  \caption[Regular Plate Discretization]{The regular plate discretization allows pairing of opposite bonds between nodes}
   \label{fig:regularmesh}
 \end{figure}
 %
-%
-\begin{figure}[h]
+\begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.6\textwidth]{unevenmesh.eps}
-  \caption{Irregular Plate Mesh}
+  \resizebox{0.6\linewidth}{!}{\input{\plotpath/irregularMesh50.pgf}}
+  \caption[Irregular Plate Discretization]{The irregular plate discretization requires virtual points to form bond pairs}
   \label{fig:unevenmesh}
 \end{figure}
 %
@@ -273,6 +292,16 @@ The loading of the ring is the same as the beam-based ring, and in cross-section
 \end{figure}
 %
 
- XXXXFinish and insert 3D ring results. XXXX
+\Cref{fig:PlateRing_n} demonstrates that, as with the curved beam, the curved shell requires a dense discretization to model.
+This is mostly as a consequence of requiring a small horizon.
+Surfaces with less curvature are less constrained.
 
+%
+\begin{figure}[tbhp]
+  \centering
+  \resizebox{0.8\linewidth}{!}{\input{\plotpath/PlateRing_n.pgf}}
+  \caption{Plate-based Proving Ring}
+  \label{fig:PlateRing_n}
+\end{figure}
+%
 

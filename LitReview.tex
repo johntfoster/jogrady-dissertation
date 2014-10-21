@@ -61,7 +61,7 @@ Mohammadnejad and Khoei~\cite{mohammadnejad2013hydro} and Hunsweck et al. \cite{
 
 A second common method of modeling material failure is the Reproducing Kernel Particle Method (RKPM), developed by Liu et al.~\cite{liu1995reproducing}.
 Mesh-based models track the connections between points in a deforming material, which can become problematic when large deformations deform the mesh and even cause it to intersect itself.
-RKPM is a ``mesh free'' method that tracks material properties by their values at selected points.
+RKPM is a ``mesh-free'' method that tracks material properties by their values at selected points.
 Mesh-free methods are advantageous for modeling large deformation in fluids and solids because they do not track connections between points.
 Between material points, properties are interpolated from their values at nearby points by way of integration with a kernel function.
 The difference in domains between RKPM and XFEM can be seen in \cref{fig:FEMvsRKPM}.
@@ -75,7 +75,8 @@ The difference in domains between RKPM and XFEM can be seen in \cref{fig:FEMvsRK
 %
 The key to the RKPM lies in this kernel function; by using window functions from wavelet analysis, a ``reproducing'' kernel guarantees that  integrals of interpolated properties reproduce the integral of the continuous property field.
 The ``reproducing'' kernel makes the RKPM a Partition of Unity method like XFEM, and is a major advantage of RKPM relative to other particle methods.
-It is, however, computationally expensive. \todo{Partly because, typically, the shape-function integration is carried out on a background grid, bringing into question whether the method is truely ``mesh-free''.}
+It is computationally expensive to perform the necessary shape-function integration, however.
+The integration is typically performed on a background grid, raising concern over whether it is truly ``mesh-free''. 
 
 In its original formulation, the RKPM successfully handles large deformations that would cause unacceptable distortion in Finite Element models.
 A semi-Lagrangian version implemented by Guan et al. in \cite{guan2009semi} allows for recalculation of the support function.
@@ -94,7 +95,8 @@ They are useful for cases such as composite delamination or debonding, where the
 Fang et al. propose in \cite{fang2011augmented} a method of augmenting the cohesive zone model to work in concert with XFEM-type elements to model both arbitrary and known crack paths.
 More recently, McGarry et al. \cite{mcgarry2014potential} and M\'airt\'in et al. \cite{mairtin2014potential} developed a cohesive zone model to account for crack closure, including crack surface tractions.
 
-Particle methods of modeling failure include the Smooth Particle Hydrodynamic (SPH) method \todo{A special case of RKPM, one that can only reproduce constant fields.}, reviewed by Monaghan in \cite{monaghan2005smoothed}, in which a kernel (commonly a cubic spline) is used to create a smooth interpolation of actual quantities.
+Particle methods of modeling failure include the Smooth Particle Hydrodynamic (SPH) method, reviewed by Monaghan in \cite{monaghan2005smoothed}, in which a kernel (commonly a cubic spline) is used to create a smooth interpolation of actual quantities.
+Unlike the wavelet basis functions of RKPM, which can be made to reproduce a polynomial field of any order, cubic splines only perfectly reproduce constant fields.
 Developed for fluids, Springel notes in \cite{springel2010smoothed} that it is often used in astrophysics problems, where many fluid problems are encountered and even ``solid" bodies deform under their own gravity.
 It can also predict elastic behavior and has been extended with failure models by Benz and Asphaug in \cite{benz1995simulations} by adding an evolving damage parameter.
 Particle methods like SPH handle fragmentation very well, and are used in a variety of problems with material interfaces, high strains, and multiphase and multi-physics aspects.
@@ -105,9 +107,11 @@ The Material Point Method, developed by Sulsky and Schreyer in~\cite{sulsky1996a
 The advantage of using both meshes is an ability to handle obstacles and boundary conditions without difficulty at large deformations.
 Wieckowski notes that the downside to using both meshes is continual remeshing and added computational expense \cite{wikeckowski2004material}.
 Despite this expense, the material point method was extended to model cracks by Nairn in \cite{nairn2003material}, then further enhanced by Sadeghirad et al. in \cite{sadeghirad2011convected} to improve stability when modeling massive deformations.
-The Lattice Discrete Particle Method was developed by Cusatis et al.\cite{cusatis2011lattice,cusatis2011blattice} to model concrete \todo{Is it based on a continuum theory? PDE?}.
+The Lattice Discrete Particle Method was developed by Cusatis et al.\cite{cusatis2011lattice,cusatis2011blattice} to model concrete.
+Unlike perviously mentioned particle methods, the particles in LDPM represent actual particles of aggregate and the cement between them, with volume as well as mass.
 It fills a volume with variously-sized particles generated from a probability density function based on aggregate size.
 The relationships between these particles form tetrahedrons (the lattice) that fill the volume and allow multi-particle interaction.
+As with finite element models, displacement between particle centers is linearized to compute strains, stresses, and forces.
 Failure occurs at predefined surfaces between particles and can include various failure modes.
 The LDPM is capable of accurately modeling many failure conditions in concrete, including the impact of specimen size on effective material behavior.
 These are only a few of the myriad of models that attempt to model the progression of material failure.
@@ -125,7 +129,7 @@ The term \textit{peridynamic} was coined by Silling to describe the new formulat
 From the Greek roots \textit{peri} and \textit{dyna} meaning \textit{near} and \textit{force} respectively, it alludes to the nonlocal force exerted by nearby points.
 %In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, the peridynamic model casts material behavior at a point as an \textit{integral} \todo{Note Eringen's stress is an integral function of strain. Might be worth being specific.} equation of the surrounding displacement rather than the classical \textit{differential} equation.
 In contrast to the nonlocal continuum mechanics models of Kr\"oner, Eringen and Edelen \cite{kroner1967elasticity,eringen1972nonlocal,eringen1983differential}, which formulate behavior as an integral function of strain (itself a spatial derivative of displacement), the peridynamic model casts material behavior at a point as an \textit{integral equation of the surrounding displacement} rather than the classical \textit{differential} equation.
-Because peridynamic models do not include spatial displacement derivatives, discontinuous displacements can arise naturally and can be analyzed without special heuristics \todo{or even discretization}. 
+Because peridynamic models do not include spatial displacement derivatives, discontinuous displacements can arise naturally and can be analyzed without first discretizing the problem or applying special heuristics.
 In classical continuum mechanics, linear momentum is conserved according to the local  \cref{eq:ClassicCoPV},
 %
 \begin{equation}

@@ -43,7 +43,7 @@ analyticalX1 = np.linspace(0.0,1.0,num=1001)
 analyticalX2 = np.linspace(0.0,1.0,num=1001)
 
 #Load PD plate data
-PDfile1name = "./SSbeam_U_regular_200/SSbeam_U_regular_200_1_exp_14.npz"
+PDfile1name = "./SSbeam_U_regular_200_1_exp_14.npz"
 PDlabel1 = "regular 100 nodes, horizon 0.05"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -82,7 +82,7 @@ difference1 = pdZ1c-analyticalZ1
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./SSbeam_U_irregular_200/SSbeam_U_irregular_200_1_exp_9.npz"
+PDfile2name = "./SSbeam_U_irregular_200_1_exp_9.npz"
 PDlabel2 = "irregular 100 nodes, horizon 0.05"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -122,14 +122,14 @@ fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
 ax.plot(analyticalX1,analyticalZ1,ls="-",label="Analytical")
-ax1=ax.plot(pdX01c,pdZ1c,ls="None", marker="^",markevery=(0,4),label="regular error")
-ax1=ax.plot(pdX02c,pdZ2c,ls="None", marker="s",markevery=(2,4),label="irregular error")
+ax1=ax.plot(pdX01c,pdZ1c,ls="None", marker="^",markevery=(0,6),label="regular discretization")
+ax1=ax.plot(pdX02c,pdZ2c,ls="None", marker="s",markevery=(3,6),label="irregular discretization")
 # ax1=ax.plot(pdX02c,analyticalZ2,ls="None", marker="s",markevery=(2,4),label="irregular error")
 # ax = fig.add_subplot(211, projection='3d')
 # ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-plt.title('Uniformly Loaded Beam')
+# plt.title('Uniformly Loaded Beam')
 
-plt.legend(loc=1, borderaxespad=0.1)
+plt.legend(loc=9, borderaxespad=0.)
 
 ax.set_xlabel('Distance Along Beam')
 ax.set_xticks(np.linspace(0.0,1.0,num=5))
@@ -140,8 +140,8 @@ ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/IrregularBeam.pgf")
+#     make_sure_path_exists("./writeup/plots")
+    fig.savefig("../IrregularBeam.pgf")
 plt.show()
 
 
