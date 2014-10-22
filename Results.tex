@@ -4,7 +4,8 @@
 \subsection{Straight Beam Results}
 The simplest test case for this model is a linear-elastic beam with a square profile.
 For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases.
-Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000} deformed under uniform load.\todo{Your figures should not have titles on top of them.}
+Even a coarse discretization successfully reproduces the shape of the elastically deformed, simply-supported beam shown  in \cref{fig:elastic_g2000} deformed under uniform load.
+%\todo{Your figures should not have titles on top of them.}
 %
 \begin{figure}[htbp]
   \centering
@@ -73,7 +74,10 @@ A material that is plastically deformed does not return to its original state wh
 For a beam in bending, the residual deformations can be seen in a beam that has been loaded beyond the onset of plastic deformation and then unloaded.
 The Abaqus model retains slightly more than \sfrac{1}{10} of its loaded displacement after being completely unloaded.
 This result is observed in the bond-pair plasticity model, shown in \cref{fig:ResidualPlasticityN,fig:ResidualPlasticityH}. 
-Accurate residual deformation modeling requires both a relatively small horizon and a fairly large number of nodes. \todo{It might be worth mentioning that, the reason for this is because the nonlocality regularizes the solution; however, if the plasticity model where to include softening, this would lead to convergent damage fields, whereas the classical models would lead to localization into a single element.}
+Accurate residual deformation modeling requires both a relatively small horizon and a fairly large number of nodes.
+While this makes for a computationally expensive model in this case, it allows for implementation of more complex plasticity models without additional expense; a plasticity model that includes softening is no more effort to implement, and would result in damage fields that depend on the peridynamic horizon, not on the density of the discretization.
+Because the peridynamic horizon is ideally a material property, this has the effect of regularizing the solution.
+Implementing a strain-softening plasticity model in a finite element beam would, by contrast, result in the localization of plasticity into one element and depend strongly on the choice of discretization.
 
 %
 \begin{figure}[h]
@@ -102,9 +106,9 @@ This is borne out by the results in \cref{fig:brittleBeam}, in which ``Nodal Hea
 \end{figure}
 
 Unlike a local model, partial failure is observed at nodes near the plastic hinge, as pairs of bonds that straddle the hinge are broken.
-This is an important feature of peridynamics; the damaged region of the brittle beam depends on the peridynamic horizon, not on the density of the discretization.
+This is an important feature of peridynamics; as in the plastic beam, the damaged region of the brittle beam depends on the peridynamic horizon rather than on the density of the discretization.
 In a finite element model, damage will occur between elements or within a single element.
-Either way, mesh refinement will eventually result in an infinitely small damage region.
+Either way, mesh refinement will eventually result in damage localization to an infinitely small damage region.
 
 \FloatBarrier
 \subsection{Flat Plate Results}
@@ -210,23 +214,6 @@ The first is a return to the simply-supported beam under uniform load.
 
 An example of a regularly-discretized plate is shown in \cref{fig:regularmesh}, while an irregularly discretized plate is shown in \cref{fig:unevenmesh}.
 To use this plate in a peridynamic simulation, we reduce each element to a single node at the element's centroid with volume equal to the volume of the element. 
-%%
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=0.6\textwidth]{regularmesh.eps}
-%  \caption{Regular Plate Mesh}
-%  \label{fig:regularmesh}
-%\end{figure}
-%%
-%%
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=0.6\textwidth]{unevenmesh.eps}
-%  \caption{Irregular Plate Mesh}
-%  \label{fig:unevenmesh}
-%\end{figure}
-%%
-%
 %
 \begin{figure}[h]
   \centering
@@ -283,14 +270,25 @@ The plots in \cref{fig:beamRing_n,fig:beamRing_h} show that convergence to the c
 
 Similarly, the use of virtual points in the simulation of curved plates and shells can be examined by starting with the ring model depicted in \cref{fig:PlateRing}.
 The loading of the ring is the same as the beam-based ring, and in cross-section looks like \cref{fig:ProvingRing}.
+%%
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=0.6\textwidth]{PlateRing.eps}
+%  \caption{3D Ring}
+%  \label{fig:PlateRing}
+%\end{figure}
+%%
 %
-\begin{figure}[h]
+\begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.6\textwidth]{PlateRing.eps}
-  \caption{3D Ring}
+  \vspace{-35mm}
+  \resizebox{0.9\linewidth}{!}{\input{\plotpath/RingMesh20.pgf}}
+  \vspace{-35mm}
+  \caption{Discretization of a 3D Proving Ring}
   \label{fig:PlateRing}
 \end{figure}
 %
+
 
 \Cref{fig:PlateRing_n} demonstrates that, as with the curved beam, the curved shell requires a dense discretization to model.
 This is mostly as a consequence of requiring a small horizon.

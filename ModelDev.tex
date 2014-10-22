@@ -61,7 +61,7 @@ where $v$ is the vertical displacement of material point.  Momentarily assuming 
 %
 \begin{align}
 \theta(\vstate{Y}{}{\xi},\vstate{Y}{}{\mathbf{-\xi}}) &\approx \pi-\xi \frac{\partial^2 v}{\partial x^2}+\mathcal{O}(\xi^3)\, , \notag \\
-&\approx  \pi-\xi \kappa +\mathcal{O}(\xi^3)\, ; 
+&\approx  \pi-\xi \kappa +\mathcal{O}(\xi^3)\,,
 \label{eq:beamdtheta2}
 \end{align}
 with
@@ -144,7 +144,7 @@ Eringen's model for nonlocal elasticity in \cite{eringen1983differential} begins
 \mathbf{t} = \int_\mathbf{V} K(|\mathbf{x}'-\mathbf{x}|,\tau)\boldsymbol{\sigma}(\mathbf{x}')dv(\mathbf{x}')\, .\notag
 \end{equation}
 In the local limit these relationships take the form of higher-order gradients.
-Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\)
+Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\),
 \begin{align}
 \left(1-(\tau l)^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D}\, ,\notag
 \end{align}
@@ -168,7 +168,7 @@ bear a striking resemblance to \cref{eq:NLbending}.
 In fact, by carefully choosing peridynamic parameter values, the results can be made identical.
 For a rectangular beam of width \(b\) and thickness \(t\), choosing 
 \begin{equation}
-\omega(\xi) = |\xi|b ;\qquad \delta = \tau l \sqrt{3} ;\qquad \alpha = \frac{E b t^3}{54 (\tau l)^4}\notag
+\omega(\xi) = |\xi|b\,,\qquad \delta = \tau l \sqrt{3}\,,\qquad \alpha = \frac{E b t^3}{54 (\tau l)^4}\,,\notag
 \end{equation}
 results in
 \begin{equation}
@@ -212,7 +212,7 @@ By comparing the formulations for the moments carried by the Euler beam in \cref
 M_\text{E}&=\int_{-\frac{t}{2}}^{\frac{t}{2}} \sigma \; y \; dA &= \int_{-\frac{t}{2}}^{\frac{t}{2}} E \kappa \; y^2 \; b(y) dy\, , \\
 %
 \label{eq:MomentPD}
-M_\text{PD}&=\int_{-\delta}^{\delta} \vstate{T}{}{\xi}\; \xi \;, d\xi &\notag \\
+M_\text{PD}&=\int_{-\delta}^{\delta} \vstate{T}{}{\xi}\; \xi \; d\xi\,, &\notag \\
 &= \int_{-\delta}^{\delta} \alpha \frac{\sin(\Delta\theta)}{|\xi|} \; \xi \; \omega(\xi) d\xi\: &\approx \int_{-\delta}^{\delta} \alpha \kappa |\xi| \; \omega(\xi) d\xi\,.
 \end{align}
 \end{subequations}
@@ -222,7 +222,7 @@ The similarity between classical and peridynamic moment formulations in \cref{eq
 %
 \begin{equation}
 \label{eq:WeightFunction}
-\omega(\xi) = |\xi| b\left(y\right) \quad \text{at} \quad y=\frac{\xi}{\delta} \frac{t}{2}, .
+\omega(\xi) = |\xi| b\left(y\right) \quad \text{at} \quad y=\frac{\xi}{\delta} \frac{t}{2}\, .
 \end{equation}
 %
 \begin{figure}[h]
@@ -247,7 +247,7 @@ b(y) =
   \begin{dcases}
     w_\text{web} & \text{if } |y| \leq \frac{h_\text{web}}{2}\, , \\
     w_\text{beam} & \text{if } \frac{h_\text{web}}{2} < |y| \leq \frac{h_\text{beam}}{2}\, , \\
-    0 &\text{otherwise}\, .
+    0 &\text{otherwise}\,,
   \end{dcases}\notag
 \end{equation}
 into \cref{eq:WeightFunction} gives the weight function
@@ -303,6 +303,7 @@ and additionally recording bond pairs that have exceeded their critical angle an
 %
 \section{Bond Pair Plate in Bending}
 The next case we will analyze is the extension of the bond pair beam model to \cref{fig:BondPairPlate}, a flat plate in the \(xy\) plane, with displacement $w$ in the \(z\)-direction. 
+Much of the material in this section can also be found in \cite{ogrady2014plates}.
 %
 \begin{figure}[htbp]
     \centering
@@ -366,7 +367,7 @@ Equating $W$ with the classical Kirchhoff plate strain-energy density, $\Omega$,
 where $\mu$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchhoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  Because $\alpha$ is inversely proportional to $m$, the energy does not change with varying choices for $\omega$ and $\delta$. It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
 
 \subsection{Combining Bending and Extension Models}
-The bond-pair bending model does not resist in-plane stretching or shear deformation because these deformations preserve the angles between opposite bonds.  If these behaviors are expected in combination with bending, a useful model must resist both in-plane and transverse deformations.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
+The bond-pair bending model does not resist in-plane stretching or shear deformation because these deformations preserve the angles between opposite bonds.  If these behaviors are expected in combination with bending, a useful model must resist both in-plane and transverse deformations.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length;
 %
 \begin{equation}
     \label{eq:bondextension}
@@ -485,12 +486,12 @@ This is not to say that the properties themselves need be continuous, but they c
 While such models are mathematically convenient, they are less convenient for performing many engineering problems.
 For the analysis of these problems, it is useful to have a discretized version of the model that can be evaluated from the properties of a finite number of peridynamic nodes that represent the continuous feature.
 \section{Discretized Bond Pair Beam}
-Discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
+Discretizing the bond-pair model is primarily matter of exchanging integrals for sums,
 %
 \begin{align}
 %
 w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right]\, , \notag \\
-&\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\notag
+&\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\,,\notag
 \end{align}
 %
 in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the point $\mathbf{x}$ to each of the $n$ points within distance $\delta$ of point $\mathbf{x}$.
@@ -498,20 +499,20 @@ in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the
 \begin{align}
 \label{eq:discreteBeamw}
 \alpha &= \frac{c\; \Delta x}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies \nonumber \\
-W&=\Delta x \sum_{i=1}^n \frac{EI}{2}\omega(\boldsymbol{\xi}_i)\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2
+W&=\Delta x \sum_{i=1}^n \frac{EI}{2}\omega(\boldsymbol{\xi}_i)\left(\frac{v(\mathbf{x}+\boldsymbol{\xi}_i)-2v(\mathbf{x})+v(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2\,.
 \end{align}
 %
-Discretization of the original model results in the equation of motion
+Discretization of the original model results in the equation of motion,
 \begin{align}
 \rho(\mathbf{x})\mathbf{\ddot{u}}(\mathbf{x}) = \mathbf{f}(\mathbf{x})&+\sum_i \omega(\boldsymbol{\xi}_i)\left\{\frac{\alpha(\mathbf{x})}{|\mathbf{p}_i |}\frac{\mathbf{p}_i}{|\mathbf{p}_i |}\times \left[ \frac{\mathbf{p}_i}{|\mathbf{p}_i |}\times \frac{\mathbf{q}_i}{|\mathbf{q}_i |}\right] \right. \notag \\
-& \left. -\frac{\alpha(\mathbf{x}+\boldsymbol{\xi}_i)}{|\mathbf{p}_i |}\frac{(-\mathbf{p}_i)}{|\mathbf{p}_i |}\times\left[\frac{(-\mathbf{p}_i)}{|\mathbf{p}_i |}\times \frac{\mathbf{r}_i}{|\mathbf{r}_i |} \right] \right\} 
+& \left. -\frac{\alpha(\mathbf{x}+\boldsymbol{\xi}_i)}{|\mathbf{p}_i |}\frac{(-\mathbf{p}_i)}{|\mathbf{p}_i |}\times\left[\frac{(-\mathbf{p}_i)}{|\mathbf{p}_i |}\times \frac{\mathbf{r}_i}{|\mathbf{r}_i |} \right] \right\} \,,
 \label{eq:discretebeamEoM}
 \end{align}
 with
 \begin{align}
-\mathbf{p}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}), ,\notag\\
-\mathbf{q}_i &= -\boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}-\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}), ,\notag\\
-\mathbf{r}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+2\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i), ,\notag
+\mathbf{p}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x})\, ,\notag\\
+\mathbf{q}_i &= -\boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}-\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x})\, ,\notag\\
+\mathbf{r}_i &= \boldsymbol{\xi}_i+\mathbf{u}(\mathbf{x}+2\boldsymbol{\xi}_i)-\mathbf{u}(\mathbf{x}+\boldsymbol{\xi}_i)\, ,\notag
 \end{align}
 and for small displacements and rotations in a uniform beam,
 \begin{align}
@@ -532,19 +533,12 @@ For this reason, the discretization does not allow for areas of higher and lower
 \label{fig:discretePlate}
 \end{figure}
 %
-As with the beam, discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
-%
-%\begin{align}
-%w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right] \notag \\
-%&\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{z(\mathbf{x}+\boldsymbol{\xi}_i)-2z(\mathbf{x})+z(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2 \notag
-%\end{align}
-%%
-%in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the point $\mathbf{x}$ to each of the $n$ points within distance $\delta$ of point $\mathbf{x}$.
+As with the beam, discretizing the bond-pair model is primarily matter of exchanging integrals for sums;
 %
 \begin{align}
 \label{eq:discreteplate}
     \alpha &= \frac{c\; (\Delta x)^2}{m} ;\; c= \frac{\mu}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies  \\
-    W&=(\Delta x)^2 \sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\frac{\mu}{2(1-\nu)}\frac{h^3}{12}\left(\frac{w(\mathbf{x}+\boldsymbol{\xi}_i)-2w(\mathbf{x})+w(\mathbf{x}-\boldsymbol{\xi}_i)}{|\boldsymbol{\xi}_i|}\right)^2 \notag
+    W&=(\Delta x)^2 \sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\frac{\mu}{2(1-\nu)}\frac{h^3}{12}\left(\frac{w(\mathbf{x}+\boldsymbol{\xi}_i)-2w(\mathbf{x})+w(\mathbf{x}-\boldsymbol{\xi}_i)}{|\boldsymbol{\xi}_i|}\right)^2 \,.\notag
 \end{align}
 %
 Discretization of the 1-parameter bending model results in the same equation of motion as for the beam model (eq. \ref{eq:discretebeamEoM}).
@@ -724,14 +718,14 @@ W_B &= -\frac{C_x-A_x}{A_x-B_x}\, ,\notag\\
 W_A &= 1-w_B\, .\notag
 \end{align}
 The problem becomes a little more complicated for curved beams, but we can tackle it by projecting the virtual point onto the line between the two nearest real points.
-The weighting function then becomes
+The weighting function is then computed according to
 \begin{align}
 \overline{AC}' &= \frac{\overline{AB}}{|\overline{AB}|}\left(\frac{\overline{AB}}{|\overline{AB}|} \cdot \overline{AC}\right)\, ,\notag\\
 \overline{BC}' &= \frac{\overline{BA}}{|\overline{BA}|}\left(\frac{\overline{BA}}{|\overline{BA}|}\cdot\overline{BC}\right)\, ,\notag\\
 W_B &= 
   \begin{dcases}
-    \phantom{-}\frac{|\overline{AC}'|}{|\overline{AB}|} & \text{if } |\overline{BC}'| \leq |\overline{AB}|\\
-    -\frac{|\overline{AC}'|}{|\overline{AB}|} &\text{otherwise}
+    \phantom{-}\frac{|\overline{AC}'|}{|\overline{AB}|} & \text{if } |\overline{BC}'| \leq |\overline{AB}|\,,\\
+    -\frac{|\overline{AC}'|}{|\overline{AB}|} &\text{otherwise}\,,
   \end{dcases}\notag\\
 W_A &= 1-W_B \, .\notag
 \end{align}
@@ -817,13 +811,13 @@ The bond pair coefficients at point $\mathbf{x}$ of a beam in bending (\cref{eq:
 %
 \begin{align}
 \label{eq:discreteBeamw2}
-\alpha_i &= \frac{c\; l(\mathbf{x})\;l(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= EI ;\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 l(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
+\alpha_i &= \frac{c\; l(\mathbf{x})\;l(\mathbf{x}+\boldsymbol{\xi}_i)}{m} \,,\; c= EI \,,\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 l(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
 \end{align}
 with $l(\mathbf{x})$ and $l(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the lengths of beam represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
 Similarly, the plate coefficients from \cref{eq:discreteplate} become
 %
 \begin{align}
-    \alpha_i &= \frac{c\; A(\mathbf{x})A(\mathbf{x}+\boldsymbol{\xi}_i)}{m} ;\; c= \frac{\mu}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2A(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
+    \alpha_i &= \frac{c\; A(\mathbf{x})A(\mathbf{x}+\boldsymbol{\xi}_i)}{m} \,,\; c= \frac{\mu}{(1-\nu)}\frac{h^3}{12}\,,\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2A(\mathbf{x}+\boldsymbol{\xi}_i)\, , \notag
 \end{align}
 %
 with $A(\mathbf{x})$ and $A(\mathbf{x}+\boldsymbol{\xi}_i)$ representing the areas represented by the nodes at  $(\mathbf{x})$ and $(\mathbf{x}+\boldsymbol{\xi}_i)$.
@@ -891,4 +885,5 @@ The nature of the Trilinos packages and the structure of the code allow for more
 
 For all but the simplest loading conditions, analytical solutions to boundary condition problems become complicated.
 As load conditions and material behavior become more complex, there are no analytical solutions.
-For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases. \todo{If you have time and the inclination, I would expand this section significantly.  The code work was a considerable part of your research and only dedicating a few paragraphs does not do it justice.}
+For comparison, equivalent models are created and analyzed in Abaqus 6.12 to verify simple cases. 
+%\todo{If you have time and the inclination, I would expand this section significantly.  The code work was a considerable part of your research and only dedicating a few paragraphs does not do it justice.}

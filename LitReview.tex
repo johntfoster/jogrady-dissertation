@@ -8,8 +8,8 @@ One of the most popular is the eXtended Finite Element Method (XFEM), an excelle
 Traditional finite elements use polynomial basis functions to describe unknown fields over an element.
 As a result, fields such as displacement always vary continuously across an element; discontinuities within an element are poorly approximated even by high-order polynomials.
 When they are allowed at all, discontinuities can only arise between elements, and are therefore very mesh-dependent; worse, to model a moving or evolving discontinuity requires continual remeshing around the advancing crack tip, adding greatly to the computational complexity of the problem.
-The finite elements in an XFEM model are ``extended'' or enriched by adding basis functions that reflect the expected field behavior \todo{Clarify ``expected field behavoir'', for an analytic solution?}. 
-In the case of crack growth, this extension comes in the form of discontinuous basis functions.
+The finite elements in an XFEM model are ``extended'' or enriched by adding basis functions that are discontinuous or that are continuous but have discontinuous derivatives. 
+In the case of crack growth, this extension comes in the form of discontinuous basis functions that reflect the discontinuous displacement field at a crack.
 In 1982, Arnold~\cite{arnold1982interior} developed a mathematical basis for using discontinuous finite elements and an interior penalty method.
 This method allows modeling problems with very high gradients (as at boundaries) and greatly reduces the importance of meshing and the need for remeshing.
 While initially demonstrated for high-gradient heat and fluid flow problems, the method of adding discontinuities within an element had strong potential for failure problems resulting in discontinuous displacements.
