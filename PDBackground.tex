@@ -27,6 +27,7 @@ For a more rigorous definition and examples of the Fr\'echet derivative, see \cr
 
 \begin{table}
 \centering
+\caption{Common State Operation Nomenclature}
 \begin{tabular}{l >{$\displaystyle}r<{$} >{$\displaystyle}l<{$}}
 Operation & \textrm{Notation} & \textrm{Meaning} \\ \hline\hline
 Addition & (\sstate{a}{}{} + \sstate{b}{}{})\langle\boldsymbol{\xi}\rangle & \sstate{a}{}{\boldsymbol{\xi}} + \sstate{b}{}{\boldsymbol{\xi}} \\ \hline
@@ -40,7 +41,6 @@ State Norm & \|\vstate{A}{}{}\| & \sqrt{\vstate{A}{}{} \bullet \vstate{B}{}{}} \
 \multirow{2}{*}{Fr\'echet Derivative} & \nabla\mathit{f}(\vstate{A}{}{}) & \frac{\partial \mathit{f}}{\partial \vstate{A}{}{}} \\ \noalign{\smallskip}
 & \Psi(\vstate{A}{}{},\vstate{B}{}{})_\vstate{A}{}{} & \frac{\partial \Psi}{\partial \vstate{A}{}{}} \\ \noalign{\smallskip} \hline\hline
 \end{tabular}
-\caption{Common State Operation Nomenclature}
 \label{table:StateOperations}
 \end{table}
 
@@ -113,6 +113,7 @@ It should be clear that many of the concepts of classical continuum mechanics ha
 
 \begin{table}
 \centering
+\caption{Peridynamic Equivalents of Classical Concepts}
 \begin{tabular}{l >{$\displaystyle}r<{$} >{$\displaystyle}l<{$}}
 Concept & \textrm{Classical} & \textrm{Peridynamic} \\ \hline\hline
 Kinematics & \mathbf{F} & \tvstate{Y}{}{} \\ \hline \noalign{\smallskip}
@@ -121,7 +122,6 @@ Angular Momentum &\boldsymbol{\sigma} = \boldsymbol{\sigma}^T  & \int_\Omega \vs
 Constitutive Law & \boldsymbol{\sigma} = \boldsymbol{\sigma}(\boldsymbol{\epsilon}) &\tvstate{T}{}{}=\tvstate{T}{}{}(\tvstate{Y}{}{}) \\  \hline
 Stress Power  & \dot{\boldsymbol{\epsilon}} \boldsymbol{\sigma} &\tvstate{T}{}{}\bullet \tvstate{\dot{Y}}{}{} \\  \hline\hline
 \end{tabular}
-\caption{Peridynamic Equivalents of Classical Concepts}
 \label{table:PDconcepts}
 \end{table}
 

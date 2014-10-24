@@ -144,7 +144,7 @@ Eringen's model for nonlocal elasticity in \cite{eringen1983differential} begins
 \mathbf{t} = \int_\mathbf{V} K(|\mathbf{x}'-\mathbf{x}|,\tau)\boldsymbol{\sigma}(\mathbf{x}')dv(\mathbf{x}')\, .\notag
 \end{equation}
 In the local limit these relationships take the form of higher-order gradients.
-Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\)results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\),
+Using a 1-dimensional decaying exponential nonlocal modulus \(K(|x|,\tau)=\frac{1}{\tau l}e^{-\frac{|x|}{\tau l}}\) results in a relationship between \(t_\text{1D}\) and \(\sigma_\text{1D}\),
 \begin{align}
 \left(1-(\tau l)^2\frac{\partial^2}{\partial x^2}\right)t_\text{1D}&=\sigma_\text{1D}\, ,\notag
 \end{align}
@@ -485,6 +485,7 @@ The model parameters and behaviors are defined by integrals over length or area,
 This is not to say that the properties themselves need be continuous, but they cannot be defined only at a finite number of points.
 While such models are mathematically convenient, they are less convenient for performing many engineering problems.
 For the analysis of these problems, it is useful to have a discretized version of the model that can be evaluated from the properties of a finite number of peridynamic nodes that represent the continuous feature.
+
 \section{Discretized Bond Pair Beam}
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums,
 %
