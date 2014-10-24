@@ -486,6 +486,34 @@ This is not to say that the properties themselves need be continuous, but they c
 While such models are mathematically convenient, they are less convenient for performing many engineering problems.
 For the analysis of these problems, it is useful to have a discretized version of the model that can be evaluated from the properties of a finite number of peridynamic nodes that represent the continuous feature.
 
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{.3\linewidth}
+        \resizebox{\linewidth}{!}{\input{./diagrams/PotatoContinuous2.tex}}
+    \end{minipage}
+    \begin{minipage}[b]{.3\linewidth}
+        \resizebox{\linewidth}{!}{\subinputfrom{\diagrampath}{PotatoMeshed2.eps_tex}}
+    \end{minipage}
+    \begin{minipage}[b]{.3\linewidth}
+        \resizebox{\linewidth}{!}{\input{./diagrams/PotatoDiscrete2.tex}}
+    \end{minipage}
+    \caption{Translating Continuum Peridynamics to a Discrete Domain}
+    \label{fig:PDpotato}
+    
+\end{figure}
+
+Discretizing the continuous domain of interest as illustrated in \cref{fig:PDpotato} is a straightforward task.
+First, the entire domain is divided into small, non-overlapping subdomains.
+Ideally, these subdomains are regular in size and compact in shape, and it is important that the largest dimension of a subdomain be similar to the smallest dimension as well as significantly smaller than the peridynamic horizon.
+
+A peridynamic node is then placed at the centroid of each subdomain.
+This node has no volume (is a zero-dimensional point), but it does have mass equal to the mass of the material in the subdomain.
+After the nodes are placed, neighborhoods are constructed.
+The neighborhood of the node at $\mathbf{x}_i$ consists of all the nodes $\mathbf{x}_j$ for whom $|\mathbf{x}_j-\mathbf{x}_i|$ is smaller than the horizon.
+As the number of nodes in each neighborhood increases, the material represented by the nodes in a neighborhood will converge to the material within the horizon in the continuous domain.
+At the same time, the integrals of well-behaved functions over neighborhood regions in the continuous model can be approximated by weighted sums of the same functions evaluated at the discrete nodes in a neighborhood.
+This is the key to translating the continuous peridynamic model into a more practical discrete version.
+
 \section{Discretized Bond Pair Beam}
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums,
 %
