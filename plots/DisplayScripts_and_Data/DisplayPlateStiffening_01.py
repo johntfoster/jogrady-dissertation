@@ -71,7 +71,8 @@ file_name_list01 = [
 "Nu33_n101_h03_compression0pt1/Nu33_n101_h03_compression0pt1_3_exp_8.npz",
 "Nu33_n101_h03_compression0pt1/Nu33_n101_h03_compression0pt1_2_exp_8.npz",
 "Nu33_n101_h03_compression0pt1/Nu33_n101_h03_compression0pt1_1_exp_8.npz",
-"Nu33_n101_h03_g0pt1/Nu33_n101_h03_g0pt1_1_exp_2.npz",
+# "Nu33_n101_h03_g0pt1/Nu33_n101_h03_g0pt1_1_exp_2.npz",
+"Nu333_n101_h03_g0pt1_1_exp_5.npz",
 "Nu33_n101_h03_tension0pt1/Nu33_n101_h03_tension0pt1_1_exp_10.npz",
 "Nu33_n101_h03_tension0pt1/Nu33_n101_h03_tension0pt1_2_exp_10.npz",
 "Nu33_n101_h03_tension0pt1/Nu33_n101_h03_tension0pt1_3_exp_10.npz"]
@@ -86,39 +87,39 @@ for index,filename in enumerate(file_name_list01):
 
 normMaxDisp01 = np.divide(maxDisp01,maxDisp01[3,None])
 
-file_name_list1 = [
-"Nu33_n101_h03_compression/Nu33_n101_h03_compression_2_exp_6.npz",
-"Nu33_n101_h03_compression/Nu33_n101_h03_compression_1_exp_6.npz",
-"Nu33_n101_h03_compression/Nu33_n101_h03_compression_0_exp_6.npz",
-"Plate_nu33_n101_h03e/Plate_nu33_n101_h03e__exp_8.npz",
-"Nu33_n101_h03_tension/Nu33_n101_h03_tension_0_exp_6.npz",
-"Nu33_n101_h03_tension/Nu33_n101_h03_tension_1_exp_6.npz",
-"Nu33_n101_h03_tension/Nu33_n101_h03_tension_2_exp_6.npz"]
-
-maxDisp1 = np.empty_like(refRatio)
-for index,filename in enumerate(file_name_list1):
-    data = np.load(filename)
-    uz = data['uz']
-    maxDisp1[index]=np.amax(np.absolute(uz))
-
-normMaxDisp1 = np.divide(maxDisp1,maxDisp1[3,None])
-
-file_name_list10 = [
-"Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_2_exp_5.npz",
-"Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_1_exp_5.npz",
-"Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_0_exp_5.npz",
-"Nu33_n101_h03_g10_2/Nu33_n101_h03_g10_2_1_exp_1.npz",
-"Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_0_exp_5.npz",
-"Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_1_exp_5.npz",
-"Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_2_exp_5.npz"]
-
-maxDisp10 = np.empty_like(refRatio)
-for index,filename in enumerate(file_name_list10):
-    data = np.load(filename)
-    uz = data['uz']
-    maxDisp10[index]=np.amax(np.absolute(uz))
-
-normMaxDisp10 = np.divide(maxDisp10,maxDisp10[3,None])
+# file_name_list1 = [
+# "Nu33_n101_h03_compression/Nu33_n101_h03_compression_2_exp_6.npz",
+# "Nu33_n101_h03_compression/Nu33_n101_h03_compression_1_exp_6.npz",
+# "Nu33_n101_h03_compression/Nu33_n101_h03_compression_0_exp_6.npz",
+# "Plate_nu33_n101_h03e/Plate_nu33_n101_h03e__exp_8.npz",
+# "Nu33_n101_h03_tension/Nu33_n101_h03_tension_0_exp_6.npz",
+# "Nu33_n101_h03_tension/Nu33_n101_h03_tension_1_exp_6.npz",
+# "Nu33_n101_h03_tension/Nu33_n101_h03_tension_2_exp_6.npz"]
+# 
+# maxDisp1 = np.empty_like(refRatio)
+# for index,filename in enumerate(file_name_list1):
+#     data = np.load(filename)
+#     uz = data['uz']
+#     maxDisp1[index]=np.amax(np.absolute(uz))
+# 
+# normMaxDisp1 = np.divide(maxDisp1,maxDisp1[3,None])
+# 
+# file_name_list10 = [
+# "Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_2_exp_5.npz",
+# "Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_1_exp_5.npz",
+# "Nu33_n101_h03_compression10/Nu33_n101_h03_compression10_0_exp_5.npz",
+# "Nu33_n101_h03_g10_2/Nu33_n101_h03_g10_2_1_exp_1.npz",
+# "Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_0_exp_5.npz",
+# "Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_1_exp_5.npz",
+# "Nu33_n101_h03_tension10/Nu33_n101_h03_tension10_2_exp_5.npz"]
+# 
+# maxDisp10 = np.empty_like(refRatio)
+# for index,filename in enumerate(file_name_list10):
+#     data = np.load(filename)
+#     uz = data['uz']
+#     maxDisp10[index]=np.amax(np.absolute(uz))
+# 
+# normMaxDisp10 = np.divide(maxDisp10,maxDisp10[3,None])
 
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
@@ -126,11 +127,11 @@ ax = fig.add_subplot(111)
 # ax.plot(analyticalX1,analyticalZ1,label="Analytical")
 # ref=ax.plot(refRatio,normRefRatio,ls="None", marker="o",label="Roark")
 ref2=ax.plot(analyticalRange,analyticalNorm, marker="None",label="Analytical")
-s01=ax.plot(refRatio,normMaxDisp01,ls="None", marker="o",label="Model")
+s01=ax.plot(refRatio[1:],normMaxDisp01[1:],ls="None", marker="o",label="Model")
 # s1=ax.plot(refRatio,normMaxDisp1,ls="None", marker="o",label="pdPlate1") 
 # s10=ax.plot(refRatio,normMaxDisp10,ls="None", marker="o",label="pdPlate10")
 ax.set_yscale('log')
-plt.title('Simply Supported Plate Stiffening')
+# plt.title('Simply Supported Plate Stiffening')
 
 plt.legend(loc=9, borderaxespad=0.)
 
@@ -141,8 +142,7 @@ ax.set_yticks(np.logspace(-1.0,1.0,num=5))
 ax.grid(True)
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/plateStiffening.pgf")
+    fig.savefig("../plateStiffening.pgf")
 plt.show()
 
 

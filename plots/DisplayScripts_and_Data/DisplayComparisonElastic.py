@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -86,11 +86,11 @@ analyticalY2 = [((-gamma*yieldstrain/(24.0*thickness*plate_length**2))*
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
-ax1=ax.plot(abaqusX1,abaqusY1,label=Abaquslabel1,linestyle="-",marker="o",markevery=(100,200))
-ax2=ax.plot(pdX1,pdZ1,label=PDlabel1,marker="^",markevery=10)
-ax3=ax.plot(pdX2,pdZ2,label=PDlabel2,marker=">",markevery=(20,10))
+ax1=ax.plot(abaqusX1,abaqusY1,label=r"Abaqus Beam, $n=2000$",linestyle="-",marker="o",markevery=(100,200))
+ax2=ax.plot(pdX1,pdZ1,label=r"50 nodes, $\delta = 0.20$",marker="^",markevery=10)
+ax3=ax.plot(pdX2,pdZ2,label=r"100 nodes, $\delta = 0.20$",marker=">",markevery=(20,10))
 
-plt.title('Uniformly Loaded Elastic Beam')
+# plt.title('Uniformly Loaded Elastic Beam')
 ax.set_xlabel('Distance along Beam')
 ax.set_xlim((0.0,2.0))
 ax.set_xticks(np.linspace(0.0,2.0,num=5))
@@ -104,7 +104,7 @@ ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.legend(loc=9, borderaxespad=0.)
 if saving:
     make_sure_path_exists("../plots")
-    fig.savefig("../plots/elastic_h20_g2000.pgf")
+    fig.savefig("../elastic_h20_g2000.pgf")
 plt.show()
 
 

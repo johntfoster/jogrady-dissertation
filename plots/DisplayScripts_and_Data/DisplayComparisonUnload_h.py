@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -89,12 +89,12 @@ fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
 
-ax1=ax.plot(abaqusX1,abaqusY1,label="Abaqus EPP Beam",linestyle="-")
-ax2=ax.plot(pdX1,pdZ1,label=PDlabel1,marker="^",markevery=(20,100))
-ax3=ax.plot(pdX2,pdZ2,label=PDlabel2,marker=">",markevery=(50,100))
-ax4=ax.plot(pdX3,pdZ3,label=PDlabel3,marker="v",markevery=(80,100))
+ax1=ax.plot(abaqusX1,abaqusY1,label=r"Abaqus, $n=2000$",linestyle="-")
+ax2=ax.plot(pdX1,pdZ1,label=r"1000 nodes, $\delta=0.20$",marker="^",markevery=(0,100))
+ax3=ax.plot(pdX2,pdZ2,label=r"1000 nodes, $\delta=0.15$",marker=">",markevery=(33,100))
+ax4=ax.plot(pdX3,pdZ3,label=r"1000 nodes, $\delta=0.10$",marker="v",markevery=(66,100))
 
-plt.title('Unloaded EPP Beam')
+# plt.title('Unloaded EPP Beam')
 ax.set_xlabel('Distance along Beam')
 ax.set_xlim((0.0,2.0))
 ax.set_xticks(np.linspace(0.0,2.0,num=5))
@@ -106,8 +106,7 @@ ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 plt.legend(loc=9, borderaxespad=0.)
 if saving:
-    make_sure_path_exists("../plots")
-    fig.savefig("../plots/unloaded2_n1000_g2000_h.pgf")
+    fig.savefig("../unloaded2_n1000_g2000_h.pgf")
 plt.show()
 
 

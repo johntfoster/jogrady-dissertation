@@ -896,11 +896,11 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{0.995956in}{0.922314in}}%
-\pgfpathlineto{\pgfqpoint{3.822225in}{0.922314in}}%
-\pgfpathlineto{\pgfqpoint{3.822225in}{1.818980in}}%
-\pgfpathlineto{\pgfqpoint{0.995956in}{1.818980in}}%
-\pgfpathlineto{\pgfqpoint{0.995956in}{0.922314in}}%
+\pgfpathmoveto{\pgfqpoint{0.849766in}{0.922314in}}%
+\pgfpathlineto{\pgfqpoint{3.968415in}{0.922314in}}%
+\pgfpathlineto{\pgfqpoint{3.968415in}{1.861202in}}%
+\pgfpathlineto{\pgfqpoint{0.849766in}{1.861202in}}%
+\pgfpathlineto{\pgfqpoint{0.849766in}{0.922314in}}%
 \pgfpathclose%
 \pgfusepath{stroke,fill}%
 \end{pgfscope}%
@@ -911,12 +911,12 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.135956in}{1.668980in}}%
-\pgfpathlineto{\pgfqpoint{1.415956in}{1.668980in}}%
+\pgfpathmoveto{\pgfqpoint{0.989766in}{1.711202in}}%
+\pgfpathlineto{\pgfqpoint{1.269766in}{1.711202in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.635956in,y=1.598980in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
+\pgftext[x=1.489766in,y=1.641202in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -935,16 +935,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.135956in}{1.390092in}%
+\pgfsys@transformshift{0.989766in}{1.422314in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.415956in}{1.390092in}%
+\pgfsys@transformshift{1.269766in}{1.422314in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.635956in,y=1.320092in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 1006 nodes, horizon .016}}%
+\pgftext[x=1.489766in,y=1.352314in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont  320 nodes/length, \(\displaystyle \delta=0.016\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -969,16 +969,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.135956in}{1.111203in}%
+\pgfsys@transformshift{0.989766in}{1.122314in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.415956in}{1.111203in}%
+\pgfsys@transformshift{1.269766in}{1.122314in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.635956in,y=1.041203in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 1006 nodes, horizon .032}}%
+\pgftext[x=1.489766in,y=1.052314in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont  320 nodes/length, \(\displaystyle \delta=0.032\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1738,9 +1738,6 @@
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgftext[x=5.790909in,y=5.469444in,,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont X Displacement}}%
-\end{pgfscope}%
-\begin{pgfscope}%
-\pgftext[x=4.000000in,y=5.880000in,,top]{{\rmfamily\fontsize{16.000000}{19.200000}\selectfont Proving Ring in Tension}}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%

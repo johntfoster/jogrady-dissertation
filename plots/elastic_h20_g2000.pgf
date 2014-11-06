@@ -21,7 +21,7 @@
 \pgfpathrectangle{\pgfpointorigin}{\pgfqpoint{6.000000in}{6.000000in}}%
 \pgfusepath{use as bounding box}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
 \pgfsetfillcolor{currentfill}%
@@ -37,13 +37,14 @@
 \pgfusepath{fill}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
 \pgfsetfillcolor{currentfill}%
 \pgfsetlinewidth{0.000000pt}%
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
+\pgfsetstrokeopacity{0.000000}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.750000in}{0.600000in}}%
 \pgfpathlineto{\pgfqpoint{5.400000in}{0.600000in}}%
@@ -726,7 +727,7 @@
 \pgftext[x=5.400000in,y=0.544444in,,top]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 2.0\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.075000in,y=0.367593in,,top]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont Distance along Beam}}%
+\pgftext[x=3.075000in,y=0.326852in,,top]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont Distance along Beam}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.750000in}{0.600000in}}{\pgfqpoint{4.650000in}{4.800000in}} %
@@ -1005,7 +1006,7 @@
 \pgftext[x=0.750000in,y=5.441667in,left,base]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle \times10^{-4}\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.003750pt}%
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
@@ -1016,7 +1017,7 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.003750pt}%
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
@@ -1027,7 +1028,7 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.003750pt}%
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
@@ -1038,7 +1039,7 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.003750pt}%
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
@@ -1049,10 +1050,7 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.075000in,y=5.469444in,,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Uniformly Loaded Elastic Beam}}%
-\end{pgfscope}%
-\begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
 \pgfsetfillcolor{currentfill}%
@@ -1060,11 +1058,11 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.710823in}{4.503334in}}%
-\pgfpathlineto{\pgfqpoint{4.439177in}{4.503334in}}%
-\pgfpathlineto{\pgfqpoint{4.439177in}{5.400000in}}%
-\pgfpathlineto{\pgfqpoint{1.710823in}{5.400000in}}%
-\pgfpathlineto{\pgfqpoint{1.710823in}{4.503334in}}%
+\pgfpathmoveto{\pgfqpoint{1.671668in}{4.503334in}}%
+\pgfpathlineto{\pgfqpoint{4.478332in}{4.503334in}}%
+\pgfpathlineto{\pgfqpoint{4.478332in}{5.400000in}}%
+\pgfpathlineto{\pgfqpoint{1.671668in}{5.400000in}}%
+\pgfpathlineto{\pgfqpoint{1.671668in}{4.503334in}}%
 \pgfpathclose%
 \pgfusepath{stroke,fill}%
 \end{pgfscope}%
@@ -1075,8 +1073,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.850823in}{5.250000in}}%
-\pgfpathlineto{\pgfqpoint{2.130823in}{5.250000in}}%
+\pgfpathmoveto{\pgfqpoint{1.811668in}{5.250000in}}%
+\pgfpathlineto{\pgfqpoint{2.091668in}{5.250000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1102,16 +1100,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.850823in}{5.250000in}%
+\pgfsys@transformshift{1.811668in}{5.250000in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.130823in}{5.250000in}%
+\pgfsys@transformshift{2.091668in}{5.250000in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.350823in,y=5.180000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Abaqus Elastic Beam}}%
+\pgftext[x=2.311668in,y=5.180000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Abaqus Beam, \(\displaystyle n=2000\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetrectcap%
@@ -1120,8 +1118,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.500000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.850823in}{4.971111in}}%
-\pgfpathlineto{\pgfqpoint{2.130823in}{4.971111in}}%
+\pgfpathmoveto{\pgfqpoint{1.811668in}{4.971111in}}%
+\pgfpathlineto{\pgfqpoint{2.091668in}{4.971111in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1141,16 +1139,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.850823in}{4.971111in}%
+\pgfsys@transformshift{1.811668in}{4.971111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.130823in}{4.971111in}%
+\pgfsys@transformshift{2.091668in}{4.971111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.350823in,y=4.901111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 50 nodes, horizon 0.20}}%
+\pgftext[x=2.311668in,y=4.901111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 50 nodes, \(\displaystyle \delta = 0.20\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetrectcap%
@@ -1159,8 +1157,8 @@
 \definecolor{currentstroke}{rgb}{1.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.850823in}{4.692223in}}%
-\pgfpathlineto{\pgfqpoint{2.130823in}{4.692223in}}%
+\pgfpathmoveto{\pgfqpoint{1.811668in}{4.692223in}}%
+\pgfpathlineto{\pgfqpoint{2.091668in}{4.692223in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1180,16 +1178,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.850823in}{4.692223in}%
+\pgfsys@transformshift{1.811668in}{4.692223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.130823in}{4.692223in}%
+\pgfsys@transformshift{2.091668in}{4.692223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.350823in,y=4.622223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, horizon 0.20}}%
+\pgftext[x=2.311668in,y=4.622223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, \(\displaystyle \delta = 0.20\)}}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%

@@ -80,7 +80,7 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 # abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
 
 #Load PD plate data
-PDfile1name = "./Nu33_n41_h05_g0pt1/Nu33_n41_h05_g0pt1_1_exp_8.npz"
+PDfile1name = "./Nu33_n41_h05_g0pt1_1_exp_8.npz"
 PDlabel1 = "101x101 nodes, h10, ext10"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -124,7 +124,7 @@ difference1 = pdZ1c-analyticalZ1
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./Nu33_n51_h05_g0pt1/Nu33_n51_h05_g0pt1_1_exp_8.npz"
+PDfile2name = "./Nu33_n51_h05_g0pt1_1_exp_8.npz"
 PDlabel2 = "101x101 nodes, h05, ext10"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -168,7 +168,7 @@ difference2 = pdZ2c-analyticalZ2
 
 #Load PD plate data
 pdHorizon3 = 0.05
-PDfile3name = "./Nu33_n61_h05_g0pt1/Nu33_n61_h05_g0pt1_1_exp_7.npz"
+PDfile3name = "./Nu33_n61_h05_g0pt1_1_exp_7.npz"
 PDlabel3 = "101x101 nodes, h05, ext10"
 PDdata3 = np.load(PDfile3name)
 ux3 = PDdata3['ux']
@@ -213,7 +213,7 @@ difference3 = pdZ3c-analyticalZ3
 
 #Load PD plate data
 pdHorizon4 = 0.05
-PDfile4name = "./Nu33_n81_h05_g0pt1/Nu33_n81_h05_g0pt1_1_exp_7.npz"
+PDfile4name = "./Nu33_n81_h05_g0pt1_1_exp_7.npz"
 PDlabel4 = "101x101 nodes, h05, ext10"
 PDdata4 = np.load(PDfile4name)
 ux4 = PDdata4['ux']
@@ -259,16 +259,16 @@ plt.hold(True)
 ax = fig.add_subplot(111)
 # ax1=ax.plot(analyticalX1,analyticalZ1,label="Analytical")
 # ax1=ax.plot(pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,2),label=r"$\Delta x$=0.025, h=0.05")
-ax1=ax.plot(pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,4),label=r"40 nodes, h=0.05")
-ax2=ax.plot(pdX2c,pdZ2c,ls="None", marker="o",markevery=(1,5),label=r"50 nodes, h=0.05")
-ax3=ax.plot(pdX3c,pdZ3c,ls="None", marker="v",markevery=(3,6),label=r"60 nodes, h=0.05")
-ax4=ax.plot(pdX4c,pdZ4c,ls="None", marker="s",markevery=(6,8),label=r"80 nodes, h=0.05")
+ax1=ax.plot(pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,4),label=r"40 nodes/side, $\delta=0.05$")
+ax2=ax.plot(pdX2c,pdZ2c,ls="None", marker="o",markevery=(1,5),label=r"50 nodes/side, $\delta=0.05$")
+ax3=ax.plot(pdX3c,pdZ3c,ls="None", marker="v",markevery=(3,6),label=r"60 nodes/side, $\delta=0.05$")
+ax4=ax.plot(pdX4c,pdZ4c,ls="None", marker="s",markevery=(6,8),label=r"80 nodes/side, $\delta=0.05$")
 # ax3=ax.plot(pdX3c,pdZ3c,ls="None", marker="v",markevery=(0,5),label=r"100 nodes, h=0.05")
 # ax4=ax.plot(pdX4c,pdZ4c,ls="None", marker="s",markevery=(0,8),label=r"160 nodes, h=0.05")
 # ax4=ax.plot(pdX3c,pdZ3c,ls="None", marker="o",markevery=(4,6),label="200 nodes, h=0.020")
 # ax = fig.add_subplot(211, projection='3d')
 # ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-plt.title('Simply Supported Plate Slice')
+# plt.title('Simply Supported Plate Slice')
 
 plt.legend(loc=9, borderaxespad=0.)
 
@@ -280,8 +280,7 @@ ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/elasticPlate_convergence_dx.pgf")
+    fig.savefig("../elasticPlate_convergence_dx.pgf")
 plt.show()
 
 

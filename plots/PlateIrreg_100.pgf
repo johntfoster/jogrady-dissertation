@@ -1084,11 +1084,11 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{1.868576in}{4.503334in}}%
-\pgfpathlineto{\pgfqpoint{4.281424in}{4.503334in}}%
-\pgfpathlineto{\pgfqpoint{4.281424in}{5.400000in}}%
-\pgfpathlineto{\pgfqpoint{1.868576in}{5.400000in}}%
-\pgfpathlineto{\pgfqpoint{1.868576in}{4.503334in}}%
+\pgfpathmoveto{\pgfqpoint{1.746182in}{4.503334in}}%
+\pgfpathlineto{\pgfqpoint{4.403818in}{4.503334in}}%
+\pgfpathlineto{\pgfqpoint{4.403818in}{5.400000in}}%
+\pgfpathlineto{\pgfqpoint{1.746182in}{5.400000in}}%
+\pgfpathlineto{\pgfqpoint{1.746182in}{4.503334in}}%
 \pgfpathclose%
 \pgfusepath{stroke,fill}%
 \end{pgfscope}%
@@ -1099,12 +1099,12 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{2.008576in}{5.250000in}}%
-\pgfpathlineto{\pgfqpoint{2.288576in}{5.250000in}}%
+\pgfpathmoveto{\pgfqpoint{1.886182in}{5.250000in}}%
+\pgfpathlineto{\pgfqpoint{2.166182in}{5.250000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.508576in,y=5.180000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
+\pgftext[x=2.386182in,y=5.180000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1123,16 +1123,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.008576in}{4.971111in}%
+\pgfsys@transformshift{1.886182in}{4.971111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.288576in}{4.971111in}%
+\pgfsys@transformshift{2.166182in}{4.971111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.508576in,y=4.901111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, regular}}%
+\pgftext[x=2.386182in,y=4.901111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont regular discretization}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1152,16 +1152,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.008576in}{4.692223in}%
+\pgfsys@transformshift{1.886182in}{4.692223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{2.288576in}{4.692223in}%
+\pgfsys@transformshift{2.166182in}{4.692223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=2.508576in,y=4.622223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, irregular}}%
+\pgftext[x=2.386182in,y=4.622223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont irregular discretization}}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%

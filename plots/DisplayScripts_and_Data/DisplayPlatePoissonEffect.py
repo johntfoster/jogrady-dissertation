@@ -80,8 +80,9 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 # abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
 
 #Load PD plate data
-PDfile1name = "./Nu33_n101_h06_g0pt1/Nu33_n101_h06_g0pt1_1_exp_8.npz"
-PDfile1name = "./Nu333_n101_h03_g0pt1/Nu333_n101_h03_g0pt1_1_exp_5.npz"
+PDfile1name = "./Nu33_n201_h03_g0pt1_1_exp_1.npz"
+# PDfile1name = "./Nu33_n101_h06_g0pt1_1_exp_8.npz"
+# PDfile1name = "./Nu333_n101_h03_g0pt1_1_exp_5.npz"
 PDlabel1 = "101x101 nodes, h10, ext10"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -127,7 +128,7 @@ difference1 = pdZ1c-analyticalZ1
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./Nu25_n101_h03_g0pt1/Nu25_n101_h03_g0pt1_1_exp_5.npz"
+PDfile2name = "./Nu25_n101_h03_g0pt1_1_exp_5.npz"
 PDlabel2 = "101x101 nodes, h05, ext10"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -174,7 +175,7 @@ difference2 = pdZ2c-analyticalZ2
 
 #Load PD plate data
 pdHorizon3 = 0.05
-PDfile3name = "./Nu20_n101_h03_g0pt1/Nu20_n101_h03_g0pt1_1_exp_5.npz"
+PDfile3name = "./Nu20_n101_h03_g0pt1_1_exp_5.npz"
 PDlabel3 = "101x101 nodes, h05, ext10"
 PDdata3 = np.load(PDfile3name)
 ux3 = PDdata3['ux']
@@ -229,7 +230,7 @@ ax3a=ax.plot(analyticalX3,analyticalZ3,label=r"Classical $\nu = 0.20$")
 ax3=ax.plot(pdX3c,pdZ3c,ls="None", marker="o",markevery=(3,4),label=r"Model $\nu = 0.20$")
 # ax = fig.add_subplot(211, projection='3d')
 # ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-plt.title('Simply Supported Plate Slice')
+# plt.title('Simply Supported Plate Slice')
 
 plt.legend(loc=9, borderaxespad=0.)
 
@@ -241,8 +242,7 @@ ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/elasticPlatePoissonEffect.pgf")
+    fig.savefig("../elasticPlatePoissonEffect.pgf")
 plt.show()
 
 

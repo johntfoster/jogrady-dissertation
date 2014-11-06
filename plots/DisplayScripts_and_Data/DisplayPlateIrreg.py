@@ -171,8 +171,8 @@ fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
 ax1=ax.plot(analyticalX1,analyticalZ1,label="Analytical")
-ax2=ax.plot(pdX01c+pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,10),label="100 nodes, regular")
-ax3=ax.plot(pdX02c+pdX2c,pdZ2c,ls="None", marker="s",markevery=(5,10),label="100 nodes, irregular")
+ax2=ax.plot(pdX01c+pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,10),label="regular discretization")
+ax3=ax.plot(pdX02c+pdX2c,pdZ2c,ls="None", marker="s",markevery=(5,10),label="irregular discretization")
 
 # plt.title('Simply Supported Plate Slice')
 

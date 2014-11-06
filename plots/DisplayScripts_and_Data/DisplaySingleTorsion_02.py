@@ -5,7 +5,7 @@
 # scalar_variables = ['ux','uy','uz','damage','radius']
 # outfile = Ensight('output', vector_variables, scalar_variables,problem.comm, viz_path=VIZ_PATH)
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -85,7 +85,7 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 
 figureWidth = 6.0
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*1.5))
-fig.suptitle('Single Torsion Fracture',fontsize=16)
+# fig.suptitle('Single Torsion Fracture',fontsize=16)
 pdNameList=["./Coupled_damage_05/Coupled_damage_05_1_exp_1.npz",
 #     "./Coupled_damage_05/Coupled_damage_05_1_exp_50.npz",
     "./Coupled_damage_05/Coupled_damage_05_2_exp_30.npz",
@@ -181,8 +181,7 @@ bar2.set_ticks([-0.02,-0.015,-.01,0.0,0.005,0.01])
 bar2.ax.yaxis.set_ticks_position('left')
 fig.text(0.05, 0.5, 'Displacement', ha='center', va='center', rotation='vertical',fontsize = 16)
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/SingleTorsion.pgf")
+    fig.savefig("../SingleTorsion.pgf")
 # fig.savefig("./writeup/plots/SingleTorsion.png")
 plt.show()
 

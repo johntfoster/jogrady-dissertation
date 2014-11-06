@@ -68963,9 +68963,6 @@
 \pgftext[x=0.544444in,y=8.280000in,right,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.005\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.000000in,y=8.820000in,,top]{{\rmfamily\fontsize{16.000000}{19.200000}\selectfont Single Torsion Fracture}}%
-\end{pgfscope}%
-\begin{pgfscope}%
 \pgftext[x=5.819992in,y=3.928694in,left,base,rotate=90.000000]{{\rmfamily\fontsize{16.000000}{19.200000}\selectfont Damage}}%
 \end{pgfscope}%
 \begin{pgfscope}%

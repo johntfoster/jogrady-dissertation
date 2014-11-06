@@ -41,46 +41,9 @@ eps = 1.0e-8
 analyticalX1 = np.linspace(0.0,1.0,num=1001)
 analyticalX2 = np.linspace(0.0,1.0,num=1001)
 
-# #Load Abaqus report data
-# Abaqusfile1name = "./AbaqusResults/elastic_SSSS_edgeload_10.rpt"
-# Abaqusfile1 = open(Abaqusfile1name, "r")
-# Abaquslines1 = np.loadtxt(Abaqusfile1,skiprows=19)
-# 
-# X0a = Abaquslines1[:,1]
-# Y0a = Abaquslines1[:,2]
-# 
-# abaqusZa = Abaquslines1[:,6]
-# 
-# analyticalXa = X0a
-# analyticalYa = Y0a
-# analyticalZa = 0.0*X0a
-# 
-# multiplier = 16.0*(gamma/(plate_length*plate_width))*(yieldstrain/thickness)/(np.pi**6.0)
-# for m in range(1,20,2):
-#     for n in range(1,20,2):
-#         denominator = (m*n*((m/plate_length)**2.0+(n/plate_width)**2.0)**2.0)
-#         mnterm =(np.sin(m*np.pi*analyticalXa/plate_length)
-#             *np.sin(n*np.pi*analyticalYa/plate_width)
-#             /denominator)
-#         analyticalZa = analyticalZa+mnterm
-# analyticalZa = analyticalZa*multiplier
-# 
-# difference0 = abaqusZa-analyticalZa
-
-# #Load second Abaqus report data
-# Abaqusfile2name = "./AbaqusResults/uniformSSunload.rpt"
-# Abaqusfile2 = open(Abaqusfile2name, "r")
-# Abaquslines2 = np.loadtxt(Abaqusfile2,skiprows=3)
-# 
-# abaqusX2 = Abaquslines2[:,0]
-# analyticalX2 = abaqusX2
-# abaqusY2 = Abaquslines2[:,1]
-# abaqusK2 = np.zeros_like(abaqusX2)
-# abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
-
-figureWidth = 6.0
-fig=plt.figure(1,figsize=(figureWidth,figureWidth*1.5))
-# fig.suptitle('Double Torsion Fracture Test',fontsize=16)
+figureWidth = 10.0
+fig=plt.figure(1,figsize=(figureWidth*1.5,figureWidth))
+fig.suptitle('Double Torsion Fracture Test',fontsize=16)
 
 pdNameList=["./DoubleTorsionTest6_n101_h03/DoubleTorsionTest6_n101_h03_1_exp_58.npz", 
     "./DoubleTorsionTest6_n101_h03/DoubleTorsionTest6_n101_h03_2_exp_52.npz", 
@@ -140,6 +103,8 @@ for index in range(numplots):
 
     ax1.set_title(pdTitleList[index],fontsize=13)
     ax1.yaxis.tick_right()
+    ax1.set_ylim([0.5,0.55])
+    ax1.set_xlim([1.0,1.1])
 
 fig.subplots_adjust(left=0.18, top = 0.92, bottom=0.05,right=0.8, wspace=0.1, hspace=0.12)
 # fig.subplots_adjust(left=None, bottom=None, right=0.5, wspace=None, hspace=None)
@@ -153,7 +118,8 @@ bar2.set_ticks([-.03,-.025,-0.02,-0.015,-0.005,0.0,0.005,0.01])
 bar2.ax.yaxis.set_ticks_position('left')
 fig.text(0.05, 0.48, 'Displacement', ha='center', va='center', rotation='vertical',fontsize = 16)
 if saving:
-    fig.savefig("../DoubleTorsionDD.pgf")
+    make_sure_path_exists("./writeup/plots")
+    fig.savefig("./writeup/plots/DoubleTorsionDD.pgf")
 plt.show()
 
 

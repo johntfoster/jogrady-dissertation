@@ -33,10 +33,10 @@ figureWidth = 6.0
 
     #Problem parameters
 yieldstrain = 1.0e-3
-thickness = 0.001
+thickness = 0.01
 plate_length = 1.0
 plate_width = 1.0
-gamma = -0.001
+gamma = -0.1
 eps = 1.0e-6
 
 analyticalX1 = np.linspace(0.0,1.0,num=1001)
@@ -80,7 +80,7 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 # abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
 
 #Load PD plate data
-PDfile1name = "./Cantilever_n500_h10_ext10_g001_1_exp_25.npz"
+PDfile1name = "./Nu33_n101_h15_g0pt1_1_exp_3.npz"
 PDlabel1 = "101x101 nodes, h10, ext10"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -89,7 +89,9 @@ uz1 = PDdata1['uz']
 x01 = PDdata1['x0']
 y01 = PDdata1['y0']
 
-data1mask = np.logical_or(0.0-eps>x01,plate_length+eps<x01)
+data1mask = np.logical_or(
+    np.logical_or(0.0-eps>x01,plate_length+eps<x01),
+    np.logical_or((plate_width/2.0)-eps>y01,(plate_width/2.0)+eps<y01))
 
 pdX1 = ma.array(ux1,mask=data1mask)
 pdY1 = ma.array(uy1,mask=data1mask)
@@ -104,10 +106,25 @@ pdY01 = ma.array(y01,mask=data1mask)
 pdX01c=pdX01.compressed()
 pdY01c=pdY01.compressed()
 
+#Elastic Displacement for uniform load of gamma
+analyticalX1 = pdX01c
+analyticalY1 = pdY01c
+analyticalZ1 = 0.0*pdZ1c
+multiplier = 16.0*(gamma/(plate_length*plate_width))*(yieldstrain/thickness)/(np.pi**6.0)
+for m in range(1,20,2):
+    for n in range(1,20,2):
+        denominator = (m*n*((m/plate_length)**2.0+(n/plate_width)**2.0)**2.0)
+        mnterm =(np.sin(m*np.pi*analyticalX1/plate_length)
+            *np.sin(n*np.pi*analyticalY1/plate_width)
+            /denominator)
+        analyticalZ1 = analyticalZ1+mnterm
+analyticalZ1 = analyticalZ1*multiplier
+
+difference1 = pdZ1c-analyticalZ1
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./Cantilever_n250_h05_ext10_g001_cont_1_exp_27.npz"
+PDfile2name = "./Nu33_n101_h10_g0pt1_1_exp_3.npz"
 PDlabel2 = "101x101 nodes, h05, ext10"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -116,7 +133,9 @@ uz2 = PDdata2['uz']
 x02 = PDdata2['x0']
 y02 = PDdata2['y0']
 
-data2mask = np.logical_or(0.0-eps>x02,plate_length+eps<x02)
+data2mask = np.logical_or(
+    np.logical_or(0.0-eps>x02,plate_length+eps<x02),
+    np.logical_or((plate_width/2.0)-eps>y02,(plate_width/2.0)+eps<y02))
 
 pdX2 = ma.array(ux2,mask=data2mask)
 pdY2 = ma.array(uy2,mask=data2mask)
@@ -134,37 +153,86 @@ pdY02c=pdY02.compressed()
 #Elastic Displacement for uniform load of gamma
 analyticalX2 = pdX02c
 analyticalY2 = pdY02c
-analyticalZ2 = (
-    (gamma*(yieldstrain/thickness)/(24.0*(plate_length**2.0)))*
-    (analyticalX2**2.0)*
-    (6.0*(plate_length**2.0)-4.0*plate_length*analyticalX2+(analyticalX2**2.0)))
+analyticalZ2 = 0.0*pdZ2c
+multiplier = 16.0*(gamma/(plate_length*plate_width))*(yieldstrain/thickness)/(np.pi**6.0)
+for m in range(1,10,2):
+    for n in range(1,10,2):
+        denominator = (m*n*((m/plate_length)**2.0+(n/plate_width)**2.0)**2.0)
+        mnterm =(np.sin(m*np.pi*analyticalX2/plate_length)
+            *np.sin(n*np.pi*analyticalY2/plate_width)
+            /denominator)
+        analyticalZ2 = analyticalZ2+mnterm
+analyticalZ2 = analyticalZ2*multiplier
+
+difference2 = pdZ2c-analyticalZ2
+
+#Load PD plate data
+pdHorizon3 = 0.05
+PDfile3name = "./Plate_nu33_n100_h05_1_1.npz"
+PDlabel3 = "101x101 nodes, h05, ext10"
+PDdata3 = np.load(PDfile3name)
+ux3 = PDdata3['ux']
+uy3 = PDdata3['uy']
+uz3 = PDdata3['uz']
+x03 = PDdata3['x0']
+y03 = PDdata3['y0']
+
+data3mask = np.logical_or(
+    np.logical_or(0.0-eps>x03,plate_length+eps<x03),
+    np.logical_or((plate_width/2.0)-eps>y03,(plate_width/2.0)+eps<y03))
+
+pdX3 = ma.array(ux3,mask=data3mask)
+pdY3 = ma.array(uy3,mask=data3mask)
+pdZ3 = ma.array(uz3,mask=data3mask)
+
+pdX3c=pdX3.compressed()
+pdY3c=pdY3.compressed()
+pdZ3c=pdZ3.compressed()
+
+pdX03 = ma.array(x03,mask=data3mask)
+pdY03 = ma.array(y03,mask=data3mask)
+pdX03c=pdX03.compressed()
+pdY03c=pdY03.compressed()
+
+#Elastic Displacement for uniform load of gamma
+analyticalX3 = pdX03c
+analyticalY3 = pdY03c
+analyticalZ3 = 0.0*pdZ3c
+multiplier = 16.0*(gamma/(plate_length*plate_width))*(yieldstrain/thickness)/(np.pi**6.0)
+for m in range(1,10,2):
+    for n in range(1,10,2):
+        denominator = (m*n*((m/plate_length)**2.0+(n/plate_width)**2.0)**2.0)
+        mnterm =(np.sin(m*np.pi*analyticalX3/plate_length)
+            *np.sin(n*np.pi*analyticalY3/plate_width)
+            /denominator)
+        analyticalZ3 = analyticalZ3+mnterm
+analyticalZ3 = analyticalZ3*multiplier
+
+difference3 = pdZ3c-analyticalZ3
 
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
-ax1=ax.plot(analyticalX2,analyticalZ2,label=r"Analytical")
-ax2=ax.plot(pdX01c,pdZ1c,ls="None", marker="^",markevery=(0,20),label=r"500 nodes, $\delta=0.05$")
-ax3=ax.plot(pdX02c,pdZ2c,ls="None", marker="s",markevery=(5,10),label=r"250 nodes, $\delta=0.05$")
+ax1=ax.plot(analyticalX1,analyticalZ1,label="Analytical")
+ax2=ax.plot(pdX1c,pdZ1c,ls="None", marker="^",markevery=(0,6),label=r"100 nodes/side, $\delta=0.15$")
+ax3=ax.plot(pdX2c,pdZ2c,ls="None", marker="s",markevery=(2,6),label=r"100 nodes/side, $\delta=0.10$")
+ax4=ax.plot(pdX3c,pdZ3c/10.0,ls="None", marker="o",markevery=(4,6),label=r"100 nodes/side, $\delta=0.05$")
 # ax = fig.add_subplot(211, projection='3d')
 # ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-# plt.title('Cantilever Beam')
+# plt.title('Simply Supported Plate Slice')
 
-plt.legend(loc=1, borderaxespad=0.1)
+plt.legend(loc=9, borderaxespad=0.)
 
-ax.set_xlabel('Distance Along Beam')
+ax.set_xlabel('Distance Along Plate Centerline')
 ax.set_xticks(np.linspace(0.0,1.0,num=5))
-ax.set_xlim([0,1])
-ax.set_ylabel('Deflection under Uniform Load')
-ax.set_yticks(1.0e-4*np.linspace(0.0,-1.5,num=5))
-ax.set_ylim([-0.00015,0.0])
+ax.set_ylabel('Deflection under Uniform Pressure')
+ax.set_yticks(1.0e-5*np.linspace(0.0,-5,num=6))
 ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    fig.savefig("../clamped_cantilever_n.pgf")
+    fig.savefig("../elasticPlate_convergence_h.pgf")
 plt.show()
-
-
 
 
 

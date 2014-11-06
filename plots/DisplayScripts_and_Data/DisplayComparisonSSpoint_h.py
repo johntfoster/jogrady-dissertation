@@ -81,7 +81,7 @@ analyticalX2 = np.linspace(0.0,1.0,num=1001)
 # abaqusK2[1:-1]=(abaqusY2[:-2]-2*abaqusY2[1:-1]+abaqusY2[2:])/np.power(abaqusX2[1:-1]-abaqusX2[:-2],2.0)
 
 #Load PD plate data
-PDfile1name = "./SS_pointload_n500_h10_ext10_g001/SS_pointload_n500_h10_ext10_g001_1_exp_17.npz"
+PDfile1name = "./SS_pointload_n500_h10_ext10_g001_1_exp_17.npz"
 PDlabel1 = "101x101 nodes, h10, ext10"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -108,7 +108,7 @@ pdY01c=pdY01.compressed()
 
 #Load PD plate data
 pdHorizon2 = 0.05
-PDfile2name = "./SS_pointload_n500_h05_ext10_g001_cont/SS_pointload_n500_h05_ext10_g001_1_exp_47.npz"
+PDfile2name = "./SS_pointload_n500_h05_ext10_g001_1_exp_47.npz"
 PDlabel2 = "101x101 nodes, h05, ext10"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -147,12 +147,12 @@ analyticalZ2 = multiplier*np.select([analyticalX2<0.0,analyticalX2<loada,analyti
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
-ax1=ax.plot(analyticalX2,analyticalZ2,label="Analytical")
-ax2=ax.plot(pdX01c,pdZ1c,ls="None", marker="^",markevery=(0,10),label="500 nodes, h=0.02")
-ax3=ax.plot(pdX02c,pdZ2c,ls="None", marker="s",markevery=(5,10),label="500 nodes, h=0.01")
+ax1=ax.plot(analyticalX2,analyticalZ2,label=r"Analytical$\,$")
+ax2=ax.plot(pdX01c,pdZ1c,ls="None", marker="^",markevery=(0,10),label=r"500 nodes, $\delta=0.02$")
+ax3=ax.plot(pdX02c,pdZ2c,ls="None", marker="s",markevery=(5,10),label=r"500 nodes, $\delta=0.01$")
 # ax = fig.add_subplot(211, projection='3d')
 # ax.plot(analyticalX1,analyticalY1,analyticalZ1,ls="None", marker="o",label="Analytical")
-plt.title('Simply Supported Beam Loaded at 0.75')
+# plt.title('Simply Supported Beam Loaded at 0.75')
 
 plt.legend(loc=9, borderaxespad=0.1)
 
@@ -166,8 +166,7 @@ ax.grid(True)
 ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 if saving:
-    make_sure_path_exists("./writeup/plots")
-    fig.savefig("./writeup/plots/SS_pointload_h.pgf")
+    fig.savefig("../SS_pointload_h.pgf")
 plt.show()
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -51,7 +51,7 @@ abaqusY1 = Abaquslines1[:,1]
 
 #Load PD beam data
 pdHorizon1 = 0.05
-PDfile1name = "./3Pt_Brittle_d0001_h10_n200_24_brittle_1.npz"
+PDfile1name = "./3Pt_Brittle_d0001_h10_n200/3Pt_Brittle_d0001_h10_n200_24_brittle_1.npz"
 PDlabel1 = "200 nodes, initial failure"
 PDdata1 = np.load(PDfile1name)
 ux1 = PDdata1['ux']
@@ -64,7 +64,7 @@ pdHealth1 = ma.masked_array(health1,mask=pdX1.mask)
 
 #Load second PD beam data
 pdHorizon2 = 0.05
-PDfile2name = "./3Pt_Brittle_d0001_h10_n200_24_brittle_3.npz"
+PDfile2name = "./3Pt_Brittle_d0001_h10_n200/3Pt_Brittle_d0001_h10_n200_24_brittle_3.npz"
 PDlabel2 = "200 nodes"
 PDdata2 = np.load(PDfile2name)
 ux2 = PDdata2['ux']
@@ -77,7 +77,7 @@ pdHealth2 = ma.masked_array(health2,mask=pdX2.mask)
 
 #Load third PD beam data
 pdHorizon3 = 0.05
-PDfile3name = "./3Pt_Brittle_d0001_h10_n200_24_brittle_5.npz"
+PDfile3name = "./3Pt_Brittle_d0001_h10_n200/3Pt_Brittle_d0001_h10_n200_24_brittle_5.npz"
 PDlabel3 = "200 nodes, horizon 0.10"
 PDdata3 = np.load(PDfile3name)
 ux3 = PDdata3['ux']
@@ -90,7 +90,7 @@ pdHealth3 = ma.masked_array(health3,mask=pdX3.mask)
 
 #Load fourth PD beam data
 pdHorizon4 = 0.05
-PDfile4name = "./3Pt_Brittle_d0001_h10_n200_24_brittle_15.npz"
+PDfile4name = "./3Pt_Brittle_d0001_h10_n200/3Pt_Brittle_d0001_h10_n200_24_brittle_15.npz"
 PDlabel4 = "200 nodes, horizon 0.10"
 PDdata4 = np.load(PDfile4name)
 ux4 = PDdata4['ux']
@@ -125,7 +125,7 @@ a1labs = [l.get_label() for l in ax1]
 plt.legend(ax1,a1labs,bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
        ncol=2, mode="expand", borderaxespad=0.)
 
-fig.suptitle("Single Loadstep Brittle Failure Progression",y=1.0,fontsize=14)
+# fig.suptitle("Single Loadstep Brittle Failure Progression",y=1.0,fontsize=14)
 
 
 ax2a=fig.add_subplot(412)
@@ -182,8 +182,7 @@ fig.text(0.03, 0.5, 'Deflection', ha='center', va='center', rotation='vertical')
 fig.text(0.98, 0.5, 'Node Health', ha='center', va='center', rotation='vertical')
 
 if saving:
-    make_sure_path_exists("../plots")
-    fig.savefig("../plots/brittle_h10_n200.pgf")
+    fig.savefig("../brittle_h10_n200.pgf")
 plt.show()
 
 

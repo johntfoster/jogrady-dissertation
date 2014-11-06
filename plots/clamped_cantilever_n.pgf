@@ -892,9 +892,6 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.075000in,y=5.469444in,,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Cantilever Beam}}%
-\end{pgfscope}%
-\begin{pgfscope}%
 \pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
@@ -903,11 +900,11 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{3.086826in}{4.483334in}}%
+\pgfpathmoveto{\pgfqpoint{2.990277in}{4.483334in}}%
 \pgfpathlineto{\pgfqpoint{5.380000in}{4.483334in}}%
 \pgfpathlineto{\pgfqpoint{5.380000in}{5.380000in}}%
-\pgfpathlineto{\pgfqpoint{3.086826in}{5.380000in}}%
-\pgfpathlineto{\pgfqpoint{3.086826in}{4.483334in}}%
+\pgfpathlineto{\pgfqpoint{2.990277in}{5.380000in}}%
+\pgfpathlineto{\pgfqpoint{2.990277in}{4.483334in}}%
 \pgfpathclose%
 \pgfusepath{stroke,fill}%
 \end{pgfscope}%
@@ -918,12 +915,12 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{3.226826in}{5.230000in}}%
-\pgfpathlineto{\pgfqpoint{3.506826in}{5.230000in}}%
+\pgfpathmoveto{\pgfqpoint{3.130277in}{5.230000in}}%
+\pgfpathlineto{\pgfqpoint{3.410277in}{5.230000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.726826in,y=5.160000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
+\pgftext[x=3.630277in,y=5.160000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -942,16 +939,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{3.226826in}{4.951111in}%
+\pgfsys@transformshift{3.130277in}{4.951111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{3.506826in}{4.951111in}%
+\pgfsys@transformshift{3.410277in}{4.951111in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.726826in,y=4.881111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 500 nodes, h=0.05}}%
+\pgftext[x=3.630277in,y=4.881111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 500 nodes, \(\displaystyle \delta=0.05\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -971,16 +968,16 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{3.226826in}{4.672223in}%
+\pgfsys@transformshift{3.130277in}{4.672223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsys@transformshift{3.506826in}{4.672223in}%
+\pgfsys@transformshift{3.410277in}{4.672223in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.726826in,y=4.602223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 250 nodes, h=0.05}}%
+\pgftext[x=3.630277in,y=4.602223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 250 nodes, \(\displaystyle \delta=0.05\)}}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = True
+saving = False
 
 import numpy as np
 import numpy.ma as ma
@@ -94,12 +94,12 @@ fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
 
-ax1=ax.plot(abaqusX2,abaqusY2,label=Abaquslabel2,linestyle="-",marker="o",markevery=(10,200))
-ax2=ax.plot(pdX1,pdZ1,label=PDlabel1,marker="^",markevery=(5,10))
-ax3=ax.plot(pdX2,pdZ2,label=PDlabel2,marker=">",markevery=(13,20))
-ax4=ax.plot(pdX3,pdZ3,label=PDlabel3,marker="v",markevery=(40,50))
+ax1=ax.plot(abaqusX2,abaqusY2,label=r"Abaqus, $n=2000$",linestyle="-",marker="o",markevery=(10,200))
+ax2=ax.plot(pdX1,pdZ1,label=r"100 nodes, $\delta=0.10$",marker="^",markevery=(5,10))
+ax3=ax.plot(pdX2,pdZ2,label=r"200 nodes, $\delta=0.10$",marker=">",markevery=(13,20))
+ax4=ax.plot(pdX3,pdZ3,label=r"500 nodes, $\delta=0.10$",marker="v",markevery=(40,50))
 
-plt.title('Uniformly Loaded EPP Beam')
+# plt.title('Uniformly Loaded EPP Beam')
 ax.set_xlabel('Distance along Beam')
 ax.set_xlim((0.0,2.0))
 ax.set_xticks(np.linspace(0.0,2.0,num=5))
@@ -112,8 +112,7 @@ ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 # plt.legend(loc=3, borderaxespad=0.)
 plt.legend(loc=9, borderaxespad=0.)
 if saving:
-    make_sure_path_exists("../plots")
-    fig.savefig("../plots/eppu_h10_g2000.pgf")
+    fig.savefig("../eppu_h10_g2000.pgf")
 plt.show()
 
 

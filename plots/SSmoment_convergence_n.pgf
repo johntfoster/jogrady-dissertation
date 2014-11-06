@@ -1302,9 +1302,6 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=3.075000in,y=5.469444in,,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont SS Beam With Point Moment}}%
-\end{pgfscope}%
-\begin{pgfscope}%
 \pgfsetbuttcap%
 \pgfsetroundjoin%
 \definecolor{currentfill}{rgb}{1.000000,1.000000,1.000000}%
@@ -1314,8 +1311,8 @@
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.770000in}{4.483334in}}%
-\pgfpathlineto{\pgfqpoint{3.063174in}{4.483334in}}%
-\pgfpathlineto{\pgfqpoint{3.063174in}{5.380000in}}%
+\pgfpathlineto{\pgfqpoint{3.159723in}{4.483334in}}%
+\pgfpathlineto{\pgfqpoint{3.159723in}{5.380000in}}%
 \pgfpathlineto{\pgfqpoint{0.770000in}{5.380000in}}%
 \pgfpathlineto{\pgfqpoint{0.770000in}{4.483334in}}%
 \pgfpathclose%
@@ -1333,7 +1330,7 @@
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.410000in,y=5.160000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical}}%
+\pgftext[x=1.410000in,y=5.160000in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont Analytical\(\displaystyle \,\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1361,7 +1358,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.410000in,y=4.881111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, h=0.02}}%
+\pgftext[x=1.410000in,y=4.881111in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 100 nodes, \(\displaystyle \delta=0.02\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1390,7 +1387,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=1.410000in,y=4.602223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 200 nodes, h=0.02}}%
+\pgftext[x=1.410000in,y=4.602223in,left,base]{{\rmfamily\fontsize{14.400000}{17.280000}\selectfont 200 nodes, \(\displaystyle \delta=0.02\)}}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%
