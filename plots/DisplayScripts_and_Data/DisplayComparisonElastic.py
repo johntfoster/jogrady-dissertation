@@ -36,6 +36,7 @@ yieldstrain = 1.0e-6
 thickness = 0.01
 plate_length = 2.0
 gamma = 0.1
+gamma = 20.0
 
 analyticalX1 = np.linspace(0.0,1.0,num=1001)
 analyticalX2 = np.linspace(0.0,1.0,num=1001)
@@ -79,16 +80,19 @@ pdHealth2 = ma.masked_array(health2,mask=pdX2.mask)
 
 #Elastic Displacement for uniform load of gamma
 analyticalY2 = [((-gamma*yieldstrain/(24.0*thickness*plate_length**2))*
-    (x**2.0-4.0*x*plate_length+6.0*plate_length**2)*x**2.0) for x in analyticalX2]
+    (x**4.0-2.0*(x**3)*plate_length+x*plate_length**3)) for x in analyticalX2]
+    
+#     ((-gamma*yieldstrain/(24.0*thickness*plate_length**2))*
+#      (xvector**2.0-4.0*xvector*plate_length+6.0*plate_length**2)*xvector**2.0)
 
 # Compare on one plot 
 
 fig=plt.figure(1,figsize=(figureWidth,figureWidth*3.0/3.0))
 plt.hold(True)
 ax = fig.add_subplot(111)
-ax1=ax.plot(abaqusX1,abaqusY1,label=r"Abaqus Beam, $n=2000$",linestyle="-",marker="o",markevery=(100,200))
-ax2=ax.plot(pdX1,pdZ1,label=r"50 nodes, $\delta = 0.20$",marker="^",markevery=10)
-ax3=ax.plot(pdX2,pdZ2,label=r"100 nodes, $\delta = 0.20$",marker=">",markevery=(20,10))
+ax1=ax.plot(analyticalX2,analyticalY2,label=r"Analytical",linestyle="-",marker="o",markevery=(0,10))
+ax2=ax.plot(pdX1,pdZ1,label=r"50 nodes, $\delta = 0.20$",marker="^",markevery=(2,5))
+ax3=ax.plot(pdX2,pdZ2,label=r"100 nodes, $\delta = 0.20$",marker=">",markevery=(7,10))
 
 # plt.title('Uniformly Loaded Elastic Beam')
 ax.set_xlabel('Distance along Beam')
