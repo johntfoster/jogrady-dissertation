@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-saving = False
+saving = True
 
 import numpy as np
 import numpy.ma as ma
@@ -62,6 +62,7 @@ numplots = len(namelist)
 
 #exaggerate displacement
 scale=20.0
+rescale=0.01
 fig=plt.figure()
 # plt.hold(True)
 
@@ -125,8 +126,8 @@ ax1.plot(pdX01c+scale*analyticaluX1,pdZ01c+scale*analyticaluZ1,label="Analytical
     
 ax1.plot(pdX01c+scale*pdX1c,pdZ01c+scale*pdZ1c,ls="None", marker="v",markevery=(0,20),label=labellist[datanumber])
 
-ax2.plot(pdX01c,analyticaluX1,label="Analytical")
-ax2.plot(pdX01c,pdX1c,ls="None", marker="v",markevery=(0,20),label=labellist[datanumber])
+ax2.plot(pdX01c,rescale*analyticaluX1,label="Analytical")
+ax2.plot(pdX01c,rescale*pdX1c,ls="None", marker="v",markevery=(0,20),label=labellist[datanumber])
     
 datanumber = 1
 PDfile1name = namelist[datanumber]
@@ -186,9 +187,10 @@ ax1.set_xticks(np.linspace(0.0,1.0,num=5))
 ax1.set_yticks(np.linspace(0.0,0.5,num=6))
 
 
-ax2.plot(pdX01c,pdX1c,ls="None", marker="o",markevery=(10,20),label=labellist[datanumber])
+ax2.plot(pdX01c,rescale*pdX1c,ls="None", marker="o",markevery=(10,20),label=labellist[datanumber])
     
 ax2.yaxis.tick_right()
+ax2.yaxis.set_offset_position('right')
     
 ax1.legend(loc='lower center',bbox_to_anchor=(0.5,-1.2))
 

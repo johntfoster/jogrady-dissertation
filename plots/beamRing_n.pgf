@@ -1504,7 +1504,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=7.255556in,y=0.600000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.0000\)}}%
+\pgftext[x=7.255556in,y=0.600000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.000000\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1526,7 +1526,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=7.255556in,y=1.800000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.0005\)}}%
+\pgftext[x=7.255556in,y=1.800000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.000005\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1548,7 +1548,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=7.255556in,y=3.000000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.0010\)}}%
+\pgftext[x=7.255556in,y=3.000000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.000010\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1570,7 +1570,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=7.255556in,y=4.200000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.0015\)}}%
+\pgftext[x=7.255556in,y=4.200000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.000015\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1592,7 +1592,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=7.255556in,y=5.400000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.0020\)}}%
+\pgftext[x=7.255556in,y=5.400000in,left,]{{\rmfamily\fontsize{12.000000}{14.400000}\selectfont \(\displaystyle 0.000020\)}}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
